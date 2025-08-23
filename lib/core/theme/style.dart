@@ -8,11 +8,20 @@ abstract class TextSTyle {
   static String semiBold = 'CairoSemiBold';
   static String medium = 'CairoMedium';
   static String light = 'CairoLight';
+  static String amiriReg = 'Amiri';
+  static String amiriBold = 'AmiriBold';
+  static String amiriItalic = 'AmiriItalic';
+  static String amiriBoldItalic = 'AmiriBoldItalic';
 
   static TextStyle f12CairoRegGrey = TextStyle(
     color: ColorManager.gray,
     fontSize: 12.sp,
     fontFamily: reg,
+  );
+  static TextStyle f12CairoBoldGrey = TextStyle(
+    color: ColorManager.gray,
+    fontSize: 12.sp,
+    fontFamily: bold,
   );
   static TextStyle f16CairoMediumBlack = TextStyle(
     color: ColorManager.black,
@@ -41,6 +50,11 @@ abstract class TextSTyle {
     fontSize: 16.sp,
     fontFamily: semiBold,
   );
+  static TextStyle f10CairoRegPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 10.sp,
+    fontFamily: reg,
+  );
   // 18
   static TextStyle f18CairoMediumBlack = TextStyle(
     color: ColorManager.black,
@@ -51,6 +65,21 @@ abstract class TextSTyle {
     color: ColorManager.primaryText,
     fontSize: 18.sp,
     fontFamily: semiBold,
+  );
+  static TextStyle f18CairoBoldWhite = TextStyle(
+    color: ColorManager.white,
+    fontSize: 18.sp,
+    fontFamily: bold,
+  );
+  static TextStyle f24CairoSemiBoldPrimary = TextStyle(
+    color: ColorManager.primaryText,
+    fontSize: 24.sp,
+    fontFamily: semiBold,
+  );
+  static TextStyle f36CairoBoldWhite = TextStyle(
+    color: ColorManager.white,
+    fontSize: 36.sp,
+    fontFamily: bold,
   );
   // 14
   static TextStyle f14CairoLightPrimary = TextStyle(
@@ -98,10 +127,48 @@ abstract class TextSTyle {
     fontSize: 8.sp,
     fontFamily: semiBold,
   );
+  static TextStyle f12CairoSemiBoldWhite = TextStyle(
+    color: ColorManager.white,
+    fontSize: 12.sp,
+    fontFamily: semiBold,
+  );
+  static TextStyle f12CairoSemiBoldPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 12.sp,
+    fontFamily: semiBold,
+  );
   // 36
   static TextStyle f36CairoSemiBoldPrimary = TextStyle(
     color: ColorManager.primaryText2,
     fontSize: 36.sp,
     fontFamily: semiBold,
+  );
+  // for amiri
+  static TextStyle f12AmiriRegPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 12.sp,
+    height: 1.6,
+    fontFamily: amiriReg,
+  );
+  // 10
+  static TextStyle f10AmiriRegPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 10.sp,
+    fontFamily: amiriReg,
+  );
+  static TextStyle f16AmiriRegPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 16.sp,
+    fontFamily: amiriReg,
+  );
+  static TextStyle f16AmiriBoldPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 16.sp,
+    fontFamily: amiriBold,
+  );
+  static TextStyle f20AmiriBoldWhite = TextStyle(
+    color: ColorManager.white,
+    fontSize: 20.sp,
+    fontFamily: bold,
   );
 }

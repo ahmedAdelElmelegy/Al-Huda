@@ -23,7 +23,7 @@ class PrayerTimeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWithArrow(),
+      appBar: CustomAppBarWithArrow(title: 'prayer_time'.tr()),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 24.h),

@@ -1,8 +1,11 @@
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/theme/style.dart';
+import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePrayerBanner extends StatelessWidget {
@@ -10,6 +13,7 @@ class HomePrayerBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<PrayerCubit>();
     return Stack(
       alignment: Alignment.topLeft,
       children: [
@@ -36,13 +40,27 @@ class HomePrayerBanner extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('dhuhr'.tr(), style: TextSTyle.f14CairoRegularPrimary),
-                  // verticalSpace(4),
+                  Text(
+                    cubit.getCurrentPrayer().tr(),
+                    style: TextSTyle.f14CairoRegularPrimary,
+                  ),
+                  // verticalSpace(4),`
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('11:45', style: TextSTyle.f36CairoSemiBoldPrimary),
-                      Text('pm'.tr(), style: TextSTyle.f14CairoRegularPrimary),
+                      Text(
+                        DateFormat(
+                          'hh:mm',
+                        ).format(cubit.getCurrentPrayerTime()),
+                        style: TextSTyle.f36CairoSemiBoldPrimary,
+                      ),
+                      horizontalSpace(4),
+                      Text(
+                        PrayerServices.getCurrentAmPm(
+                          cubit.getCurrentPrayerTime(),
+                        ),
+                        style: TextSTyle.f14CairoBoldPrimary,
+                      ),
                     ],
                   ),
                   verticalSpace(8),
@@ -53,7 +71,10 @@ class HomePrayerBanner extends StatelessWidget {
                         'next_prayer'.tr(),
                         style: TextSTyle.f14CairoRegularPrimary,
                       ),
-                      Text('asr'.tr(), style: TextSTyle.f14CairoRegularPrimary),
+                      Text(
+                        cubit.nextPrayer.tr(),
+                        style: TextSTyle.f14CairoRegularPrimary,
+                      ),
                     ],
                   ),
                   verticalSpace(4),
@@ -62,8 +83,14 @@ class HomePrayerBanner extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text('2:50', style: TextSTyle.f14CairoBoldPrimary),
-                  Text('pmt'.tr(), style: TextSTyle.f14CairoBoldPrimary),
+                  Text(
+                    DateFormat('hh:mm ').format(cubit.nextPrayerTime!),
+                    style: TextSTyle.f14CairoBoldPrimary,
+                  ),
+                  Text(
+                    PrayerServices.getNextAmPm(cubit.nextPrayerTime!),
+                    style: TextSTyle.f14CairoBoldPrimary,
+                  ),
                 ],
               ),
             ],

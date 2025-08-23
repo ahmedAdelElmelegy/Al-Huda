@@ -1,5 +1,9 @@
+import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
+import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/feature/home/presentation/widgets/prayer_item.dart';
+import 'package:al_huda/feature/tasbeh/presentation/screens/tasbeh_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,18 +26,32 @@ class PrayersList extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Align(
           alignment: Alignment.topCenter,
-          child: Wrap(
-            spacing: 16.w,
-            runSpacing: 16.h,
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: .83,
+              mainAxisSpacing: 8.h,
+              crossAxisSpacing: 8.w,
+            ),
             children: [
-              PrayerItem(),
-              PrayerItem(),
-              PrayerItem(),
-              PrayerItem(),
-              PrayerItem(),
-              PrayerItem(),
-              PrayerItem(),
-              PrayerItem(),
+              InkWell(
+                onTap: () {
+                  push(AzkarScreen());
+                },
+                child: PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              ),
+              InkWell(
+                onTap: () {
+                  push(TasbehScreen());
+                },
+                child: PrayerItem(title: 'tasbeh'.tr(), icon: AppIcons.tasbih),
+              ),
+              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
             ],
           ),
         ),

@@ -23,6 +23,19 @@ abstract class AppIcons {
   static const String mute = "assets/icons/mute.svg";
   static const String on = "assets/icons/on.svg";
   static const String update = "assets/icons/update.svg";
+  static const String azkarTop = "assets/icons/azkar_top.svg";
+  static const String azkarButton = "assets/icons/azkar_button.svg";
+  static const String heart = "assets/icons/heart.svg";
+  static const String edit = "assets/icons/edit.svg";
+  static const String tasbih = "assets/icons/tasbih.svg";
+  static const String reset = "assets/icons/reset.svg";
+  static const String share = "assets/icons/share.svg";
+  static const String clear = "assets/icons/clear.svg";
+  static const String qranA = "assets/icons/qran_a.svg";
+  static const String qran = "assets/icons/qran.svg";
+  static const String add = "assets/icons/add.svg";
+  static const String lock = "assets/icons/lock.svg";
+  static const String delete = "assets/icons/delete.svg";
 }
 
 abstract class AppImages {

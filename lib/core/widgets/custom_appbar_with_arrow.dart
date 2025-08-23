@@ -1,12 +1,12 @@
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarWithArrow extends StatelessWidget
     implements PreferredSizeWidget {
-  const CustomAppBarWithArrow({super.key});
+  final String title;
+  const CustomAppBarWithArrow({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CustomAppBarWithArrow extends StatelessWidget
           pop();
         },
       ),
-      title: Text('prayer_time'.tr(), style: TextSTyle.f18CairoSemiBoldPrimary),
+      title: Text(title, style: TextSTyle.f18CairoSemiBoldPrimary),
     );
   }
 

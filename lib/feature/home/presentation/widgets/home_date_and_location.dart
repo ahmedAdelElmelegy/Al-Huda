@@ -1,4 +1,5 @@
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,6 +12,7 @@ class HomeDateAndLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = DateTime.now();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
@@ -19,10 +21,13 @@ class HomeDateAndLocation extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('date'.tr(), style: TextSTyle.f12CairoRegGrey),
+              Text(
+                PrayerServices.getFormattedGregorianDate(date),
+                style: TextSTyle.f12CairoRegGrey,
+              ),
               verticalSpace(4),
               Text(
-                'date2'.tr(),
+                PrayerServices.getFormattedHijriDate(date),
                 style: isPrayerTime
                     ? TextSTyle.f16CairoMediumBlack.copyWith(
                         color: ColorManager.primaryText,

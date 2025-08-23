@@ -1,3 +1,5 @@
+import 'package:al_huda/bloc.dart';
+import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/feature/splash/presentation/screen/splash_screen.dart';
 import 'package:al_huda/main.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -12,22 +14,26 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          navigatorKey: navigator,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
+        return GenerateMultiBloc(
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            navigatorKey: navigator,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
 
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              surfaceTintColor: Colors.white,
+            theme: ThemeData(
+              dialogTheme: DialogThemeData(backgroundColor: ColorManager.white),
+              primaryColor: ColorManager.primary,
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                surfaceTintColor: Colors.white,
+              ),
             ),
+            home: const SplashScreen(),
           ),
-          home: const SplashScreen(),
         );
       },
     );

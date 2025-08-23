@@ -9,7 +9,6 @@ import 'package:al_huda/feature/settings/presentation/widgets/setting_action_btn
 import 'package:al_huda/feature/settings/presentation/widgets/setting_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingScreenAction extends StatelessWidget {
   const SettingScreenAction({super.key});

@@ -10,4 +10,5 @@ abstract class ColorManager {
   static const Color black = Color(0xFF1E1E1E);
   static const Color blue = Color(0xFF1B6180);
   static const Color primaryText2 = Color(0xFF005773);
+  static const Color red = Color(0xFFE62D2D);
 }

@@ -1,11 +1,24 @@
 import 'package:al_huda/app.dart';
+import 'package:al_huda/core/di/injection.dart';
+import 'package:al_huda/core/services/tasbeh_services.dart';
+import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   EasyLocalization.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(TasbehModelAdapter());
+
+  await TasbehServices().openBox();
+
+  await TasbehServices().initTasbeh();
+
+  init();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('ar', 'EG')],

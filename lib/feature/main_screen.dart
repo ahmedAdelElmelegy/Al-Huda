@@ -3,6 +3,7 @@ import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/home/presentation/screens/home_screen.dart';
 import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_screen.dart';
+import 'package:al_huda/feature/qran/presentation/screens/qran_screen.dart';
 import 'package:al_huda/feature/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     PrayerTimeScreen(),
+    QranScreen(),
     SettingsScreen(),
   ];
   @override
@@ -66,10 +68,14 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () => onItemTapped(1),
                 ),
                 buildBottomNavigationBar(
-                  icon: _selectedIndex == 2
+                  icon: _selectedIndex == 2 ? AppIcons.qranA : AppIcons.qran,
+                  onTap: () => onItemTapped(2),
+                ),
+                buildBottomNavigationBar(
+                  icon: _selectedIndex == 3
                       ? AppIcons.settingActive
                       : AppIcons.setttings,
-                  onTap: () => onItemTapped(2),
+                  onTap: () => onItemTapped(3),
                 ),
               ],
             ),
