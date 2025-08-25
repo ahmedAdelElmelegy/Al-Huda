@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AzkarActionBtn extends StatelessWidget {
-  const AzkarActionBtn({super.key});
+  final int count;
+  const AzkarActionBtn({super.key, required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AzkarActionBtn extends StatelessWidget {
             color: ColorManager.white,
           ),
           child: Text(
-            '1',
+            count.toString(),
             style: TextSTyle.f14CairoBoldPrimary.copyWith(
               color: ColorManager.primary,
             ),

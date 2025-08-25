@@ -1,3 +1,10 @@
+import 'package:al_huda/core/helper/app_constants.dart';
+import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/theme/colors.dart';
+import 'package:al_huda/core/theme/style.dart';
+import 'package:al_huda/core/widgets/svg_icon.dart';
+import 'package:al_huda/feature/qran/presentation/widgets/surah_list_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class QranScreen extends StatelessWidget {
@@ -5,20 +12,33 @@ class QranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Text(
-              '1', // رمز نهاية الآية
-              style: TextStyle(fontSize: 24, fontFamily: 'Amiri'),
-            ),
-            Text(
-              '\u06DD', // رمز نهاية الآية
-              style: TextStyle(fontSize: 5, fontFamily: 'Amiri'),
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: ColorManager.primaryBg,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              verticalSpace(24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgIcon(
+                    assetName: AppIcons.qranA,
+                    color: ColorManager.primaryText2,
+                  ),
+                  horizontalSpace(8),
+                  Text(
+                    'quran'.tr(),
+                    style: TextSTyle.f18CairoSemiBoldPrimary.copyWith(
+                      color: ColorManager.primaryText2,
+                    ),
+                  ),
+                ],
+              ),
+              verticalSpace(24),
+              SurahListView(),
+            ],
+          ),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/feature/home/presentation/widgets/prayer_item.dart';
+import 'package:al_huda/feature/radio/presentation/screens/radio_screen.dart';
 import 'package:al_huda/feature/tasbeh/presentation/screens/tasbeh_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,12 @@ class PrayersList extends StatelessWidget {
                 },
                 child: PrayerItem(title: 'tasbeh'.tr(), icon: AppIcons.tasbih),
               ),
-              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              InkWell(
+                onTap: () {
+                  push(RadioScreen());
+                },
+                child: PrayerItem(title: 'radio'.tr(), icon: AppIcons.radio),
+              ),
               PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
               PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
               PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),

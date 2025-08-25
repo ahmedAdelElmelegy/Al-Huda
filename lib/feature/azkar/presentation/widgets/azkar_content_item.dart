@@ -1,16 +1,17 @@
+import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_count_item.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AzkarContentItem extends StatelessWidget {
   final int count;
-  const AzkarContentItem({super.key, required this.count});
+  final Zikr zikr;
+  const AzkarContentItem({super.key, required this.count, required this.zikr});
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,8 @@ class AzkarContentItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: SingleChildScrollView(
               child: Text(
-                'doaa_card'.tr(),
-                style: TextSTyle.f16AmiriRegPrimary,
+                zikr.text,
+                style: TextSTyle.f16AmiriRegPrimary.copyWith(height: 1.7),
               ),
             ),
           ),

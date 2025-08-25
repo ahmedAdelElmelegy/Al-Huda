@@ -19,7 +19,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          icon != null ? SvgIcon(assetName: icon!) : SizedBox(),
+          icon != null
+              ? SvgIcon(assetName: icon!, color: ColorManager.primary)
+              : SizedBox(),
           horizontalSpace(8),
           Text(title, style: TextSTyle.f18CairoSemiBoldPrimary),
         ],

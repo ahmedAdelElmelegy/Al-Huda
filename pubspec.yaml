@@ -29,10 +29,12 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   adhan: ^2.0.0+1
+  audioplayers: ^6.5.0
   auto_size_text: ^3.0.0
   bloc: ^9.0.0
   cupertino_icons: ^1.0.8
   custom_paint: ^0.0.1
+  dio: ^5.9.0
   easy_localization: ^3.0.8
   flutter:
     sdk: flutter
@@ -43,7 +45,10 @@ dependencies:
   hijri: ^3.0.0
   hive_ce: ^2.11.3
   hive_ce_flutter: ^2.3.1
+  just_audio: ^0.10.4
   page_transition: ^2.2.1
+  pretty_dio_logger: ^1.4.0
+  shimmer: ^3.0.0
 dev_dependencies:
   build_runner: ^2.7.0
   flutter_lints: ^5.0.0
@@ -66,6 +71,8 @@ flutter:
     - assets/translations/
     - assets/icons/
     - assets/fonts/
+    - assets/data/
+    - assets/audio/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -109,5 +116,9 @@ flutter:
     - family: AmiriBoldItalic
       fonts:
         - asset: assets/fonts/Amiri-BoldItalic.ttf
+
+    - family: UthmanicHafs1
+      fonts:
+        - asset: assets/fonts/alfont_com_UthmanicHafs1-Ver18.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

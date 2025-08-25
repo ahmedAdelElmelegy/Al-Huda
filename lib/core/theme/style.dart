@@ -12,6 +12,7 @@ abstract class TextSTyle {
   static String amiriBold = 'AmiriBold';
   static String amiriItalic = 'AmiriItalic';
   static String amiriBoldItalic = 'AmiriBoldItalic';
+  static String uthmanicHafs1 = 'UthmanicHafs1';
 
   static TextStyle f12CairoRegGrey = TextStyle(
     color: ColorManager.gray,
@@ -170,5 +171,11 @@ abstract class TextSTyle {
     color: ColorManager.white,
     fontSize: 20.sp,
     fontFamily: bold,
+  );
+  // for uthmanic
+  static TextStyle f16UthmanicHafs1Primary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 16.sp,
+    fontFamily: uthmanicHafs1,
   );
 }

@@ -1,7 +1,5 @@
-import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/utils/constants.dart';
-import 'package:al_huda/feature/home/data/model/prayer_model.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:al_huda/feature/home/presentation/widgets/home_prayer_time_item.dart';
 import 'package:easy_localization/easy_localization.dart';

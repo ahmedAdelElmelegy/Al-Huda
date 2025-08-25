@@ -1,13 +1,12 @@
-import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/theme/colors.dart';
+import 'package:al_huda/feature/azkar/data/model/azkar_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:al_huda/core/theme/style.dart';
-import 'package:al_huda/core/widgets/svg_icon.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class AzkarItem extends StatelessWidget {
-  const AzkarItem({super.key});
+  final AzkarCategory category;
+  const AzkarItem({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +29,12 @@ class AzkarItem extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              'azkar_prayer'.tr(),
+              category.name,
               style: TextSTyle.f16CairoSemiBoldWhite,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-          SvgIcon(assetName: AppIcons.sun, color: ColorManager.white),
         ],
       ),
     );

@@ -11,8 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: isLandscape ? const Size(812, 375) : const Size(375, 812),
       builder: (context, child) {
         return GenerateMultiBloc(
           child: MaterialApp(

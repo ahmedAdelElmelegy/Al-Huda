@@ -13,9 +13,7 @@ void main() async {
   EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TasbehModelAdapter());
-
   await TasbehServices().openBox();
-
   await TasbehServices().initTasbeh();
 
   init();
@@ -29,3 +27,6 @@ void main() async {
     ),
   );
 }
+
+// https://api.alquran.cloud/v1/surah/1/ar.alafasy
+// https://api.alquran.cloud/v1/surah

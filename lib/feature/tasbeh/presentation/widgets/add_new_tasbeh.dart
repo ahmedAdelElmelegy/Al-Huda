@@ -1,5 +1,4 @@
 import 'package:al_huda/core/helper/app_constants.dart';
-import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';

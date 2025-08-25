@@ -36,10 +36,19 @@ abstract class AppIcons {
   static const String add = "assets/icons/add.svg";
   static const String lock = "assets/icons/lock.svg";
   static const String delete = "assets/icons/delete.svg";
+  static const String number = "assets/icons/number.svg";
+  static const String medina = "assets/icons/madena.svg";
+  static const String maka = "assets/icons/maka.svg";
+  static const String radio = "assets/icons/radio.svg";
+  static const String skipLeft = "assets/icons/skipleft.svg";
+  static const String skipRight = "assets/icons/skipright.svg";
 }
 
 abstract class AppImages {
   static const String logo = "assets/images/logo.png";
   static const String bg = "assets/images/bg.png";
   static const String banner = "assets/images/banner.png";
+  static const String basmala = "assets/images/Basmala.png";
+  static const String titleCover = "assets/images/titleCover.png";
+  static const String radioReader = "assets/images/radio_reader.jpg";
 }

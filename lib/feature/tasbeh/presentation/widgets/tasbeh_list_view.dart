@@ -54,26 +54,3 @@ class _TasbehListViewState extends State<TasbehListView> {
     );
   }
 }
-//  showDialog(
-//                     context: context,
-//                     builder: (context) {
-//                       return AlertDialog(
-//                         title: Text('delete_zekr'.tr()),
-//                         content: Text('are_you_sure'.tr()),
-//                         actions: [
-//                           TextButton(
-//                             onPressed: () {
-//                               pop();
-//                             },
-//                             child: Text('cancel'.tr()),
-//                           ),
-//                           TextButton(
-//                             onPressed: () {
-//                               cubit.deleteTasbeh(index);
-//                             },
-//                             child: Text('delete'.tr()),
-//                           ),
-//                         ],
-//                       );
-//                     },
-//                   );

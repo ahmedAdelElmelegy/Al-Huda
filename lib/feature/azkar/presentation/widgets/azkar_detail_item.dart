@@ -1,6 +1,7 @@
+import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_action_btn.dart';
+import 'package:al_huda/feature/azkar/presentation/widgets/azkar_audio_item.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_content_item.dart';
-import 'package:al_huda/feature/azkar/presentation/widgets/azkar_description.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AzkarDetailItem extends StatelessWidget {
   final int index;
-  const AzkarDetailItem({super.key, required this.index});
+  final Zikr zikr;
+  const AzkarDetailItem({super.key, required this.index, required this.zikr});
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +31,11 @@ class AzkarDetailItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          AzkarContentItem(count: index),
+          AzkarContentItem(count: index, zikr: zikr),
           verticalSpace(24),
-          AzkarDescription(),
+          AzkarAudioItem(zikr: zikr, index: index),
           verticalSpace(16),
-          AzkarActionBtn(),
+          AzkarActionBtn(count: zikr.count),
         ],
       ),
     );
