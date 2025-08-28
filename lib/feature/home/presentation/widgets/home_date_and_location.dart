@@ -8,7 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeDateAndLocation extends StatelessWidget {
   final bool isPrayerTime;
-  const HomeDateAndLocation({super.key, this.isPrayerTime = false});
+  final String? location;
+  const HomeDateAndLocation({
+    super.key,
+    this.isPrayerTime = false,
+    this.location,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,7 @@ class HomeDateAndLocation extends StatelessWidget {
                     ? TextSTyle.f16CairoMediumBlack.copyWith(
                         color: ColorManager.primaryText,
                       )
-                    : TextSTyle.f16CairoMediumBlack,
+                    : TextSTyle.f16SSTArabicRegBlack,
               ),
             ],
           ),
@@ -42,12 +47,12 @@ class HomeDateAndLocation extends StatelessWidget {
               Text('place'.tr(), style: TextSTyle.f12CairoRegGrey),
               verticalSpace(4),
               Text(
-                'location'.tr(),
+                location ?? 'location'.tr(),
                 style: isPrayerTime
                     ? TextSTyle.f16CairoMediumBlack.copyWith(
                         color: ColorManager.primaryText,
                       )
-                    : TextSTyle.f16CairoMediumBlack,
+                    : TextSTyle.f16SSTArabicRegBlack,
               ),
             ],
           ),

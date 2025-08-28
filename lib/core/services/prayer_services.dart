@@ -96,4 +96,16 @@ class PrayerServices {
     final remainingSeconds = remainingTime.inSeconds.remainder(60);
     return '$remainingSeconds : $remainingMinutes : $remainingHours';
   }
+
+  static Duration getDelayUnitMidnight() {
+    final now = DateTime.now();
+    final tomorrow = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      now.hour,
+      now.minute + 1,
+    );
+    return tomorrow.difference(now);
+  }
 }

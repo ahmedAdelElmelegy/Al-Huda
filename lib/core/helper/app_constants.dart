@@ -42,6 +42,9 @@ abstract class AppIcons {
   static const String radio = "assets/icons/radio.svg";
   static const String skipLeft = "assets/icons/skipleft.svg";
   static const String skipRight = "assets/icons/skipright.svg";
+  static const String azkar = "assets/icons/azkar.svg";
+  static const String allah = "assets/icons/allah.svg";
+  static const String leave = "assets/icons/leave.svg";
 }
 
 abstract class AppImages {
@@ -51,4 +54,17 @@ abstract class AppImages {
   static const String basmala = "assets/images/Basmala.png";
   static const String titleCover = "assets/images/titleCover.png";
   static const String radioReader = "assets/images/radio_reader.jpg";
+  static const String azkar = "assets/images/p_Athkar.png";
+  static const String azkarDetail = "assets/images/p_Ad3yah.png";
+  static const String cloudTop = "assets/images/cloud-top.png";
+  static const String cloudBottom = "assets/images/cloud-bottom.png";
+  static const String sunB = "assets/images/sun.png";
+  static const String azkarBg = "assets/images/p_Athkar.png";
+  static const String allahNamesBg = "assets/images/p_AllahNames.png";
+  static const String allahImageBg = "assets/images/p_AllahNames.png";
+  static const String allahLogo = "assets/images/elements.png";
+
+  static const String leaves = "assets/images/leaves.png";
+  static const String ribbon1 = "assets/images/ribbon1.png";
+  static const String ribbon2 = "assets/images/ribbon2.png";
 }

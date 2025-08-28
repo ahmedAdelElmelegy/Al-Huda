@@ -6,10 +6,10 @@ import 'package:al_huda/core/services/api_services.dart';
 class AyatRepo {
   ApiService apiService;
   AyatRepo(this.apiService);
-  Future<ApiResponse> getAyat(int surahNumber) async {
+  Future<ApiResponse> getAyat(int surahNumber, String readerName) async {
     try {
       final response = await apiService.get(
-        endpoint: '${AppURL.surah}/$surahNumber/${AppURL.readerName}',
+        endpoint: '${AppURL.surah}/$surahNumber/$readerName',
       );
       return ApiResponse.withSuccess(response);
     } catch (e) {

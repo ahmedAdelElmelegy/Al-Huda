@@ -1,5 +1,7 @@
+import 'package:al_huda/core/services/notification/notification_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 part 'prayer_state.dart';
@@ -22,6 +24,14 @@ class PrayerCubit extends Cubit<PrayerState> {
         MapEntry("isha", times.isha),
       ];
       emit(PrayerSucess());
+      for (int i = 0; i < prayerTimes.length; i++) {
+        NotificationService.scheduleNotification(
+          i,
+          'حان الآن موعد ${prayerTimes[i].key.tr()}',
+          'وقت الصلاة: ${prayerTimes[i].key.tr()}',
+          prayerTimes[i].value,
+        );
+      }
     } catch (e) {
       emit(PrayerFailure());
     }
@@ -37,21 +47,19 @@ class PrayerCubit extends Cubit<PrayerState> {
 
       if (now.isBefore(prayer.value)) {
         // أول صلاة جاية
-        nextPrayer = (i + 1 < prayerTimes.length)
-            ? prayerTimes[i + 1].key
-            : "dhuhr"; // بعد الفجر اللي عليه الدور الظهر
-        nextPrayerTime = (i + 1 < prayerTimes.length)
-            ? prayerTimes[i + 1].value
-            : prayerTimes[2].value; // نخلي بعد الفجر الضهر
+        if (now.isBefore(prayer.value)) {
+          nextPrayer = prayer.key;
+          nextPrayerTime = prayer.value;
+          return prayer.key;
+        }
 
         return prayer.key;
       }
     }
 
-    // لو معاد كل الصلوات خلص (بعد العشاء) → يبقى اللي عليه الدور الفجر بتاع بكرة
-    nextPrayer = "dhuhr"; // بعد الفجر الضهر
-    nextPrayerTime = prayerTimes[2].value.add(const Duration(days: 1));
-    return "fagr"; // الحالي: الفجر (اليوم الجديد)
+    nextPrayer = "fagr";
+    nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
+    return "fagr";
   }
 
   DateTime? nextPrayerTime;
@@ -69,8 +77,7 @@ class PrayerCubit extends Cubit<PrayerState> {
       }
     }
 
-    // بعد العشاء → نخلي الحالي الفجر (اليوم الجديد)
-    nextPrayerTime = prayerTimes[2].value.add(const Duration(days: 1));
+    nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
     return prayerTimes[0].value.add(const Duration(days: 1)); // فجر بكرة
   }
 }

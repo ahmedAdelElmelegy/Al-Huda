@@ -1,3 +1,4 @@
+import 'package:al_huda/feature/allah_name/presentation/screens/allah_name_screen.dart';
 import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
@@ -53,7 +54,15 @@ class PrayersList extends StatelessWidget {
                 },
                 child: PrayerItem(title: 'radio'.tr(), icon: AppIcons.radio),
               ),
-              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              InkWell(
+                onTap: () {
+                  push(AllahNameScreen());
+                },
+                child: PrayerItem(
+                  title: 'allah_name'.tr(),
+                  icon: AppIcons.allah,
+                ),
+              ),
               PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
               PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
               PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),

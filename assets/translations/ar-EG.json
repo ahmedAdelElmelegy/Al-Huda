@@ -55,6 +55,8 @@
     "chapter":"الحزب",
     "soura_name":"الفاتحة",
     "radio":"راديو",
-    "radio_reader":"قارئ راديو"
-    
+    "radio_reader":"قارئ راديو",
+   "allah_name":"أسماء الله ",
+   "qran_setting":"إعدادات القران",
+   "select_reader":"اختر قارئ"
 }

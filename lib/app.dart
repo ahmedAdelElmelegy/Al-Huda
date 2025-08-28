@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
               dialogTheme: DialogThemeData(backgroundColor: ColorManager.white),
               primaryColor: ColorManager.primary,
               scaffoldBackgroundColor: Colors.white,
+
               appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white,
                 elevation: 0,
@@ -41,3 +42,26 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// class NotifictionText extends StatelessWidget {
+//   const NotifictionText({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: ElevatedButton(
+//           onPressed: () {
+//             NotificationService.scheduleNotification(
+//               1,
+//               "Notification",
+//               "Notification",
+//               DateTime.now().add(const Duration(seconds: 5)),
+//             );
+//           },
+//           child: Text("Notification"),
+//         ),
+//       ),
+//     );
+//   }
+// }

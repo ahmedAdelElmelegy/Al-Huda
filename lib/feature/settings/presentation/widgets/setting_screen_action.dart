@@ -5,6 +5,7 @@ import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_detail_screen.dart';
+import 'package:al_huda/feature/settings/presentation/screens/qran_setting_screen.dart';
 import 'package:al_huda/feature/settings/presentation/widgets/setting_action_btn.dart';
 import 'package:al_huda/feature/settings/presentation/widgets/setting_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,6 +25,13 @@ class SettingScreenAction extends StatelessWidget {
           child: SettingActionBtn(title: 'prayers_time'.tr()),
         ),
         verticalSpace(16),
+        InkWell(
+          onTap: () {
+            push(QranSettingScreen());
+          },
+          child: SettingActionBtn(title: 'qran_setting'.tr()),
+        ),
+        verticalSpace(16),
         SettingActionBtn(title: 'english'.tr(), child: SettingSwitch()),
         verticalSpace(16),
         SettingActionBtn(
@@ -41,6 +49,7 @@ class SettingScreenAction extends StatelessWidget {
             ],
           ),
         ),
+        verticalSpace(16),
         verticalSpace(16),
         SettingActionBtn(
           title: 'app_version'.tr(),

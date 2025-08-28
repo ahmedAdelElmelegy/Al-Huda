@@ -1,11 +1,10 @@
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class AzkarAudioItem extends StatefulWidget {
-  final Zikr zikr;
+  final String audio;
   final int index;
-  const AzkarAudioItem({super.key, required this.zikr, required this.index});
+  const AzkarAudioItem({super.key, required this.audio, required this.index});
 
   @override
   State<AzkarAudioItem> createState() => _AzkarAudioItemState();
@@ -64,7 +63,7 @@ class _AzkarAudioItemState extends State<AzkarAudioItem> {
         currentlyPlayingIndex == widget.index ? Icons.pause : Icons.play_arrow,
         color: Colors.green,
       ),
-      onPressed: () => playAudio(fixAudioPath(widget.zikr.audio), widget.index),
+      onPressed: () => playAudio(fixAudioPath(widget.audio), widget.index),
     );
   }
 }

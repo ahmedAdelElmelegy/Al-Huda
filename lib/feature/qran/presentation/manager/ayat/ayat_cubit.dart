@@ -15,9 +15,9 @@ class AyatCubit extends Cubit<AyatState> {
   List<Ayah> ayatList = [];
   ServerFailure? serverFailure;
 
-  Future<ApiResponse> getAyat(int surahNumber) async {
+  Future<ApiResponse> getAyat(int surahNumber, String readerName) async {
     emit(AyatLoading());
-    final response = await ayatRepo.getAyat(surahNumber);
+    final response = await ayatRepo.getAyat(surahNumber, readerName);
     if (response.response!.statusCode == 200 &&
         response.response != null &&
         response.response!.data != null) {

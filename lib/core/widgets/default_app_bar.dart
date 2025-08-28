@@ -1,3 +1,4 @@
+import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
@@ -11,17 +12,22 @@ class DefaultAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 100.h,
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: ColorManager.primary.withValues(alpha: .5),
-            blurRadius: 10,
-            offset: Offset(0, 5),
+            color: ColorManager.primary.withValues(alpha: .4),
+            blurRadius: 6,
+            offset: Offset(2, 2),
           ),
         ],
-        color: ColorManager.primary,
+        color: ColorManager.primary.withValues(alpha: .7),
+        image: DecorationImage(
+          image: AssetImage(AppImages.bg),
+          fit: BoxFit.fill,
+        ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(50.r),
           bottomRight: Radius.circular(50.r),
@@ -36,16 +42,11 @@ class DefaultAppBar extends StatelessWidget {
               onPressed: () {
                 pop();
               },
-              icon: Icon(Icons.arrow_back, color: ColorManager.white),
+              icon: Icon(Icons.arrow_back, color: ColorManager.primaryText),
             ),
           ),
           Center(
-            child: Text(
-              title,
-              style: TextSTyle.f24CairoSemiBoldPrimary.copyWith(
-                color: ColorManager.white,
-              ),
-            ),
+            child: Text(title, style: TextSTyle.f24SSTArabicMediumPrimary),
           ),
         ],
       ),

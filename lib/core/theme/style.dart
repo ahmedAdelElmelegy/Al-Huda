@@ -13,6 +13,9 @@ abstract class TextSTyle {
   static String amiriItalic = 'AmiriItalic';
   static String amiriBoldItalic = 'AmiriBoldItalic';
   static String uthmanicHafs1 = 'UthmanicHafs1';
+  static String sSTArabicMedium = 'SSTArabicMedium';
+  static String sSTArabicRoman = 'SSTArabicRoman';
+  static String sSTArabicLight = 'SSTArabicLight';
 
   static TextStyle f12CairoRegGrey = TextStyle(
     color: ColorManager.gray,
@@ -177,5 +180,44 @@ abstract class TextSTyle {
     color: ColorManager.primaryText2,
     fontSize: 16.sp,
     fontFamily: uthmanicHafs1,
+  );
+
+  // 16,18 for new font
+  static TextStyle f16SSTArabicMediumPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 16.sp,
+    fontFamily: sSTArabicMedium,
+  );
+  static TextStyle f16SSTArabicMediumBlack = TextStyle(
+    color: ColorManager.black,
+    fontSize: 16.sp,
+    fontFamily: sSTArabicMedium,
+  );
+  static TextStyle f16SSTArabicRegBlack = TextStyle(
+    color: ColorManager.black,
+    fontSize: 16.sp,
+    fontFamily: sSTArabicRoman,
+  );
+  static TextStyle f16SSTArabicLightPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 16.sp,
+    fontFamily: sSTArabicLight,
+  );
+  static TextStyle f18SSTArabicMediumPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 18.sp,
+    fontFamily: sSTArabicMedium,
+  );
+  // 24
+  static TextStyle f24SSTArabicMediumPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 24.sp,
+    fontFamily: sSTArabicMedium,
+  );
+  // 14
+  static TextStyle f14SSTArabicMediumPrimary = TextStyle(
+    color: ColorManager.primary,
+    fontSize: 14.sp,
+    fontFamily: sSTArabicMedium,
   );
 }

@@ -1,4 +1,3 @@
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_count_item.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
@@ -10,8 +9,8 @@ import 'package:flutter_svg/svg.dart';
 
 class AzkarContentItem extends StatelessWidget {
   final int count;
-  final Zikr zikr;
-  const AzkarContentItem({super.key, required this.count, required this.zikr});
+  final String text;
+  const AzkarContentItem({super.key, required this.count, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class AzkarContentItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: SingleChildScrollView(
               child: Text(
-                zikr.text,
+                text,
                 style: TextSTyle.f16AmiriRegPrimary.copyWith(height: 1.7),
               ),
             ),
