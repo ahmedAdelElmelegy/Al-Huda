@@ -26,7 +26,9 @@ class _QranSettingScreenState extends State<QranSettingScreen> {
   }
 
   Future<void> _getCurrentReader() async {
-    String url = await QranServices.getReaderName() ?? AppURL.readerName;
+    String url =
+        await SharedPrefServices.getValue(Constants.reader) ??
+        AppURL.readerName;
     selectedReader = Constants.quranReader.firstWhere(
       (element) => element.url == url,
     );
@@ -69,7 +71,7 @@ class _QranSettingScreenState extends State<QranSettingScreen> {
                   onChanged: (value) {
                     setState(() {
                       selectedReader = value;
-                      QranServices.setReaderName(value!.url);
+                      SharedPrefServices.setValue(value!.url, Constants.reader);
                     });
                   },
                 ),

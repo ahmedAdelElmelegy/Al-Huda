@@ -15,6 +15,9 @@ class HomePrayerTimeListView extends StatelessWidget {
     return BlocBuilder<PrayerCubit, PrayerState>(
       builder: (context, state) {
         final cubit = context.read<PrayerCubit>();
+        if (state is PrayerLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
         return Container(
           padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 8.w),
           width: double.infinity,
@@ -28,13 +31,13 @@ class HomePrayerTimeListView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
-                Constants.prayer.length,
+                cubit.prayerTimes.length,
                 (index) => HomePrayerTimeItem(
                   time: DateFormat(
                     'hh:mm',
                   ).format(cubit.prayerTimes[index].value),
                   isSelected:
-                      cubit.getCurrentPrayer() == Constants.prayer[index].name,
+                      cubit.getCurrentPrayer() == cubit.prayerTimes[index].key,
                   prayerTime: Constants.prayer[index],
                 ),
               ),

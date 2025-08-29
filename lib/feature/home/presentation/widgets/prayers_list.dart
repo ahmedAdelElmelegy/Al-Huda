@@ -3,6 +3,7 @@ import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/feature/home/presentation/widgets/prayer_item.dart';
+import 'package:al_huda/feature/nearst_mosque/presentation/screens/nearest_mosque_screen.dart';
 import 'package:al_huda/feature/radio/presentation/screens/radio_screen.dart';
 import 'package:al_huda/feature/tasbeh/presentation/screens/tasbeh_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -63,10 +64,15 @@ class PrayersList extends StatelessWidget {
                   icon: AppIcons.allah,
                 ),
               ),
-              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
-              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
-              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
-              PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+              InkWell(
+                onTap: () {
+                  push(NearestMosqueScreen());
+                },
+                child: PrayerItem(
+                  title: 'nearest_mosque'.tr(),
+                  icon: AppIcons.mosque,
+                ),
+              ),
             ],
           ),
         ),

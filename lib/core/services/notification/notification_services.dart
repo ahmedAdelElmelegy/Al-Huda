@@ -51,8 +51,10 @@ class NotificationService {
     int id,
     String title,
     String body,
-    DateTime scheduleTime,
-  ) async {
+    DateTime scheduleTime, {
+    bool playSound = true,
+    String sound = 'athan',
+  }) async {
     if (scheduleTime.isBefore(DateTime.now())) {
       return;
     }
@@ -63,8 +65,8 @@ class NotificationService {
       channelDescription: 'Notifications for prayer times',
       importance: Importance.max,
       priority: Priority.high,
-      playSound: true,
-      sound: RawResourceAndroidNotificationSound('athan'),
+      playSound: playSound,
+      sound: RawResourceAndroidNotificationSound(sound),
     );
 
     // تفاصيل الإشعار لنظام iOS
@@ -114,5 +116,63 @@ class NotificationService {
     );
 
     await _localNotificationsPlugin.show(id, title, body, details);
+  }
+  // dayily notification
+
+  static Future<void> scheduleDailyNotification(
+    int id,
+    String title,
+    String body,
+    int hour,
+    int minute, {
+    bool playSound = true,
+    String sound = 'athan',
+  }) async {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
+
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
+      'daily_azkar_channel',
+      'Daily Azkar',
+      channelDescription: 'Notifications for daily azkar',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      sound: RawResourceAndroidNotificationSound(sound),
+    );
+
+    DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+      sound: '$sound.mp3',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    NotificationDetails platformDetails = NotificationDetails(
+      android: androidDaily,
+      iOS: iosDetails,
+    );
+
+    await _localNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduledDate,
+      platformDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
   }
 }

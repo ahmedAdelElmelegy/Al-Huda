@@ -6,6 +6,7 @@ import 'package:al_huda/feature/allah_name/presentation/manager/cubit/allah_name
 import 'package:al_huda/feature/azkar/data/repo/azkar_repo.dart';
 import 'package:al_huda/feature/azkar/presentation/manager/cubit/azkar_cubit.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
+import 'package:al_huda/feature/nearst_mosque/presentation/manager/cubit/google_map_cubit.dart';
 import 'package:al_huda/feature/prayer_time/data/repo/prayer_repo.dart';
 import 'package:al_huda/feature/prayer_time/presentation/manager/cubit/prayer_time_cubit.dart';
 import 'package:al_huda/feature/qran/data/Repo/ayat_repo.dart';
@@ -60,4 +61,5 @@ void init() async {
   getIt.registerLazySingleton<PrayerTimeCubit>(
     () => PrayerTimeCubit(getIt<PrayerRepo>()),
   );
+  getIt.registerLazySingleton<GoogleMapCubit>(() => GoogleMapCubit());
 }

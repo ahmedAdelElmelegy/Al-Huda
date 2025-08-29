@@ -11,10 +11,10 @@ class PrayerCubit extends Cubit<PrayerState> {
   final PrayerServices prayerServices;
 
   List<MapEntry<String, DateTime>> prayerTimes = [];
-  void getPrayerTimes() {
+  Future<void> getPrayerTimes() async {
     emit(PrayerLoading());
     try {
-      final times = prayerServices.getPrayerTimes();
+      final times = await prayerServices.getPrayerTimes();
       prayerTimes = [
         MapEntry("fagr", times.fajr),
         MapEntry("shurooq", times.sunrise),
@@ -44,40 +44,72 @@ class PrayerCubit extends Cubit<PrayerState> {
 
     for (int i = 0; i < prayerTimes.length; i++) {
       final prayer = prayerTimes[i];
-
+      final nextPrayerIndex = i + 1;
       if (now.isBefore(prayer.value)) {
-        // أول صلاة جاية
         if (now.isBefore(prayer.value)) {
-          nextPrayer = prayer.key;
-          nextPrayerTime = prayer.value;
+          if (prayerTimes.length > nextPrayerIndex) {
+            nextPrayer = prayerTimes[nextPrayerIndex].key;
+            nextPrayerTime = prayerTimes[nextPrayerIndex].value;
+          } else {
+            nextPrayer = prayerTimes[0].key;
+            nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
+          }
           return prayer.key;
         }
 
         return prayer.key;
       }
     }
-
+    if (prayerTimes.isEmpty) {
+      debugPrint("⚠️ مفيش أوقات صلاه متسجله دلوقتي");
+      return "fagr";
+    }
     nextPrayer = "fagr";
     nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
     return "fagr";
   }
 
   DateTime? nextPrayerTime;
+
   DateTime getCurrentPrayerTime() {
+    emit(GetCurrentPrayerLoading());
     final now = DateTime.now();
+
+    if (prayerTimes.isEmpty) return now;
 
     for (int i = 0; i < prayerTimes.length; i++) {
       final prayer = prayerTimes[i];
 
       if (now.isBefore(prayer.value)) {
-        nextPrayerTime = (i + 1 < prayerTimes.length)
-            ? prayerTimes[i + 1].value
-            : prayerTimes[2].value; // بعد الفجر → الضهر
-        return prayer.value;
+        // الصلاة الحالية = الصلاة السابقة
+        final currentPrayer = prayer.value;
+
+        nextPrayerTime = prayerTimes[i + 1].value;
+
+        emit(GetCurrentPrayerSucess());
+        return currentPrayer;
       }
     }
 
-    nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
-    return prayerTimes[0].value.add(const Duration(days: 1)); // فجر بكرة
+    // لو الوقت بعد آخر صلاة (العشاء)
+    final currentPrayer = prayerTimes.last.value; // Isha اليوم
+    nextPrayerTime = prayerTimes.first.value.add(
+      const Duration(days: 1),
+    ); // Fajr الغد
+
+    emit(GetCurrentPrayerSucess());
+    return currentPrayer;
+  }
+
+  //   notification for sabah and massaa
+
+  void scheduleSabah(DateTime time, String sound, int id) {
+    NotificationService.scheduleNotification(
+      id,
+      'azkar_sabah'.tr(),
+      'azkar_sabah'.tr(),
+      time,
+      sound: sound,
+    );
   }
 }

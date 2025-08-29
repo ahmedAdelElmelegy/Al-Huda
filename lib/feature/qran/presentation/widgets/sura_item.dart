@@ -23,7 +23,7 @@ class SurahItem extends StatelessWidget {
             color: ColorManager.primaryText2.withValues(alpha: 0.1),
           ),
         ),
-        color: ColorManager.primaryBg,
+        color: ColorManager.white,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

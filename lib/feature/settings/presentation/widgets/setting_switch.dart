@@ -2,15 +2,12 @@ import 'package:al_huda/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SettingSwitch extends StatefulWidget {
-  const SettingSwitch({super.key});
+class SettingSwitch extends StatelessWidget {
+  final bool value;
+  final ValueChanged<bool>? onChanged;
 
-  @override
-  State<SettingSwitch> createState() => _SettingSwitchState();
-}
+  const SettingSwitch({super.key, required this.value, this.onChanged});
 
-class _SettingSwitchState extends State<SettingSwitch> {
-  bool value = true;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -19,11 +16,7 @@ class _SettingSwitchState extends State<SettingSwitch> {
         activeTrackColor: ColorManager.primary,
         activeColor: ColorManager.white,
         value: value,
-        onChanged: (value) {
-          setState(() {
-            this.value = value;
-          });
-        },
+        onChanged: onChanged,
       ),
     );
   }

@@ -58,5 +58,9 @@
     "radio_reader":"قارئ راديو",
    "allah_name":"أسماء الله ",
    "qran_setting":"إعدادات القران",
-   "select_reader":"اختر قارئ"
+   "select_reader":"اختر قارئ",
+   "nearest_mosque":"اقرب مسجد",
+   "azkar_sabah":"اذكار الصباح",
+   "azkar_massaa":"اذكار المساء",
+   "azkar_setting":"إعدادات الاذكار"
 }

@@ -2,6 +2,7 @@ import 'package:al_huda/core/di/injection.dart';
 import 'package:al_huda/feature/allah_name/presentation/manager/cubit/allah_name_cubit.dart';
 import 'package:al_huda/feature/azkar/presentation/manager/cubit/azkar_cubit.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
+import 'package:al_huda/feature/nearst_mosque/presentation/manager/cubit/google_map_cubit.dart';
 import 'package:al_huda/feature/prayer_time/presentation/manager/cubit/prayer_time_cubit.dart';
 import 'package:al_huda/feature/qran/presentation/manager/Surah/qran_cubit.dart';
 import 'package:al_huda/feature/qran/presentation/manager/ayat/ayat_cubit.dart';
@@ -31,6 +32,8 @@ class GenerateMultiBloc extends StatelessWidget {
           create: (context) => getIt<AllahNameCubit>()..getAllahNames(),
         ),
         BlocProvider(create: (context) => getIt<PrayerTimeCubit>()),
+
+        BlocProvider(create: (context) => getIt<GoogleMapCubit>()),
       ],
 
       child: child,

@@ -13,7 +13,7 @@ class QranScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.primaryBg,
+      backgroundColor: ColorManager.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

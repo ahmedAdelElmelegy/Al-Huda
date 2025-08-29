@@ -1,13 +1,11 @@
-import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
-import 'package:al_huda/core/widgets/svg_icon.dart';
-import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_detail_screen.dart';
+import 'package:al_huda/feature/prayer_time/presentation/screens/setting_prayer_time_screen.dart';
+import 'package:al_huda/feature/settings/presentation/screens/azkar_setting_screen.dart';
 import 'package:al_huda/feature/settings/presentation/screens/qran_setting_screen.dart';
 import 'package:al_huda/feature/settings/presentation/widgets/setting_action_btn.dart';
-import 'package:al_huda/feature/settings/presentation/widgets/setting_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +18,7 @@ class SettingScreenAction extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            push(PrayerTimeDetailScreen());
+            push(SettingPrayerTimeScreen());
           },
           child: SettingActionBtn(title: 'prayers_time'.tr()),
         ),
@@ -32,24 +30,12 @@ class SettingScreenAction extends StatelessWidget {
           child: SettingActionBtn(title: 'qran_setting'.tr()),
         ),
         verticalSpace(16),
-        SettingActionBtn(title: 'english'.tr(), child: SettingSwitch()),
-        verticalSpace(16),
-        SettingActionBtn(
-          title: 'update_location'.tr(),
-          child: Row(
-            children: [
-              Text(
-                'location'.tr(),
-                style: TextSTyle.f8CairoSemiBoldWhite.copyWith(
-                  color: Colors.black,
-                ),
-              ),
-              horizontalSpace(8),
-              SvgIcon(assetName: AppIcons.update),
-            ],
-          ),
+        InkWell(
+          onTap: () {
+            push(AzkarSettingScreen());
+          },
+          child: SettingActionBtn(title: 'azkar_setting'.tr()),
         ),
-        verticalSpace(16),
         verticalSpace(16),
         SettingActionBtn(
           title: 'app_version'.tr(),
@@ -64,7 +50,24 @@ class SettingScreenAction extends StatelessWidget {
             ],
           ),
         ),
+        verticalSpace(16),
       ],
     );
   }
 }
+  // ToggleSwitch(
+  //         totalSwitches: 3,
+  //         labels: ['إيقاف', 'خفيف', 'قوي'],
+  //         initialLabelIndex: 0,
+  //         activeBgColor: [ColorManager.primary],
+  //         inactiveBgColor: ColorManager.greyLight,
+  //         activeFgColor: Colors.white,
+  //         inactiveFgColor: ColorManager.gray,
+  //         cornerRadius: 12,
+  //         curve: Curves.easeInOut,
+  //         animate: true,
+  //         animationDuration: 500,
+  //         onToggle: (index) {
+  //           print('اختيار: $index');
+  //         },
+  //       ),

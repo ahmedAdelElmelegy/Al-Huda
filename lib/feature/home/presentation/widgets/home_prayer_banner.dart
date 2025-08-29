@@ -84,11 +84,15 @@ class HomePrayerBanner extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    DateFormat('hh:mm ').format(cubit.nextPrayerTime!),
+                    cubit.nextPrayerTime == null
+                        ? "—"
+                        : DateFormat('hh:mm').format(cubit.nextPrayerTime!),
                     style: TextSTyle.f14CairoBoldPrimary,
                   ),
                   Text(
-                    PrayerServices.getNextAmPm(cubit.nextPrayerTime!),
+                    PrayerServices.getNextAmPm(
+                      cubit.nextPrayerTime ?? DateTime.now(),
+                    ),
                     style: TextSTyle.f14CairoBoldPrimary,
                   ),
                 ],

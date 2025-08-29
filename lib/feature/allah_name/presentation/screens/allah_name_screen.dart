@@ -1,11 +1,9 @@
 import 'package:al_huda/core/helper/app_constants.dart';
-import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/widgets/custom_bg_app_bar.dart';
 import 'package:al_huda/core/widgets/loading_list_view.dart';
 import 'package:al_huda/feature/allah_name/presentation/manager/cubit/allah_name_cubit.dart';
-import 'package:al_huda/feature/allah_name/presentation/screens/allah_detail_screen.dart';
-import 'package:al_huda/feature/allah_name/presentation/widgets/allah_name_item.dart';
+import 'package:al_huda/feature/allah_name/presentation/widgets/allah_name_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,19 +43,12 @@ class AllahNameScreen extends StatelessWidget {
                   );
                 }
                 return SliverPadding(
-                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          push(AllahDetailScreen(allahNames: cubit.allahNames));
-                        },
-
-                        child: AllahNameItem(
-                          allahName: cubit.allahNames[index],
-                        ),
-                      );
-                    }, childCount: cubit.allahNames.length),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16.h,
+                    horizontal: 16.w,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: AllahNameList(cubit: cubit),
                   ),
                 );
               },

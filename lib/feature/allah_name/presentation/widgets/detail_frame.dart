@@ -19,6 +19,13 @@ class DetailFrame extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 16.h),
           padding: EdgeInsets.symmetric(vertical: 30.h),
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: ColorManager.primary.withValues(alpha: .5),
+                blurRadius: 10,
+                offset: const Offset(3, 3),
+              ),
+            ],
             borderRadius: BorderRadius.circular(12.r),
             image: DecorationImage(
               image: AssetImage(AppImages.ribbon1),

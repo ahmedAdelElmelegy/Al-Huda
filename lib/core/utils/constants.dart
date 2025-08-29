@@ -27,4 +27,10 @@ class Constants {
     QuranReaderModel(name: 'محمد جبريل', url: 'ar.muhammadjibreel'),
   ];
   static String reader = 'reader';
+  static String lat = 'lat';
+  static String lng = 'lng';
+  static const keyPrefix = "prayer_switch_";
+  static const keyPrefixNotification = "prayer_switch_notification_";
+  static List<String> azkar = ["azkar_sabah", "azkar_massaa"];
+  static const keyPrefixAzkar = "azkar_switch_";
 }

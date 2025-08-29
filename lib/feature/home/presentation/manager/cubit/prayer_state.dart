@@ -10,3 +10,7 @@ final class PrayerLoading extends PrayerState {}
 final class PrayerSucess extends PrayerState {}
 
 final class PrayerFailure extends PrayerState {}
+
+final class GetCurrentPrayerLoading extends PrayerState {}
+
+final class GetCurrentPrayerSucess extends PrayerState {}

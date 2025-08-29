@@ -45,6 +45,7 @@ abstract class AppIcons {
   static const String azkar = "assets/icons/azkar.svg";
   static const String allah = "assets/icons/allah.svg";
   static const String leave = "assets/icons/leave.svg";
+  static const String mosque = "assets/icons/mosque.svg";
 }
 
 abstract class AppImages {

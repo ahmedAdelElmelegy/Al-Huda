@@ -1,13 +1,27 @@
 import 'package:adhan/adhan.dart';
+import 'package:al_huda/core/services/qran_services.dart';
+import 'package:al_huda/core/utils/constants.dart';
+
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PrayerServices {
-  final coordinates = Coordinates(30.0444, 31.2357); // القاهرة
-  final params = CalculationMethod.egyptian.getParameters();
+  Future<Coordinates> getCoordinates() async {
+    String? latValue = await SharedPrefServices.getValue(Constants.lat);
+    String? lngValue = await SharedPrefServices.getValue(Constants.lng);
 
-  PrayerTimes getPrayerTimes() {
+    if (latValue != null && lngValue != null) {
+      return Coordinates(double.parse(latValue), double.parse(lngValue));
+    }
+
+    return Coordinates(30.0444, 31.2357);
+  }
+
+  final params = CalculationMethod.egyptian.getParameters();
+  Future<PrayerTimes> getPrayerTimes() async {
+    final coordinates = await getCoordinates();
     return PrayerTimes.today(coordinates, params);
   }
 
@@ -99,13 +113,23 @@ class PrayerServices {
 
   static Duration getDelayUnitMidnight() {
     final now = DateTime.now();
-    final tomorrow = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      now.hour,
-      now.minute + 1,
-    );
+    final tomorrow = DateTime(now.year, now.month, now.day + 1, 0, 5);
     return tomorrow.difference(now);
+  }
+
+  // for notificaton  setting
+
+  static Future<void> saveSwitchState(
+    int index,
+    bool value,
+    String keyPrefix,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("$keyPrefix$index", value);
+  }
+
+  static Future<bool> getSwitchState(int index, String keyPrefix) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool("$keyPrefix$index") ?? true; // default = true
   }
 }

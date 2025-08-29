@@ -1,6 +1,5 @@
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_action_btn.dart';
-import 'package:al_huda/feature/azkar/presentation/widgets/azkar_audio_item.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_content_item.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
@@ -32,8 +31,8 @@ class AzkarDetailItem extends StatelessWidget {
       child: Column(
         children: [
           AzkarContentItem(count: index, text: zikr.text),
-          verticalSpace(24),
-          AzkarAudioItem(audio: zikr.audio, index: index),
+          // verticalSpace(24),
+          // AzkarAudioItem(audio: zikr.audio, index: index),
           verticalSpace(16),
           AzkarActionBtn(count: zikr.count),
         ],

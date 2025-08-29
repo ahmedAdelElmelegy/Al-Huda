@@ -29,6 +29,7 @@ class PrayerTimeList extends StatelessWidget {
               Constants.prayer.length,
               (index) => PrayerTimeItem(
                 prayer: Constants.prayer[index],
+                index: index,
                 time: DateFormat(
                   'hh:mm',
                 ).format(cubit.prayerTimes[index].value),

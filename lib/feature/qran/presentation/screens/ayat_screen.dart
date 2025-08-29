@@ -6,6 +6,7 @@ import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/services/qran_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
+import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/loading_list_view.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/ayat.dart';
@@ -52,7 +53,7 @@ class _AyatScreenState extends State<AyatScreen> {
   }
 
   updateAyat(int surahNumber) async {
-    String? readerName = await QranServices.getReaderName();
+    String? readerName = await SharedPrefServices.getValue(Constants.reader);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AyatCubit>().getAyat(
         surahNumber,
