@@ -97,8 +97,8 @@ class NotificationService {
     required String body,
   }) async {
     const androidDetails = AndroidNotificationDetails(
-      'default_channel',
-      'Default',
+      'prayer_channel',
+      'Prayer Times',
       channelDescription: 'Default notifications',
       importance: Importance.max,
       priority: Priority.high,
@@ -143,8 +143,8 @@ class NotificationService {
     }
 
     AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
-      'daily_azkar_channel',
-      'Daily Azkar',
+      'prayer_channel',
+      'Prayer Times',
       channelDescription: 'Notifications for daily azkar',
       importance: Importance.max,
       priority: Priority.high,
@@ -173,6 +173,45 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
 
       matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  static Future<void> showPeriodicallyNotification(
+    int id,
+    String title,
+    String body, {
+    bool playSound = true,
+    String sound = 'athan',
+  }) async {
+    AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
+      'prayer_channel',
+      'Prayer Times',
+      channelDescription: 'Notifications for daily azkar',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      sound: RawResourceAndroidNotificationSound(sound),
+    );
+
+    DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+      sound: '$sound.mp3',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    NotificationDetails platformDetails = NotificationDetails(
+      android: androidDaily,
+      iOS: iosDetails,
+    );
+
+    await _localNotificationsPlugin.periodicallyShow(
+      id,
+      title,
+      body,
+      RepeatInterval.everyMinute,
+      platformDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
 }

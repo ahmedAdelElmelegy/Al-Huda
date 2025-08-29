@@ -33,4 +33,5 @@ class Constants {
   static const keyPrefixNotification = "prayer_switch_notification_";
   static List<String> azkar = ["azkar_sabah", "azkar_massaa"];
   static const keyPrefixAzkar = "azkar_switch_";
+  static const onlyOneAzkarNotification = "only_one_azkar_notification";
 }

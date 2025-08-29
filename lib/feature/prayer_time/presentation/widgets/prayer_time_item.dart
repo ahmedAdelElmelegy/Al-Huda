@@ -77,25 +77,32 @@ class _PrayerTimeItemState extends State<PrayerTimeItem> {
           horizontalSpace(16),
           Spacer(),
           InkWell(
-            onTap: () {
+            onTap: () async {
               setState(() {
                 value = !value;
               });
-              PrayerServices.saveSwitchState(
+
+              // حفظ الحالة
+              await PrayerServices.saveSwitchState(
                 widget.index,
                 value,
                 Constants.keyPrefixNotification,
               );
 
+              // ignore: use_build_context_synchronously
               final cubit = context.read<PrayerCubit>();
               final prayerTime = cubit.prayerTimes[widget.index];
 
-              NotificationService.scheduleNotification(
+              // إلغاء أي إشعار قديم
+              await NotificationService.cancelNotification(widget.index);
+
+              // إعادة جدولة جديدة بالحالة الصحيحة
+              await NotificationService.scheduleNotification(
                 widget.index,
                 'حان الآن موعد ${prayerTime.key.tr()}',
                 'وقت الصلاة: ${prayerTime.key.tr()}',
                 prayerTime.value,
-                playSound: value,
+                playSound: value, // mute أو بصوت
               );
             },
             child: SvgIcon(

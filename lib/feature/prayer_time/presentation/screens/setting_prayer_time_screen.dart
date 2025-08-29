@@ -13,6 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class SettingPrayerTimeScreen extends StatelessWidget {
   const SettingPrayerTimeScreen({super.key});
@@ -108,12 +109,15 @@ class _PrayerTimeDetailItemState extends State<PrayerTimeDetailItem> {
               } else {
                 final cubit = context.read<PrayerCubit>();
                 final prayerTime = cubit.prayerTimes[widget.index];
-
+                final scheduledTime = tz.TZDateTime.from(
+                  prayerTime.value,
+                  tz.local,
+                );
                 NotificationService.scheduleNotification(
                   widget.index,
                   'حان الآن موعد ${prayerTime.key.tr()}',
                   'وقت الصلاة: ${prayerTime.key.tr()}',
-                  prayerTime.value,
+                  scheduledTime,
                 );
               }
             },

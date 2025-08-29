@@ -43,6 +43,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// class NotifictionText extends StatelessWidget {
+//   const NotifictionText({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: ElevatedButton(
+//           onPressed: () {
+//             NotificationService.showPeriodicallyNotification(
+//               5000,
+//               'sally_al_mohamed'.tr(),
+//               'sally_al_mohamed'.tr(),
+//               sound: 'salyalmohamed',
+//             );
+//           },
+//           child: Text("Pick Time"),
+//         ),
+//       ),
+//     );
+//   }
+// }
 // class NotifictionText extends StatefulWidget {
 //   const NotifictionText({super.key});
 

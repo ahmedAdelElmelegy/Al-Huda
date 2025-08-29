@@ -1,8 +1,10 @@
 import 'package:al_huda/core/services/notification/notification_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
+import 'package:al_huda/core/utils/constants.dart';
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 part 'prayer_state.dart';
 
@@ -11,10 +13,14 @@ class PrayerCubit extends Cubit<PrayerState> {
   final PrayerServices prayerServices;
 
   List<MapEntry<String, DateTime>> prayerTimes = [];
+  DateTime? nextPrayerTime;
+  String nextPrayer = "";
+
   Future<void> getPrayerTimes() async {
     emit(PrayerLoading());
     try {
       final times = await prayerServices.getPrayerTimes();
+
       prayerTimes = [
         MapEntry("fagr", times.fajr),
         MapEntry("shurooq", times.sunrise),
@@ -23,92 +29,80 @@ class PrayerCubit extends Cubit<PrayerState> {
         MapEntry("maghrib", times.maghrib),
         MapEntry("isha", times.isha),
       ];
+
       emit(PrayerSucess());
+
       for (int i = 0; i < prayerTimes.length; i++) {
-        NotificationService.scheduleNotification(
-          i,
-          'حان الآن موعد ${prayerTimes[i].key.tr()}',
-          'وقت الصلاة: ${prayerTimes[i].key.tr()}',
+        final scheduledTime = tz.TZDateTime.from(
           prayerTimes[i].value,
+          tz.local,
         );
+        bool isSwitchedOn = await PrayerServices.getSwitchState(
+          i,
+          Constants.keyPrefix,
+        );
+        if (isSwitchedOn) {
+          NotificationService.scheduleNotification(
+            i,
+            'حان الآن موعد ',
+            'وقت الصلاة: ',
+            scheduledTime,
+            playSound: await PrayerServices.getSwitchState(
+              i,
+              Constants.keyPrefixNotification,
+            ),
+          );
+        }
       }
     } catch (e) {
       emit(PrayerFailure());
     }
   }
 
-  String nextPrayer = "";
-
   String getCurrentPrayer() {
     final now = DateTime.now();
+    if (prayerTimes.isEmpty) return "fagr";
 
     for (int i = 0; i < prayerTimes.length; i++) {
       final prayer = prayerTimes[i];
-      final nextPrayerIndex = i + 1;
       if (now.isBefore(prayer.value)) {
-        if (now.isBefore(prayer.value)) {
-          if (prayerTimes.length > nextPrayerIndex) {
-            nextPrayer = prayerTimes[nextPrayerIndex].key;
-            nextPrayerTime = prayerTimes[nextPrayerIndex].value;
-          } else {
-            nextPrayer = prayerTimes[0].key;
-            nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
-          }
-          return prayer.key;
-        }
-
+        final nextIndex = (i + 1) % prayerTimes.length;
+        nextPrayer = prayerTimes[nextIndex].key;
+        nextPrayerTime = prayerTimes[nextIndex].value;
         return prayer.key;
       }
     }
-    if (prayerTimes.isEmpty) {
-      debugPrint("⚠️ مفيش أوقات صلاه متسجله دلوقتي");
-      return "fagr";
-    }
+
+    // After last prayer
     nextPrayer = "fagr";
     nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
-    return "fagr";
+    return "isha";
   }
 
-  DateTime? nextPrayerTime;
-
   DateTime getCurrentPrayerTime() {
-    emit(GetCurrentPrayerLoading());
     final now = DateTime.now();
-
     if (prayerTimes.isEmpty) return now;
 
     for (int i = 0; i < prayerTimes.length; i++) {
       final prayer = prayerTimes[i];
-
       if (now.isBefore(prayer.value)) {
-        // الصلاة الحالية = الصلاة السابقة
-        final currentPrayer = prayer.value;
-
-        nextPrayerTime = prayerTimes[i + 1].value;
-
-        emit(GetCurrentPrayerSucess());
-        return currentPrayer;
+        nextPrayerTime = prayerTimes[(i + 1) % prayerTimes.length].value;
+        return prayer.value;
       }
     }
 
-    // لو الوقت بعد آخر صلاة (العشاء)
-    final currentPrayer = prayerTimes.last.value; // Isha اليوم
-    nextPrayerTime = prayerTimes.first.value.add(
-      const Duration(days: 1),
-    ); // Fajr الغد
-
-    emit(GetCurrentPrayerSucess());
-    return currentPrayer;
+    // After last prayer
+    nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
+    return prayerTimes.last.value;
   }
 
-  //   notification for sabah and massaa
-
   void scheduleSabah(DateTime time, String sound, int id) {
+    final scheduledTime = tz.TZDateTime.from(time, tz.local);
     NotificationService.scheduleNotification(
       id,
       'azkar_sabah'.tr(),
       'azkar_sabah'.tr(),
-      time,
+      scheduledTime,
       sound: sound,
     );
   }

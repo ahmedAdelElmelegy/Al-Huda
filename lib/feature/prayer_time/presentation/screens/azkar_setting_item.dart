@@ -6,11 +6,8 @@ import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
-import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:al_huda/feature/settings/presentation/widgets/setting_switch.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AzkarSettingItem extends StatefulWidget {
@@ -73,28 +70,17 @@ class _AzkarSettingItemState extends State<AzkarSettingItem> {
                 Constants.keyPrefixAzkar,
               );
 
-              if (!newValue) {
-                NotificationService.cancelNotification(1000 + widget.index);
-              } else {
-                if (widget.index == 0) {
-                  NotificationService.scheduleDailyNotification(
-                    1000,
-                    widget.title,
-                    "اذكر الله صباحك",
-                    6,
-                    0,
-                    sound: 'azkarsabahh',
-                  );
-                } else {
-                  NotificationService.scheduleDailyNotification(
-                    1000,
-                    widget.title,
-                    "اذكر الله مساءك",
-                    18,
-                    0,
-                    sound: 'azkarmassaa',
-                  );
-                }
+              NotificationService.cancelNotification(1000 + widget.index);
+
+              if (newValue) {
+                NotificationService.scheduleDailyNotification(
+                  1000 + widget.index,
+                  widget.title,
+                  widget.index == 0 ? "اذكر الله صباحك" : "اذكر الله مساءك",
+                  widget.index == 0 ? 6 : 18,
+                  0,
+                  sound: widget.index == 0 ? 'azkarsabahh' : 'azkarmassaa',
+                );
               }
             },
           ),

@@ -12,4 +12,16 @@ class SharedPrefServices {
         await SharedPreferences.getInstance();
     return sharedPreferences.getString(key);
   }
+
+  static Future<void> setBool(bool value, String key) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setBool(key, value);
+  }
+
+  static Future<bool?> getBool(String key) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    return sharedPreferences.getBool(key);
+  }
 }
