@@ -44,8 +44,8 @@ class PrayerCubit extends Cubit<PrayerState> {
         if (isSwitchedOn) {
           NotificationService.scheduleNotification(
             i,
-            'حان الآن موعد ',
-            'وقت الصلاة: ',
+            ' ${prayerTimes[i].key.tr()} حان الآن موعد ',
+            ' ${prayerTimes[i].key.tr()} حان الآن موعد ',
             scheduledTime,
             playSound: await PrayerServices.getSwitchState(
               i,

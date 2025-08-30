@@ -60,27 +60,45 @@ class _AzkarSettingItemState extends State<AzkarSettingItem> {
           const Spacer(),
           SettingSwitch(
             value: value,
-            onChanged: (newValue) {
+            onChanged: (newValue) async {
               setState(() {
                 value = newValue;
               });
-              PrayerServices.saveSwitchState(
+
+              // حفظ الحالة في الـ SharedPreferences
+              await PrayerServices.saveSwitchState(
                 widget.index,
                 newValue,
                 Constants.keyPrefixAzkar,
               );
 
-              NotificationService.cancelNotification(1000 + widget.index);
+              // إلغاء أي إشعار موجود بنفس الـ ID
+              final notificationId = 1000 + widget.index;
+              await NotificationService.cancelNotification(notificationId);
 
               if (newValue) {
-                NotificationService.scheduleDailyNotification(
-                  1000 + widget.index,
-                  widget.title,
-                  widget.index == 0 ? "اذكر الله صباحك" : "اذكر الله مساءك",
-                  widget.index == 0 ? 6 : 18,
-                  0,
-                  sound: widget.index == 0 ? 'azkarsabahh' : 'azkarmassaa',
-                );
+                if (widget.index == 2) {
+                  await NotificationService.showPeriodicallyNotification(
+                    notificationId,
+                    widget.title,
+                    "صلي الله عليه وسلم",
+                    sound: 'salyalmohamed',
+                  );
+                } else {
+                  final hour = widget.index == 0 ? 6 : 18;
+                  final sound = widget.index == 0
+                      ? 'azkarsabahh'
+                      : 'azkarmassaa';
+
+                  await NotificationService.scheduleDailyNotification(
+                    notificationId,
+                    widget.title,
+                    widget.index == 0 ? "اذكر الله صباحك" : "اذكر الله مساءك",
+                    hour,
+                    0,
+                    sound: sound,
+                  );
+                }
               }
             },
           ),

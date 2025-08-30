@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 
 class AzkarSettingScreen extends StatelessWidget {
   const AzkarSettingScreen({super.key});
-  static List<String> azkar = ["azkar_sabah", "azkar_massaa"];
+  static List<String> azkar = [
+    "azkar_sabah",
+    "azkar_massaa",
+    "sally_al_mohamed",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

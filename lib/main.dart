@@ -87,9 +87,9 @@ void main() async {
       false;
   if (!isOnlyOneAzkarNotificationOn) {
     NotificationService.showPeriodicallyNotification(
-      5000,
-      "sally_al_mohamed".tr(),
-      "sally_al_mohamed".tr(),
+      1002,
+      "صلي علي محمد",
+      "صلي الله عليه وسلم",
       sound: 'salyalmohamed',
     );
     SharedPrefServices.setBool(true, Constants.onlyOneAzkarNotification);
@@ -99,8 +99,8 @@ void main() async {
       1000,
       "أذكار الصباح",
       "اذكر الله صباحك",
-      4,
-      40,
+      6,
+      0,
       sound: 'azkarsabahh',
       playSound: await PrayerServices.getSwitchState(
         0,
