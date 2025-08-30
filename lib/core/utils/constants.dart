@@ -35,4 +35,7 @@ class Constants {
   static const keyPrefixAzkar = "azkar_switch_";
   static const onlyOneAzkarNotification = "only_one_azkar_notification";
   static const azkarsalleyalmohamed = "azkar_salley_al_mohamed";
+  static const azkarAlsabahChannelId = "azkar_sabah_channel";
+  static const azkarElmassaaChannelId = "azkar_massaa_channel";
+  static const saleAlMohamedChannelId = "sale_al_mohamed_channel";
 }

@@ -1,7 +1,7 @@
 class Zikr {
   final int id;
   final String text;
-  final int count;
+  int count;
   final String audio;
   final String filename;
 
@@ -20,6 +20,23 @@ class Zikr {
       count: json['count'],
       audio: json['audio'],
       filename: json['filename'],
+    );
+  }
+  Zikr copyWith({
+    String? text,
+    int? count,
+    String? audio,
+    String? filename,
+    int? id,
+    // other parameters...
+  }) {
+    return Zikr(
+      id: id ?? this.id,
+      text: text ?? this.text,
+      count: count ?? this.count,
+      audio: audio ?? this.audio,
+      filename: filename ?? this.filename,
+      // copy other properties...
     );
   }
 }

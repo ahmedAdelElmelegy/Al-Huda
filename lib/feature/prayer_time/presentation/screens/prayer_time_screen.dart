@@ -22,15 +22,30 @@ class PrayerTimeScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              verticalSpace(8),
-
               HomeDateAndLocation(isPrayerTime: true),
               verticalSpace(20),
-              SvgIcon(assetName: AppIcons.prayer, width: 128.w, height: 128.h),
-              verticalSpace(16),
-              PrayerTime(),
-              verticalSpace(20),
-              PrayerTimeList(),
+              verticalSpace(8),
+              Column(
+                children: [
+                  Column(
+                    children: [
+                      SvgIcon(
+                        assetName: AppIcons.prayer,
+                        width: 128.w,
+                        height: 128.h,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      verticalSpace(16),
+                      PrayerTime(),
+                      verticalSpace(20),
+                      PrayerTimeList(),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ),

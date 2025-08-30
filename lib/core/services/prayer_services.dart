@@ -132,4 +132,22 @@ class PrayerServices {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool("$keyPrefix$index") ?? true; // default = true
   }
+
+  static DateTime calculateDataTime(int hour, int minute) {
+    final now = DateTime.now();
+    DateTime scheduledDate = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    ); // 6:00 AM
+
+    if (scheduledDate.isBefore(now)) {
+      // لو الوقت عدى، نزود يوم
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    return scheduledDate;
+  }
 }

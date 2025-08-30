@@ -6,6 +6,7 @@ import 'package:al_huda/feature/home/presentation/widgets/home_prayer_banner.dar
 import 'package:al_huda/feature/home/presentation/widgets/home_prayer_time_listview.dart';
 import 'package:al_huda/feature/home/presentation/widgets/prayers_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,21 +21,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSpace(18),
-              HomeDateAndLocation(),
-              verticalSpace(16),
-              HomePrayerTimeListView(),
-              verticalSpace(16),
-              HomePrayerBanner(),
-              verticalSpace(18),
-              AllPrayersHeadline(),
-              verticalSpace(16),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 500.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  verticalSpace(18),
+                  HomeDateAndLocation(),
+                  verticalSpace(16),
+                  HomePrayerTimeListView(),
+                  verticalSpace(16),
+                  HomePrayerBanner(),
+                  verticalSpace(18),
+                  AllPrayersHeadline(),
+                  verticalSpace(16),
 
-              PrayersList(),
-            ],
+                  PrayersList(),
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:al_huda/core/utils/constants.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz; // الاستيراد كـ tz
 import 'package:timezone/data/latest_all.dart' as tz; // لتهيئة بيانات التوقيت
@@ -54,15 +55,16 @@ class NotificationService {
     DateTime scheduleTime, {
     bool playSound = true,
     String sound = 'athan',
+    String chanelId = 'prayer_channel',
+    String chanelName = 'Prayer Times',
   }) async {
     if (scheduleTime.isBefore(DateTime.now())) {
       return;
     }
 
     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'prayer_channel', // Channel ID
-      'Prayer Times', // Channel Name
-      channelDescription: 'Notifications for prayer times',
+      chanelId, // Channel ID
+      chanelName, // Channel Name
       importance: Importance.max,
       priority: Priority.high,
       playSound: playSound,
@@ -71,7 +73,7 @@ class NotificationService {
 
     // تفاصيل الإشعار لنظام iOS
     DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
-      sound: 'athan.mp3',
+      sound: sound,
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
@@ -119,77 +121,80 @@ class NotificationService {
   }
   // dayily notification
 
-  static Future<void> scheduleDailyNotification(
-    int id,
-    String title,
-    String body,
-    int hour,
-    int minute, {
-    bool playSound = true,
-    String sound = 'athan',
-  }) async {
-    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      hour,
-      minute,
-    );
+  // static Future<void> scheduleDailyNotification(
+  //   int id,
+  //   String title,
+  //   String body,
+  //   int hour,
+  //   int minute, {
+  //   bool playSound = true,
+  //   String sound = 'athan',
+  // }) async {
+  //   final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+  //   tz.TZDateTime scheduledDate = tz.TZDateTime(
+  //     tz.local,
+  //     now.year,
+  //     now.month,
+  //     now.day,
+  //     hour,
+  //     minute,
+  //   );
 
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
-    }
+  //   if (scheduledDate.isBefore(now)) {
+  //     scheduledDate = scheduledDate.add(const Duration(days: 1));
+  //   }
 
-    AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
-      'prayer_channel',
-      'Prayer Times',
-      channelDescription: 'Notifications for daily azkar',
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      sound: RawResourceAndroidNotificationSound(sound),
-    );
+  //   AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
+  //     'prayer_channel',
+  //     'Prayer Times',
+  //     channelDescription: 'Notifications for daily azkar',
+  //     importance: Importance.max,
+  //     priority: Priority.high,
+  //     playSound: true,
+  //     sound: RawResourceAndroidNotificationSound(sound),
+  //   );
 
-    DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
-      sound: '$sound.mp3',
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
+  //   DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+  //     sound: '$sound.mp3',
+  //     presentAlert: true,
+  //     presentBadge: true,
+  //     presentSound: true,
+  //   );
 
-    NotificationDetails platformDetails = NotificationDetails(
-      android: androidDaily,
-      iOS: iosDetails,
-    );
+  //   NotificationDetails platformDetails = NotificationDetails(
+  //     android: androidDaily,
+  //     iOS: iosDetails,
+  //   );
 
-    await _localNotificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      scheduledDate,
-      platformDetails,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+  //   await _localNotificationsPlugin.zonedSchedule(
+  //     id,
+  //     title,
+  //     body,
+  //     scheduledDate,
+  //     platformDetails,
+  //     androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
 
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-  }
+  //     matchDateTimeComponents: DateTimeComponents.time,
+  //   );
+  // }
 
   static Future<void> showPeriodicallyNotification(
     int id,
     String title,
     String body, {
     bool playSound = true,
-    String sound = 'athan',
+    String sound = 'salyalmohamed',
+    String chanelId = Constants.saleAlMohamedChannelId,
+    String chanelName = 'sale_al_mohamed',
   }) async {
     AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
-      'prayer_channel',
-      'Prayer Times',
+      chanelId,
+      chanelName,
       channelDescription: 'Notifications for daily azkar',
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
+      icon: 'logo',
       sound: RawResourceAndroidNotificationSound(sound),
     );
 

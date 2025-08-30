@@ -54,6 +54,7 @@ void callbackDispatcher() {
           i,
           Constants.keyPrefixNotification,
         ),
+        sound: 'athan',
       );
     }
 
@@ -95,34 +96,36 @@ void main() async {
     SharedPrefServices.setBool(true, Constants.onlyOneAzkarNotification);
   }
   if (isSabahOn) {
-    NotificationService.scheduleDailyNotification(
+    NotificationService.scheduleNotification(
       1000,
       "أذكار الصباح",
       "اذكر الله صباحك",
-      6,
-      0,
+      PrayerServices.calculateDataTime(6, 0),
       sound: 'azkarsabahh',
       playSound: await PrayerServices.getSwitchState(
         0,
         Constants.keyPrefixAzkar,
       ),
+      chanelId: Constants.azkarAlsabahChannelId,
+      chanelName: "أذكار الصباح",
     );
   } else {
     NotificationService.cancelNotification(1000);
   }
 
   if (isMassaaOn) {
-    NotificationService.scheduleDailyNotification(
+    NotificationService.scheduleNotification(
       1001,
       "أذكار المساء",
       "اذكر الله مساءك",
-      18,
-      0,
+      PrayerServices.calculateDataTime(18, 0),
       sound: 'azkarmassaa',
       playSound: await PrayerServices.getSwitchState(
         1,
         Constants.keyPrefixAzkar,
       ),
+      chanelId: Constants.azkarElmassaaChannelId,
+      chanelName: "أذكار المساء",
     );
   } else {
     NotificationService.cancelNotification(1001);

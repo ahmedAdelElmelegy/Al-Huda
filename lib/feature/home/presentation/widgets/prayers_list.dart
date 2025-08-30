@@ -30,6 +30,7 @@ class PrayersList extends StatelessWidget {
         child: Align(
           alignment: Alignment.topCenter,
           child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: .83,

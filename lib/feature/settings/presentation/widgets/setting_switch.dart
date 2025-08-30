@@ -11,7 +11,8 @@ class SettingSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 20.h,
+      height: 16.h,
+
       child: Switch(
         activeTrackColor: ColorManager.primary,
         activeColor: ColorManager.white,
@@ -21,3 +22,14 @@ class SettingSwitch extends StatelessWidget {
     );
   }
 }
+
+// //  Checkbox(
+//         side: BorderSide(color: ColorManager.primary, width: 2.w),
+//         activeColor: ColorManager.primary,
+//         checkColor: ColorManager.white,
+//         shape: CircleBorder(),
+//         value: value,
+//         onChanged: (value) {
+//           onChanged!(value!);
+//         },
+//       ),

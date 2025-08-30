@@ -90,13 +90,18 @@ class _AzkarSettingItemState extends State<AzkarSettingItem> {
                       ? 'azkarsabahh'
                       : 'azkarmassaa';
 
-                  await NotificationService.scheduleDailyNotification(
+                  await NotificationService.scheduleNotification(
                     notificationId,
                     widget.title,
                     widget.index == 0 ? "اذكر الله صباحك" : "اذكر الله مساءك",
-                    hour,
-                    0,
+                    PrayerServices.calculateDataTime(hour, 0),
                     sound: sound,
+                    chanelId: widget.index == 0
+                        ? Constants.azkarAlsabahChannelId
+                        : Constants.azkarElmassaaChannelId,
+                    chanelName: widget.index == 0
+                        ? "أذكار الصباح"
+                        : "أذكار المساء",
                   );
                 }
               }
