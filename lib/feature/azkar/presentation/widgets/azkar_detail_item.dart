@@ -31,8 +31,7 @@ class AzkarDetailItem extends StatelessWidget {
       child: Column(
         children: [
           AzkarContentItem(count: index, text: zikr.text),
-          // verticalSpace(24),
-          // AzkarAudioItem(audio: zikr.audio, index: index),
+
           verticalSpace(16),
           AzkarActionBtn(count: zikr.count),
         ],

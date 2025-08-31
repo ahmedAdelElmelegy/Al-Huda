@@ -9,7 +9,15 @@ class CustomAppBarWithArrow extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
   final String? icon;
-  const CustomAppBarWithArrow({super.key, required this.title, this.icon});
+  final bool iSactions;
+  final VoidCallback? onPressed;
+  const CustomAppBarWithArrow({
+    super.key,
+    required this.title,
+    this.icon,
+    this.iSactions = false,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +35,23 @@ class CustomAppBarWithArrow extends StatelessWidget
               ? SvgIcon(assetName: icon!, color: ColorManager.primary)
               : SizedBox(),
           icon != null ? horizontalSpace(8) : SizedBox(),
-          Text(title, style: TextSTyle.f18CairoSemiBoldPrimary),
+          Text(
+            title,
+            style: TextSTyle.f18SSTArabicMediumPrimary.copyWith(
+              color: ColorManager.primary,
+            ),
+          ),
         ],
       ),
+      actions: iSactions
+          ? [
+              IconButton(
+                icon: Icon(Icons.alarm, color: ColorManager.primary),
+                onPressed: onPressed,
+              ),
+              horizontalSpace(16),
+            ]
+          : null,
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
-import 'package:al_huda/core/services/qran_services.dart';
+import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';

@@ -1,4 +1,4 @@
-import 'package:al_huda/core/services/qran_services.dart';
+import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:location/location.dart';
 
 class LocationService {

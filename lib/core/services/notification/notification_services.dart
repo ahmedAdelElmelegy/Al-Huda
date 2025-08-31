@@ -56,7 +56,7 @@ class NotificationService {
     bool playSound = true,
     String sound = 'athan',
     String chanelId = 'prayer_channel',
-    String chanelName = 'Prayer Times',
+    String chanelName = 'مواعيد الصلاة',
   }) async {
     if (scheduleTime.isBefore(DateTime.now())) {
       return;
@@ -68,6 +68,7 @@ class NotificationService {
       importance: Importance.max,
       priority: Priority.high,
       playSound: playSound,
+      icon: 'logo',
       sound: RawResourceAndroidNotificationSound(sound),
     );
 
@@ -104,6 +105,7 @@ class NotificationService {
       channelDescription: 'Default notifications',
       importance: Importance.max,
       priority: Priority.high,
+      icon: 'logo',
     );
 
     const iosDetails = DarwinNotificationDetails(
@@ -119,64 +121,6 @@ class NotificationService {
 
     await _localNotificationsPlugin.show(id, title, body, details);
   }
-  // dayily notification
-
-  // static Future<void> scheduleDailyNotification(
-  //   int id,
-  //   String title,
-  //   String body,
-  //   int hour,
-  //   int minute, {
-  //   bool playSound = true,
-  //   String sound = 'athan',
-  // }) async {
-  //   final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-  //   tz.TZDateTime scheduledDate = tz.TZDateTime(
-  //     tz.local,
-  //     now.year,
-  //     now.month,
-  //     now.day,
-  //     hour,
-  //     minute,
-  //   );
-
-  //   if (scheduledDate.isBefore(now)) {
-  //     scheduledDate = scheduledDate.add(const Duration(days: 1));
-  //   }
-
-  //   AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
-  //     'prayer_channel',
-  //     'Prayer Times',
-  //     channelDescription: 'Notifications for daily azkar',
-  //     importance: Importance.max,
-  //     priority: Priority.high,
-  //     playSound: true,
-  //     sound: RawResourceAndroidNotificationSound(sound),
-  //   );
-
-  //   DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
-  //     sound: '$sound.mp3',
-  //     presentAlert: true,
-  //     presentBadge: true,
-  //     presentSound: true,
-  //   );
-
-  //   NotificationDetails platformDetails = NotificationDetails(
-  //     android: androidDaily,
-  //     iOS: iosDetails,
-  //   );
-
-  //   await _localNotificationsPlugin.zonedSchedule(
-  //     id,
-  //     title,
-  //     body,
-  //     scheduledDate,
-  //     platformDetails,
-  //     androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-
-  //     matchDateTimeComponents: DateTimeComponents.time,
-  //   );
-  // }
 
   static Future<void> showPeriodicallyNotification(
     int id,
@@ -185,7 +129,7 @@ class NotificationService {
     bool playSound = true,
     String sound = 'salyalmohamed',
     String chanelId = Constants.saleAlMohamedChannelId,
-    String chanelName = 'sale_al_mohamed',
+    String chanelName = 'صلي علي محمد',
   }) async {
     AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
       chanelId,

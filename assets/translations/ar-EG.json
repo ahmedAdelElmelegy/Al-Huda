@@ -63,5 +63,19 @@
    "azkar_sabah":"اذكار الصباح",
    "azkar_massaa":"اذكار المساء",
    "azkar_setting":"إعدادات الاذكار",
-   "sally_al_mohamed":"صلي علي محمد"
+   "sally_al_mohamed":"صلي علي محمد",
+   "scedule_zekr_time":" جدولة ذكر",
+   "hijri_date":"التقويم الهجري",
+"miladi_date":"التقويم الميلادي",
+"follow_prayer":"متتبع الصلوات والصيام",
+"hijri":"الهجري",
+"miladi":"الميلادي",
+"remaining":"متبقي",
+"days":"أيام",
+"hours":"ساعات",
+"minutes":"دقائق",
+"seconds":"ثؤات",
+ "ramadan"     :"رمضان"
+
+   
 }

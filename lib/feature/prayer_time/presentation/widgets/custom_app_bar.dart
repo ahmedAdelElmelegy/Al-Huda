@@ -23,7 +23,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ? SvgIcon(assetName: icon!, color: ColorManager.primary)
               : SizedBox(),
           horizontalSpace(8),
-          Text(title, style: TextSTyle.f18CairoSemiBoldPrimary),
+          Text(
+            title,
+            style: TextSTyle.f18SSTArabicMediumPrimary.copyWith(
+              color: ColorManager.primary,
+            ),
+          ),
         ],
       ),
     );

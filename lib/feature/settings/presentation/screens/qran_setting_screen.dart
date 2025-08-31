@@ -1,6 +1,6 @@
 import 'package:al_huda/core/data/api_url/app_url.dart';
 import 'package:al_huda/core/helper/spacing.dart';
-import 'package:al_huda/core/services/qran_services.dart';
+import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/custom_appbar_with_arrow.dart';

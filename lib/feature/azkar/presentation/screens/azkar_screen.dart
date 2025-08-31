@@ -57,6 +57,7 @@ class AzkarScreen extends StatelessWidget {
                             AzkarDetailScreen(
                               zikrName: azkarCategories[index].name,
                               zikr: azkarCategories[index].azkar,
+                              index: index,
                             ),
                           );
                         },

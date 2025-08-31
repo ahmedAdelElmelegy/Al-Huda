@@ -1,4 +1,5 @@
 import 'package:al_huda/core/helper/app_constants.dart';
+import 'package:al_huda/feature/hijri_date/data/model/islamic_model.dart';
 import 'package:al_huda/feature/home/data/model/prayer_model.dart';
 import 'package:al_huda/feature/qran/data/model/qran_reader_model.dart';
 
@@ -33,9 +34,21 @@ class Constants {
   static const keyPrefixNotification = "prayer_switch_notification_";
   static List<String> azkar = ["azkar_sabah", "azkar_massaa"];
   static const keyPrefixAzkar = "azkar_switch_";
+  static const azkarKeySabah = "time_أذكار الصباح";
+  static const azkarKeyMassaa = "time_أذكار المساء";
   static const onlyOneAzkarNotification = "only_one_azkar_notification";
   static const azkarsalleyalmohamed = "azkar_salley_al_mohamed";
   static const azkarAlsabahChannelId = "azkar_sabah_channel";
   static const azkarElmassaaChannelId = "azkar_massaa_channel";
   static const saleAlMohamedChannelId = "sale_al_mohamed_channel";
+  static List<IslamicEvent> islamicEvents = [
+    IslamicEvent(name: "رأس السنة الهجرية", hMonth: 1, hDay: 1),
+    IslamicEvent(name: "عاشوراء", hMonth: 1, hDay: 10),
+    IslamicEvent(name: "المولد النبوي", hMonth: 3, hDay: 12),
+    IslamicEvent(name: "بداية رمضان", hMonth: 9, hDay: 1),
+    IslamicEvent(name: "ليلة القدر", hMonth: 9, hDay: 27),
+    IslamicEvent(name: "عيد الفطر", hMonth: 10, hDay: 1),
+    IslamicEvent(name: "يوم عرفة", hMonth: 12, hDay: 9),
+    IslamicEvent(name: "عيد الأضحى", hMonth: 12, hDay: 10),
+  ];
 }

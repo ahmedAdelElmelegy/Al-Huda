@@ -1,5 +1,5 @@
 import 'package:al_huda/core/helper/app_constants.dart';
-import 'package:al_huda/core/services/qran_services.dart';
+import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/custom_appbar_with_arrow.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';

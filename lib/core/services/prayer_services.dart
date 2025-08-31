@@ -1,11 +1,14 @@
 import 'package:adhan/adhan.dart';
-import 'package:al_huda/core/services/qran_services.dart';
+import 'package:al_huda/core/services/notification/notification_services.dart';
+import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
 
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class PrayerServices {
   Future<Coordinates> getCoordinates() async {
@@ -149,5 +152,55 @@ class PrayerServices {
     }
 
     return scheduledDate;
+  }
+
+  // convert from string to time of day
+  static Future<TimeOfDay?> convertStringToTimeOfDay(String time) async {
+    String? savedTime = await SharedPrefServices.getValue(time);
+    if (savedTime != null && savedTime.isNotEmpty) {
+      final parts = savedTime.split(":");
+      return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+    }
+    return null;
+  }
+
+  static Future<void> workManagerTask() async {
+    final prayerServices = PrayerServices();
+    final times = await prayerServices.getPrayerTimes();
+    await NotificationService.init();
+
+    final labels = {
+      "fagr": "الفجر",
+      "shurooq": "الشروق",
+      "dhuhr": "الظهر",
+      "asr": "العصر",
+      "maghrib": "المغرب",
+      "isha": "العشاء",
+    };
+
+    final prayerTimes = [
+      MapEntry("fagr", times.fajr),
+      MapEntry("shurooq", times.sunrise),
+      MapEntry("dhuhr", times.dhuhr),
+      MapEntry("asr", times.asr),
+      MapEntry("maghrib", times.maghrib),
+      MapEntry("isha", times.isha),
+    ];
+
+    for (int i = 0; i < prayerTimes.length; i++) {
+      final prayer = prayerTimes[i];
+      final scheduledTime = tz.TZDateTime.from(prayer.value, tz.local);
+      NotificationService.scheduleNotification(
+        i,
+        'صلاة ${labels[prayer.key]}',
+        'حان وقت الصلاة ${labels[prayer.key]}',
+        scheduledTime,
+        playSound: await PrayerServices.getSwitchState(
+          i,
+          Constants.keyPrefixNotification,
+        ),
+        sound: 'athan',
+      );
+    }
   }
 }

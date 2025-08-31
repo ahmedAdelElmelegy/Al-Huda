@@ -208,6 +208,11 @@ abstract class TextSTyle {
     fontSize: 18.sp,
     fontFamily: sSTArabicMedium,
   );
+  static TextStyle f18SSTArabicRegPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 18.sp,
+    fontFamily: sSTArabicRoman,
+  );
   // 24
   static TextStyle f24SSTArabicMediumPrimary = TextStyle(
     color: ColorManager.primaryText2,
