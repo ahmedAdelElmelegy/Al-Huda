@@ -198,6 +198,11 @@ abstract class TextSTyle {
     fontSize: 16.sp,
     fontFamily: sSTArabicRoman,
   );
+  static TextStyle f14SSTArabicBoldWhite = TextStyle(
+    color: ColorManager.white,
+    fontSize: 14.sp,
+    fontFamily: sSTArabicMedium,
+  );
   static TextStyle f16SSTArabicLightPrimary = TextStyle(
     color: ColorManager.primaryText2,
     fontSize: 16.sp,

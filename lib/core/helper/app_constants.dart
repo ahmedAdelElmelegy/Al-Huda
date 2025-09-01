@@ -68,4 +68,5 @@ abstract class AppImages {
   static const String leaves = "assets/images/leaves.png";
   static const String ribbon1 = "assets/images/ribbon1.png";
   static const String ribbon2 = "assets/images/ribbon2.png";
+  static const String noAzkarFav = "assets/images/NoAd3yahFav.png";
 }

@@ -9,7 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AzkarDetailItem extends StatelessWidget {
   final int index;
   final Zikr zikr;
-  const AzkarDetailItem({super.key, required this.index, required this.zikr});
+  final bool? isFav;
+  final int? zikrIndex;
+  const AzkarDetailItem({
+    super.key,
+    required this.index,
+    required this.zikr,
+    this.isFav = false,
+    this.zikrIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +27,7 @@ class AzkarDetailItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: ColorManager.primary, width: .5.w),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.gray.withValues(alpha: .2),
-            blurRadius: 6,
-            offset: Offset(2, 4),
-          ),
-        ],
+
         color: ColorManager.white,
       ),
       child: Column(
@@ -33,7 +35,12 @@ class AzkarDetailItem extends StatelessWidget {
           AzkarContentItem(count: index, text: zikr.text),
 
           verticalSpace(16),
-          AzkarActionBtn(count: zikr.count),
+          AzkarActionBtn(
+            count: zikr.count,
+            zikr: zikr,
+            isFav: isFav,
+            index: zikrIndex,
+          ),
         ],
       ),
     );

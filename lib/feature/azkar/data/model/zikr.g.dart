@@ -1,38 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tasbeh_model.dart';
+part of 'zikr.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TasbehModelAdapter extends TypeAdapter<TasbehModel> {
+class ZikrAdapter extends TypeAdapter<Zikr> {
   @override
-  final typeId = 0;
+  final typeId = 1;
 
   @override
-  TasbehModel read(BinaryReader reader) {
+  Zikr read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TasbehModel(
-      count: fields[0] == null ? 0 : (fields[0] as num).toInt(),
-      name: fields[1] as String,
-      lock: fields[2] == null ? false : fields[2] as bool,
+    return Zikr(
+      id: (fields[0] as num).toInt(),
+      text: fields[1] as String,
+      count: (fields[2] as num).toInt(),
+      audio: fields[3] as String,
+      filename: fields[4] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, TasbehModel obj) {
+  void write(BinaryWriter writer, Zikr obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.count)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.text)
       ..writeByte(2)
-      ..write(obj.lock);
+      ..write(obj.count)
+      ..writeByte(3)
+      ..write(obj.audio)
+      ..writeByte(4)
+      ..write(obj.filename);
   }
 
   @override
@@ -41,7 +47,7 @@ class TasbehModelAdapter extends TypeAdapter<TasbehModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TasbehModelAdapter &&
+      other is ZikrAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -1,4 +1,5 @@
 import 'package:al_huda/core/services/api_services.dart';
+import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
 import 'package:al_huda/feature/allah_name/data/repo/allah_name_repo.dart';
@@ -39,6 +40,7 @@ void init() async {
   getIt.registerLazySingleton<PrayerRepo>(
     () => PrayerRepo(getIt<ApiService>()),
   );
+  getIt.registerLazySingleton<AzkarServices>(() => AzkarServices());
 
   getIt.registerLazySingleton<AllahNameRepo>(() => AllahNameRepo());
   // cubits
@@ -46,7 +48,9 @@ void init() async {
     () => TasbehCubit(getIt<TasbehServices>()),
   );
 
-  getIt.registerLazySingleton<AzkarCubit>(() => AzkarCubit(getIt<AzkarRepo>()));
+  getIt.registerLazySingleton<AzkarCubit>(
+    () => AzkarCubit(getIt<AzkarRepo>(), getIt<AzkarServices>()),
+  );
   getIt.registerLazySingleton<PrayerCubit>(
     () => PrayerCubit(getIt<PrayerServices>()),
   );

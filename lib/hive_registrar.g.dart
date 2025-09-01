@@ -3,16 +3,19 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
+import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(TasbehModelAdapter());
+    registerAdapter(ZikrAdapter());
   }
 }
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(TasbehModelAdapter());
+    registerAdapter(ZikrAdapter());
   }
 }

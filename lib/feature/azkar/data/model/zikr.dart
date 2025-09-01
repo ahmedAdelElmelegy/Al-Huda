@@ -1,8 +1,18 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
+
+part 'zikr.g.dart';
+
+@HiveType(typeId: 1)
 class Zikr {
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final String text;
+  @HiveField(2)
   int count;
+  @HiveField(3)
   final String audio;
+  @HiveField(4)
   final String filename;
 
   Zikr({

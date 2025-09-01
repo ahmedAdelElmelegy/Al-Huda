@@ -3,6 +3,7 @@ import 'package:al_huda/core/di/injection.dart';
 import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
+import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -46,6 +47,7 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(TasbehModelAdapter());
+  Hive.registerAdapter(ZikrAdapter());
   await TasbehServices().openBox();
   await TasbehServices().initTasbeh();
 

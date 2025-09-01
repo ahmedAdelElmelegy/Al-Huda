@@ -2,7 +2,9 @@ import 'package:al_huda/core/services/notification/notification_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
+import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 class AzkarServices {
   Future<void> azkarInit() async {
@@ -78,5 +80,39 @@ class AzkarServices {
     } else {
       NotificationService.cancelNotification(1001);
     }
+  }
+
+  //  for azkar add to hive
+  static const String boxName = Constants.zikrBoxName;
+
+  // create box
+  Future<Box<Zikr>> openBox() async {
+    return await Hive.openBox<Zikr>(boxName);
+  }
+
+  Future<void> addZikr(Zikr zikr) async {
+    final box = await openBox();
+    await box.add(zikr);
+  }
+
+  // get all zikr
+  Future<List<Zikr>> getAllZikr() async {
+    final box = await openBox();
+    return box.values.toList();
+  }
+
+  Future<void> updateZikr(int index, Zikr zikr) async {
+    final box = await openBox();
+    await box.putAt(index, zikr);
+  }
+
+  Future<void> deleteZikr(int index) async {
+    final box = await openBox();
+    await box.deleteAt(index);
+  }
+
+  Future<void> clearAll() async {
+    final box = await openBox();
+    await box.clear();
   }
 }
