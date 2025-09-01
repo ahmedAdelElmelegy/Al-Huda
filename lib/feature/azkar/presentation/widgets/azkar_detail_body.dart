@@ -2,6 +2,8 @@ import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/azkar/presentation/screens/azkar_detail_screen.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_detail_item.dart';
+import 'package:al_huda/feature/azkar/presentation/widgets/azkar_list_view.dart';
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -96,39 +98,6 @@ class _AzkarDetailBodyState extends State<AzkarDetailBody> {
   }
 }
 
-class AzkarListView extends StatelessWidget {
-  final List<Zikr> zikr;
-  final int index;
-  final Function(int) onCountComplete;
-  final Map<int, GlobalKey> itemKeys;
-  const AzkarListView({
-    super.key,
-    required this.zikr,
-    required this.index,
-    required this.onCountComplete,
-    required this.itemKeys,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: zikr.length,
-      itemBuilder: (context, index) {
-        return AzkarDetailItem(
-          index: index + 1,
-          key: itemKeys[index],
-          zikr: zikr[index],
-          onCountComplete: () {
-            onCountComplete(index);
-          },
-        );
-      },
-    );
-  }
-}
-
 class AzkarGridView extends StatelessWidget {
   final List<Zikr> zikr;
   final int index;
@@ -144,17 +113,10 @@ class AzkarGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return DynamicHeightGridView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: zikr.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16.h,
-        crossAxisSpacing: 16.w,
-        childAspectRatio: 1,
-      ),
-      itemBuilder: (context, index) {
+      builder: (context, index) {
         return AzkarDetailItem(
           index: index + 1,
           key: itemKeys[index],
@@ -164,6 +126,10 @@ class AzkarGridView extends StatelessWidget {
           },
         );
       },
+      itemCount: zikr.length,
+      crossAxisCount: 2,
     );
   }
 }
+
+// return AzkarDetailItem(
