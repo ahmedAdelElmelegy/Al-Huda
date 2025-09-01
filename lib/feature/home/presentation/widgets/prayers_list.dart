@@ -21,88 +21,83 @@ class PrayersList extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       width: double.infinity,
-      height: 300.h,
+
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(AppImages.bg),
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: GridView(
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: .83,
-              mainAxisSpacing: 8.h,
-              crossAxisSpacing: 8.w,
-            ),
-            children: [
-              InkWell(
-                onTap: () {
-                  push(AzkarScreen());
-                },
-                child: PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
-              ),
-              InkWell(
-                onTap: () {
-                  push(TasbehScreen());
-                },
-                child: PrayerItem(title: 'tasbeh'.tr(), icon: AppIcons.tasbih),
-              ),
-              InkWell(
-                onTap: () {
-                  push(RadioScreen());
-                },
-                child: PrayerItem(title: 'radio'.tr(), icon: AppIcons.radio),
-              ),
-              InkWell(
-                onTap: () {
-                  push(AllahNameScreen());
-                },
-                child: PrayerItem(
-                  title: 'allah_name'.tr(),
-                  icon: AppIcons.allah,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  push(NearestMosqueScreen());
-                },
-                child: PrayerItem(
-                  title: 'nearest_mosque'.tr(),
-                  icon: AppIcons.mosque,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  push(CalenderScreen());
-                },
-                child: PrayerItem(
-                  title: 'hijri_date'.tr(),
-                  icon: AppIcons.callender,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  push(DoaaScreen());
-                },
-                child: PrayerItem(title: 'doaa'.tr(), icon: AppIcons.alldoaa),
-              ),
-              InkWell(
-                onTap: () {
-                  push(FavoriteScreen());
-                },
-                child: PrayerItem(
-                  title: 'favorite'.tr(),
-                  icon: AppIcons.favorite,
-                ),
-              ),
-            ],
+        child: GridView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            childAspectRatio: .83,
+            mainAxisSpacing: 8.h,
+            crossAxisSpacing: 8.w,
           ),
+          children: [
+            InkWell(
+              onTap: () {
+                push(AzkarScreen());
+              },
+              child: PrayerItem(title: 'azkar'.tr(), icon: AppIcons.salah),
+            ),
+            InkWell(
+              onTap: () {
+                push(TasbehScreen());
+              },
+              child: PrayerItem(title: 'tasbeh'.tr(), icon: AppIcons.tasbih),
+            ),
+            InkWell(
+              onTap: () {
+                push(RadioScreen());
+              },
+              child: PrayerItem(title: 'radio'.tr(), icon: AppIcons.radio),
+            ),
+            InkWell(
+              onTap: () {
+                push(AllahNameScreen());
+              },
+              child: PrayerItem(title: 'allah_name'.tr(), icon: AppIcons.allah),
+            ),
+            InkWell(
+              onTap: () {
+                push(NearestMosqueScreen());
+              },
+              child: PrayerItem(
+                title: 'nearest_mosque'.tr(),
+                icon: AppIcons.mosque,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                push(CalenderScreen());
+              },
+              child: PrayerItem(
+                title: 'hijri_date'.tr(),
+                icon: AppIcons.callender,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                push(DoaaScreen());
+              },
+              child: PrayerItem(title: 'doaa'.tr(), icon: AppIcons.alldoaa),
+            ),
+            InkWell(
+              onTap: () {
+                push(FavoriteScreen());
+              },
+              child: PrayerItem(
+                title: 'favorite'.tr(),
+                icon: AppIcons.favorite,
+              ),
+            ),
+          ],
         ),
       ),
     );

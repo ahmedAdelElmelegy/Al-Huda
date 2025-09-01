@@ -5,6 +5,7 @@ import 'package:al_huda/feature/favorite/presentation/manager/cubit/favorite_cub
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavoriteDoaaList extends StatefulWidget {
   final String category;
@@ -35,6 +36,8 @@ class _FavoriteDoaaListState extends State<FavoriteDoaaList> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return BlocBuilder<FavoriteCubit, FavoriteState>(
       builder: (context, state) {
         final cubit = context.read<FavoriteCubit>();
@@ -46,7 +49,12 @@ class _FavoriteDoaaListState extends State<FavoriteDoaaList> {
         }
 
         if (cubit.doaaList.isEmpty) {
-          return Center(child: Image.asset(AppImages.noAzkarFav));
+          return Center(
+            child: Image.asset(
+              AppImages.noAzkarFav,
+              width: isLandScape ? 200.w : double.infinity,
+            ),
+          );
         }
 
         return ListView.builder(

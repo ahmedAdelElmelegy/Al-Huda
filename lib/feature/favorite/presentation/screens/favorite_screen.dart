@@ -30,6 +30,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       appBar: CustomAppBarWithArrow(title: 'favorite'.tr()),
       body: SafeArea(
@@ -74,7 +76,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       return Center(child: Text('error'.tr()));
                     }
                     if (cubit.zikrList.isEmpty && selectedIndex == 0) {
-                      return Center(child: Image.asset(AppImages.noAzkarFav));
+                      return Center(
+                        child: Image.asset(
+                          AppImages.noAzkarFav,
+
+                          width: isLandScape ? 200.w : double.infinity,
+                        ),
+                      );
                     }
                     return SelectContent(index: selectedIndex, cubit: cubit);
                   },

@@ -29,10 +29,9 @@ class RadioReaderAudio extends StatefulWidget {
 class _RadioReaderAudioState extends State<RadioReaderAudio> {
   final AudioPlayer audioPlayer = AudioPlayer();
   bool isPlaying = false;
-  Duration duration = Duration.zero; // الطول الكلي
-  Duration position = Duration.zero; // الوقت الحالي
-  double volume = 1.0; // الصوت (من 0 → 1)
-  // subscriptions
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+  double volume = 1.0;
   StreamSubscription? durationSub;
   StreamSubscription? positionSub;
   StreamSubscription? completeSub;
@@ -59,14 +58,12 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
         position = Duration.zero;
       });
     });
-    // لما الصوت يخلص
   }
 
   @override
   void didUpdateWidget(covariant RadioReaderAudio oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // لو الـ URL اتغير من القديم للجديد
     if (oldWidget.radioData.url != widget.radioData.url) {
       togglePlayPause(widget.radioData.url!, true);
     }
@@ -98,11 +95,7 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
         }
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Cannot play audio: $e')));
-      }
+      debugPrint(e.toString());
     }
   }
 

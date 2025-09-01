@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 500.w),
+              constraints: BoxConstraints(maxWidth: 400.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomePrayerBanner(),
                   verticalSpace(18),
                   AllPrayersHeadline(),
-                  verticalSpace(16),
+                  verticalSpace(24),
 
                   PrayersList(),
                 ],

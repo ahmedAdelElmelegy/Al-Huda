@@ -33,12 +33,15 @@ class AzkarContentItem extends StatelessWidget {
             ],
           ),
           verticalSpace(16),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Text(
-                text,
-                style: TextSTyle.f16AmiriRegPrimary.copyWith(height: 1.7),
+          SizedBox(
+            height: 160.h,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Text(
+                  text,
+                  style: TextSTyle.f16AmiriRegPrimary.copyWith(height: 1.7),
+                ),
               ),
             ),
           ),

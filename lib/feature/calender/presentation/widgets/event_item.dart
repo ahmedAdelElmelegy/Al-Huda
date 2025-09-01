@@ -32,7 +32,6 @@ class EventItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            flex: 3,
             child: Text(
               name,
               style: TextSTyle.f14SSTArabicMediumPrimary,
@@ -40,30 +39,36 @@ class EventItem extends StatelessWidget {
               maxLines: 1,
             ),
           ),
-          Spacer(),
 
-          Flexible(
-            flex: 2,
-            child: Text(
-              DateFormat('yyyy/MM/dd', 'ar').format(date),
-              style: TextSTyle.f12CairoBoldGrey,
-              maxLines: 1,
-              textAlign: TextAlign.center,
-            ),
-          ),
+          SizedBox(
+            width: 170.w,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    DateFormat('yyyy/MM/dd', 'ar').format(date),
+                    style: TextSTyle.f12CairoBoldGrey,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
 
-          horizontalSpace(8),
+                horizontalSpace(4),
 
-          Flexible(
-            flex: 3,
-            child: Text(
-              '${tr('remaining')} ${CalenderServices.toArabicNumber(remainingDays)} ${tr('days')}',
-              style: TextSTyle.f12CairoSemiBoldPrimary.copyWith(
-                color: ColorManager.primaryText2,
-              ),
-              // overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              textAlign: TextAlign.end,
+                Expanded(
+                  child: Text(
+                    '${tr('remaining')} ${CalenderServices.toArabicNumber(remainingDays)} ${tr('days')}',
+                    style: TextSTyle.f12CairoSemiBoldPrimary.copyWith(
+                      color: ColorManager.primaryText2,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

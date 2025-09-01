@@ -1,9 +1,11 @@
 import 'package:al_huda/core/data/api_url/app_url.dart';
+import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/custom_appbar_with_arrow.dart';
+import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/qran/data/model/qran_reader_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +57,19 @@ class _QranSettingScreenState extends State<QranSettingScreen> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: ColorManager.greyLight2),
+                  border: Border.all(color: ColorManager.primary),
                 ),
                 child: DropdownButtonFormField(
                   borderRadius: BorderRadius.circular(12.r),
                   decoration: InputDecoration(border: InputBorder.none),
-                  hint: Text('select_reader'.tr()),
+                  hint: Row(
+                    children: [
+                      horizontalSpace(4),
+                      SvgIcon(assetName: AppIcons.qranA),
+                      horizontalSpace(4),
+                      Text('select_reader'.tr()),
+                    ],
+                  ),
                   value: selectedReader,
 
                   items: Constants.quranReader

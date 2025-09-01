@@ -22,14 +22,13 @@ class RadioDetailScreen extends StatefulWidget {
 }
 
 class _RadioDetailScreenState extends State<RadioDetailScreen> {
-  late RadioData selectedRadio; // الراديو الحالي اللي فوق
-  late List<RadioData> otherRadios; // باقي الراديوهات
+  late RadioData selectedRadio;
+  late List<RadioData> otherRadios;
 
   @override
   void initState() {
     super.initState();
-    selectedRadio =
-        widget.radioData; // البداية بالراديو اللي جاي من الشاشة السابقة
+    selectedRadio = widget.radioData;
     otherRadios = List.from(widget.radioList)
       ..removeWhere((element) => element.id == widget.radioData.id);
   }
@@ -37,41 +36,46 @@ class _RadioDetailScreenState extends State<RadioDetailScreen> {
   void changeRadio(RadioData newRadio) {
     setState(() {
       otherRadios.add(selectedRadio);
-      // نشيل الجديد من الـ list
+
       otherRadios.removeWhere((element) => element.id == newRadio.id);
-      // نخلي الجديد هو المختار
+
       selectedRadio = newRadio;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    bool isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            verticalSpace(120),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(24.r),
-              child: Image.network(selectedRadio.img!, height: 200),
-            ),
-            verticalSpace(24),
-            Text(
-              selectedRadio.name!,
-              style: TextSTyle.f18CairoSemiBoldPrimary.copyWith(
-                color: ColorManager.primaryText2,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              isLandScape ? verticalSpace(16) : verticalSpace(120),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(24.r),
+                child: Image.network(selectedRadio.img!, height: 200),
               ),
-            ),
-            verticalSpace(30),
-            RadioReaderAudio(
-              radioData: selectedRadio,
-              radioList: widget.radioList,
-              onRadioChangeRight: changeRadio,
-              onRadioChangeLeft: changeRadio,
-            ),
-            Expanded(
-              child: ListView.builder(
+              verticalSpace(24),
+              Text(
+                selectedRadio.name!,
+                style: TextSTyle.f18CairoSemiBoldPrimary.copyWith(
+                  color: ColorManager.primaryText2,
+                ),
+              ),
+              verticalSpace(30),
+              RadioReaderAudio(
+                radioData: selectedRadio,
+                radioList: widget.radioList,
+                onRadioChangeRight: changeRadio,
+                onRadioChangeLeft: changeRadio,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: otherRadios.length,
                 itemBuilder: (context, index) {
                   return InkWell(
@@ -83,8 +87,8 @@ class _RadioDetailScreenState extends State<RadioDetailScreen> {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

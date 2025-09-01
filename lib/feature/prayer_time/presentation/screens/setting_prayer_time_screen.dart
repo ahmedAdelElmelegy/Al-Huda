@@ -15,14 +15,16 @@ class SettingPrayerTimeScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBarWithArrow(title: 'prayer_time'.tr()),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24.h),
-          child: Column(
-            children: List.generate(
-              Constants.prayer.length,
-              (index) => PrayerTimeDetailItem(
-                index: index,
-                title: Constants.prayer[index].name.tr(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 24.h),
+            child: Column(
+              children: List.generate(
+                Constants.prayer.length,
+                (index) => PrayerTimeDetailItem(
+                  index: index,
+                  title: Constants.prayer[index].name.tr(),
+                ),
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/azkar/presentation/screens/azkar_detail_screen.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_detail_item.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,8 @@ class _AzkarDetailBodyState extends State<AzkarDetailBody> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return SafeArea(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -70,26 +73,97 @@ class _AzkarDetailBodyState extends State<AzkarDetailBody> {
           child: Column(
             children: [
               verticalSpace(24),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.widget.zikr.length,
-                itemBuilder: (context, index) {
-                  return AzkarDetailItem(
-                    index: index + 1,
-                    key: _itemKeys[index],
-                    zikr: widget.widget.zikr[index],
-                    onCountComplete: () {
-                      _scrollToNextItem(index);
-                    },
-                  );
-                },
-              ),
+
+              isLandscape
+                  ? AzkarGridView(
+                      zikr: widget.widget.zikr,
+                      index: widget.widget.index,
+                      onCountComplete: _scrollToNextItem,
+                      itemKeys: _itemKeys,
+                    )
+                  : AzkarListView(
+                      zikr: widget.widget.zikr,
+                      index: widget.widget.index,
+                      onCountComplete: _scrollToNextItem,
+                      itemKeys: _itemKeys,
+                    ),
               verticalSpace(20),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class AzkarListView extends StatelessWidget {
+  final List<Zikr> zikr;
+  final int index;
+  final Function(int) onCountComplete;
+  final Map<int, GlobalKey> itemKeys;
+  const AzkarListView({
+    super.key,
+    required this.zikr,
+    required this.index,
+    required this.onCountComplete,
+    required this.itemKeys,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: zikr.length,
+      itemBuilder: (context, index) {
+        return AzkarDetailItem(
+          index: index + 1,
+          key: itemKeys[index],
+          zikr: zikr[index],
+          onCountComplete: () {
+            onCountComplete(index);
+          },
+        );
+      },
+    );
+  }
+}
+
+class AzkarGridView extends StatelessWidget {
+  final List<Zikr> zikr;
+  final int index;
+  final Function(int) onCountComplete;
+  final Map<int, GlobalKey> itemKeys;
+  const AzkarGridView({
+    super.key,
+    required this.zikr,
+    required this.index,
+    required this.onCountComplete,
+    required this.itemKeys,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: zikr.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16.h,
+        crossAxisSpacing: 16.w,
+        childAspectRatio: 1,
+      ),
+      itemBuilder: (context, index) {
+        return AzkarDetailItem(
+          index: index + 1,
+          key: itemKeys[index],
+          zikr: zikr[index],
+          onCountComplete: () {
+            onCountComplete(index);
+          },
+        );
+      },
     );
   }
 }

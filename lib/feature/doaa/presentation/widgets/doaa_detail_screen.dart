@@ -3,7 +3,8 @@ import 'package:al_huda/core/widgets/loading_list_view.dart';
 
 import 'package:al_huda/feature/doaa/presentation/manager/cubit/doaa_cubit.dart';
 import 'package:al_huda/feature/doaa/presentation/widgets/clear_app_bar.dart';
-import 'package:al_huda/feature/doaa/presentation/widgets/doaa_item.dart';
+import 'package:al_huda/feature/doaa/presentation/widgets/doaa_grid_view.dart';
+import 'package:al_huda/feature/doaa/presentation/widgets/doaa_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,6 +33,8 @@ class _DoaaDetailsScreenState extends State<DoaaDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -49,18 +52,9 @@ class _DoaaDetailsScreenState extends State<DoaaDetailsScreen> {
                     } else if (state is DoaaError) {
                       return Center(child: Text(state.message));
                     }
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: cubit.doaaList.length,
-                      itemBuilder: (context, index) {
-                        return DoaaItem(
-                          doaaHeaderIndex: widget.doaaHeaderindex,
-                          doaaModelData: cubit.doaaList[index],
-                          index: index,
-                        );
-                      },
-                    );
+                    return isLandScape
+                        ? DoaaGridView(cubit: cubit, widget: widget)
+                        : DoaaListView(cubit: cubit, widget: widget);
                   },
                 ),
               ],
