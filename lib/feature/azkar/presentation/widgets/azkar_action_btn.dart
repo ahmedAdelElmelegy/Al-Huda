@@ -8,19 +8,20 @@ import 'package:al_huda/feature/azkar/presentation/manager/cubit/azkar_cubit.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart';
 
 class AzkarActionBtn extends StatelessWidget {
   final int count;
   final bool? isFav;
   final Zikr? zikr;
   final int? index;
+  final VoidCallback? onCountComplete;
   const AzkarActionBtn({
     super.key,
     required this.count,
     this.zikr,
     this.isFav = false,
     this.index,
+    this.onCountComplete,
   });
 
   @override
@@ -52,27 +53,49 @@ class AzkarActionBtn extends StatelessWidget {
                     },
                     child: SvgIcon(
                       assetName: AppIcons.heart,
-                      color: context.read<AzkarCubit>().isFav(zikr!)
-                          ? ColorManager.red
+                      color: zikr != null
+                          ? context.read<AzkarCubit>().isFav(zikr!)
+                                ? ColorManager.red
+                                : ColorManager.primary
                           : ColorManager.primary,
                     ),
                   ),
             horizontalSpace(24),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: ColorManager.primary, width: 2),
+            count == 0
+                ? SvgIcon(
+                    assetName: AppIcons.check,
+                    color: ColorManager.primary,
+                    width: 43.w,
+                    height: 43.h,
+                  )
+                : GestureDetector(
+                    onTap: () {
+                      if (onCountComplete != null) {
+                        onCountComplete!();
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 16.h,
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: ColorManager.primary,
+                          width: 2,
+                        ),
 
-                color: ColorManager.white,
-              ),
-              child: Text(
-                count.toString(),
-                style: TextSTyle.f14CairoBoldPrimary.copyWith(
-                  color: ColorManager.primary,
-                ),
-              ),
-            ),
+                        color: ColorManager.white,
+                      ),
+                      child: Text(
+                        count.toString(),
+                        style: TextSTyle.f14CairoBoldPrimary.copyWith(
+                          color: ColorManager.primary,
+                        ),
+                      ),
+                    ),
+                  ),
             horizontalSpace(24),
 
             SvgIcon(assetName: AppIcons.share),

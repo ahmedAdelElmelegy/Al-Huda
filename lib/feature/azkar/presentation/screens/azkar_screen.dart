@@ -61,7 +61,7 @@ class AzkarScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: AzkarItem(category: azkarCategories[index]),
+                        child: AzkarItem(name: azkarCategories[index].name),
                       );
                     }, childCount: azkarCategories.length),
                   ),

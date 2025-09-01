@@ -33,15 +33,16 @@ class AzkarContentItem extends StatelessWidget {
             ],
           ),
           verticalSpace(16),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: SingleChildScrollView(
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
                 text,
                 style: TextSTyle.f16AmiriRegPrimary.copyWith(height: 1.7),
               ),
             ),
           ),
+
           verticalSpace(16),
           SvgPicture.asset(AppIcons.azkarButton, height: 16.h),
           verticalSpace(16),

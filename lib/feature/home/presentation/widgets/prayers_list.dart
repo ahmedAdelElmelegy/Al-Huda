@@ -2,8 +2,9 @@ import 'package:al_huda/feature/allah_name/presentation/screens/allah_name_scree
 import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
+import 'package:al_huda/feature/doaa/presentation/screens/doaa_screen.dart';
 import 'package:al_huda/feature/favorite/presentation/screens/favorite_screen.dart';
-import 'package:al_huda/feature/hijri_date/presentation/screens/calender_screen.dart';
+import 'package:al_huda/feature/calender/presentation/screens/calender_screen.dart';
 import 'package:al_huda/feature/home/presentation/widgets/prayer_item.dart';
 import 'package:al_huda/feature/nearst_mosque/presentation/screens/nearest_mosque_screen.dart';
 import 'package:al_huda/feature/radio/presentation/screens/radio_screen.dart';
@@ -84,6 +85,12 @@ class PrayersList extends StatelessWidget {
                   title: 'hijri_date'.tr(),
                   icon: AppIcons.callender,
                 ),
+              ),
+              InkWell(
+                onTap: () {
+                  push(DoaaScreen());
+                },
+                child: PrayerItem(title: 'doaa'.tr(), icon: AppIcons.alldoaa),
               ),
               InkWell(
                 onTap: () {

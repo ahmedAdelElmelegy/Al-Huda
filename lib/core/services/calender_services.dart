@@ -65,4 +65,12 @@ class CalenderServices {
 
     return events;
   }
+
+  // convet to arabic
+  static String toArabicNumber(int number) {
+    return number.toString().replaceAllMapped(
+      RegExp(r'\d'),
+      (match) => '٠١٢٣٤٥٦٧٨٩'[int.parse(match[0]!)],
+    );
+  }
 }

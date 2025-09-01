@@ -1,12 +1,16 @@
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavoriteBtn extends StatelessWidget {
   final bool selectIndex;
-  const FavoriteBtn({super.key, required this.selectIndex});
+  final String title;
+  const FavoriteBtn({
+    super.key,
+    required this.selectIndex,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class FavoriteBtn extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        "azkar".tr(),
+        title,
         style: TextSTyle.f14SSTArabicBoldWhite.copyWith(
           color: selectIndex ? ColorManager.white : ColorManager.primary,
         ),

@@ -2,14 +2,14 @@ import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
-import 'package:al_huda/feature/azkar/data/model/azkar_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:al_huda/core/theme/style.dart';
 
 class AzkarItem extends StatelessWidget {
-  final AzkarCategory category;
-  const AzkarItem({super.key, required this.category});
+  final String name;
+
+  const AzkarItem({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,8 @@ class AzkarItem extends StatelessWidget {
           ),
           horizontalSpace(8),
           Text(
-            category.name,
-            style: TextSTyle.f16AmiriBoldPrimary,
+            name,
+            style: TextSTyle.f16SSTArabicMediumPrimary,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

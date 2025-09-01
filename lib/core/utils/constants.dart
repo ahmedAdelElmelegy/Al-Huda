@@ -1,5 +1,5 @@
 import 'package:al_huda/core/helper/app_constants.dart';
-import 'package:al_huda/feature/hijri_date/data/model/islamic_model.dart';
+import 'package:al_huda/feature/calender/data/model/islamic_model.dart';
 import 'package:al_huda/feature/home/data/model/prayer_model.dart';
 import 'package:al_huda/feature/qran/data/model/qran_reader_model.dart';
 
@@ -51,5 +51,10 @@ class Constants {
     IslamicEvent(name: "عيد الفطر", hMonth: 10, hDay: 1),
     IslamicEvent(name: "يوم عرفة", hMonth: 12, hDay: 9),
     IslamicEvent(name: "عيد الأضحى", hMonth: 12, hDay: 10),
+  ];
+  static List<String> doaaNameList = [
+    "doaa_form_qran_karem",
+    "doaa_from_sonaa_nabweya",
+    "alroqia_sharia",
   ];
 }

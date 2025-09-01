@@ -1,4 +1,4 @@
-import 'package:al_huda/feature/hijri_date/presentation/widgets/event_item.dart';
+import 'package:al_huda/feature/calender/presentation/widgets/event_item.dart';
 import 'package:flutter/material.dart';
 
 class EventListView extends StatelessWidget {

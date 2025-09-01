@@ -1,4 +1,5 @@
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/services/calender_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,18 +29,41 @@ class EventItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(name, style: TextSTyle.f16SSTArabicRegBlack),
-          const Spacer(),
-          Text(
-            "${date.day}/${date.month}/${date.year}",
-            style: TextSTyle.f12CairoBoldGrey,
+          Expanded(
+            flex: 3,
+            child: Text(
+              name,
+              style: TextSTyle.f14SSTArabicMediumPrimary,
+
+              maxLines: 1,
+            ),
           ),
+          Spacer(),
+
+          Flexible(
+            flex: 2,
+            child: Text(
+              DateFormat('yyyy/MM/dd', 'ar').format(date),
+              style: TextSTyle.f12CairoBoldGrey,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
+
           horizontalSpace(8),
-          Text(
-            '${tr('remaining')} $remainingDays ${tr('days')}',
-            style: TextSTyle.f12CairoSemiBoldPrimary.copyWith(
-              color: ColorManager.primaryText2,
+
+          Flexible(
+            flex: 3,
+            child: Text(
+              '${tr('remaining')} ${CalenderServices.toArabicNumber(remainingDays)} ${tr('days')}',
+              style: TextSTyle.f12CairoSemiBoldPrimary.copyWith(
+                color: ColorManager.primaryText2,
+              ),
+              // overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.end,
             ),
           ),
         ],

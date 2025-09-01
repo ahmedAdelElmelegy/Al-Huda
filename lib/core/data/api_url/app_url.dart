@@ -11,6 +11,13 @@ class AppURL {
   static const String readerName = "ar.alafasy";
   static const String radio = "https://data-rosy.vercel.app/radio.json";
   static const String allahNames = "assets/data/6_allah_names.json";
+
+  static const String doaa = "assets/data/";
+  static List<String> doaaListUrl = [
+    "doaa_qran.json",
+    "doaa_sunnah.json",
+    "doaa_rouqia.json",
+  ];
 }
 
 // https://api.aladhan.com/v1/timings/26-08-2025?latitude=30.0444&longitude=31.2357&method=8

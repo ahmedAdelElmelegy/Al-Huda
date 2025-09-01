@@ -46,6 +46,8 @@ abstract class AppIcons {
   static const String allah = "assets/icons/allah.svg";
   static const String leave = "assets/icons/leave.svg";
   static const String mosque = "assets/icons/mosque.svg";
+  static const String copy = "assets/icons/copy.svg";
+  static const String check = "assets/icons/check.svg";
 }
 
 abstract class AppImages {
@@ -63,10 +65,12 @@ abstract class AppImages {
   static const String azkarBg = "assets/images/p_Athkar.png";
   static const String allahNamesBg = "assets/images/p_AllahNames.png";
   static const String allahImageBg = "assets/images/p_AllahNames.png";
+  static const String doaaBg = "assets/images/p_Ad3yah.png";
   static const String allahLogo = "assets/images/elements.png";
 
   static const String leaves = "assets/images/leaves.png";
   static const String ribbon1 = "assets/images/ribbon1.png";
   static const String ribbon2 = "assets/images/ribbon2.png";
   static const String noAzkarFav = "assets/images/NoAd3yahFav.png";
+  static const String doaaLogo = "assets/images/doaa_icon.png";
 }

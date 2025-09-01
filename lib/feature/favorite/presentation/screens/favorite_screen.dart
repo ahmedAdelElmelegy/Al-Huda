@@ -23,6 +23,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     context.read<AzkarCubit>().getAllZikr();
   }
 
+  static List<String> favoriteBtnTitle = ['azkar', 'allah_name'];
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -47,15 +48,17 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: List.generate(
-                        5,
-                        (index) => InkWell(
+                        favoriteBtnTitle.length,
+                        (index) => GestureDetector(
                           onTap: () {
                             setState(() {
                               selectedIndex = index;
                             });
                           },
                           child: FavoriteBtn(
+                            title: favoriteBtnTitle[index].tr(),
                             selectIndex: selectedIndex == index,
                           ),
                         ),

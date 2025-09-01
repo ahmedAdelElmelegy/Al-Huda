@@ -2,9 +2,9 @@ import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/services/calender_services.dart';
 
 import 'package:al_huda/core/widgets/custom_appbar_with_arrow.dart';
-import 'package:al_huda/feature/hijri_date/presentation/widgets/calender_chose_date_type_btn.dart';
-import 'package:al_huda/feature/hijri_date/presentation/widgets/calender_list_view.dart';
-import 'package:al_huda/feature/hijri_date/presentation/widgets/calender_picker_table.dart';
+import 'package:al_huda/feature/calender/presentation/widgets/calender_chose_date_type_btn.dart';
+import 'package:al_huda/feature/calender/presentation/widgets/calender_list_view.dart';
+import 'package:al_huda/feature/calender/presentation/widgets/calender_picker_table.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
