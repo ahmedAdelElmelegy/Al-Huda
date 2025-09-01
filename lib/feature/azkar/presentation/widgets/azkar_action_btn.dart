@@ -5,7 +5,7 @@ import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
-import 'package:al_huda/feature/azkar/presentation/manager/cubit/azkar_cubit.dart';
+import 'package:al_huda/feature/favorite/presentation/manager/cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +15,7 @@ class AzkarActionBtn extends StatelessWidget {
   final bool? isFav;
   final Zikr? zikr;
   final int? index;
+  final String? title;
   final VoidCallback? onCountComplete;
   const AzkarActionBtn({
     super.key,
@@ -22,14 +23,15 @@ class AzkarActionBtn extends StatelessWidget {
     this.zikr,
     this.isFav = false,
     this.index,
+    this.title,
     this.onCountComplete,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AzkarCubit, AzkarState>(
+    return BlocBuilder<FavoriteCubit, FavoriteState>(
       builder: (context, state) {
-        final cubit = context.read<AzkarCubit>();
+        final cubit = context.read<FavoriteCubit>();
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,13 +51,13 @@ class AzkarActionBtn extends StatelessWidget {
                 : GestureDetector(
                     onTap: () {
                       if (zikr != null) {
-                        context.read<AzkarCubit>().addAzkar(zikr!);
+                        context.read<FavoriteCubit>().addAzkar(zikr!);
                       }
                     },
                     child: SvgIcon(
                       assetName: AppIcons.heart,
                       color: zikr != null
-                          ? context.read<AzkarCubit>().isFav(zikr!)
+                          ? context.read<FavoriteCubit>().isFav(zikr!)
                                 ? ColorManager.red
                                 : ColorManager.primary
                           : ColorManager.primary,
@@ -101,7 +103,7 @@ class AzkarActionBtn extends StatelessWidget {
 
             GestureDetector(
               onTap: () {
-                AzkarServices.copyText(zikr!.text);
+                AzkarServices.copyText(zikr?.text ?? title ?? "");
               },
               child: Icon(Icons.copy, color: ColorManager.primary, size: 24.sp),
             ),

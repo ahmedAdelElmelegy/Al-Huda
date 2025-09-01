@@ -52,6 +52,7 @@ class PrayerCubit extends Cubit<PrayerState> {
               Constants.keyPrefixNotification,
             ),
             sound: 'athan',
+            payload: 'prayer',
           );
         }
       }

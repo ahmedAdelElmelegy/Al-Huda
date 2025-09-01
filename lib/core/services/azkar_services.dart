@@ -33,6 +33,7 @@ class AzkarServices {
         "صلي علي محمد",
         "صلي الله عليه وسلم",
         sound: 'salyalmohamed',
+        payload: 'sallehAlMohamed',
       );
       SharedPrefServices.setBool(true, Constants.onlyOneAzkarNotification);
     }
@@ -55,6 +56,7 @@ class AzkarServices {
 
         chanelId: Constants.azkarAlsabahChannelId,
         chanelName: "أذكار الصباح",
+        payload: 'azkar',
       );
     } else {
       NotificationService.cancelNotification(1000);
@@ -77,6 +79,7 @@ class AzkarServices {
         ),
         chanelId: Constants.azkarElmassaaChannelId,
         chanelName: "أذكار المساء",
+        payload: 'azkar',
       );
     } else {
       NotificationService.cancelNotification(1001);
@@ -119,6 +122,6 @@ class AzkarServices {
 
   static void copyText(String text) {
     Clipboard.setData(ClipboardData(text: text));
-    print('Text copied to clipboard!');
+    debugPrint('Text copied to clipboard!');
   }
 }

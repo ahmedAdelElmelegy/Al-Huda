@@ -11,7 +11,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class DoaaDetailsScreen extends StatefulWidget {
   final String title;
   final String data;
-  const DoaaDetailsScreen({super.key, required this.title, required this.data});
+  final int doaaHeaderindex;
+  const DoaaDetailsScreen({
+    super.key,
+    required this.title,
+    required this.data,
+    required this.doaaHeaderindex,
+  });
 
   @override
   State<DoaaDetailsScreen> createState() => _DoaaDetailsScreenState();
@@ -48,7 +54,11 @@ class _DoaaDetailsScreenState extends State<DoaaDetailsScreen> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: cubit.doaaList.length,
                       itemBuilder: (context, index) {
-                        return DoaaItem(doaaModelData: cubit.doaaList[index]);
+                        return DoaaItem(
+                          doaaHeaderIndex: widget.doaaHeaderindex,
+                          doaaModelData: cubit.doaaList[index],
+                          index: index,
+                        );
                       },
                     );
                   },

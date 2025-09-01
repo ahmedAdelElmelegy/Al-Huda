@@ -55,19 +55,3 @@ class SettingScreenAction extends StatelessWidget {
     );
   }
 }
-  // ToggleSwitch(
-  //         totalSwitches: 3,
-  //         labels: ['إيقاف', 'خفيف', 'قوي'],
-  //         initialLabelIndex: 0,
-  //         activeBgColor: [ColorManager.primary],
-  //         inactiveBgColor: ColorManager.greyLight,
-  //         activeFgColor: Colors.white,
-  //         inactiveFgColor: ColorManager.gray,
-  //         cornerRadius: 12,
-  //         curve: Curves.easeInOut,
-  //         animate: true,
-  //         animationDuration: 500,
-  //         onToggle: (index) {
-  //           print('اختيار: $index');
-  //         },
-  //       ),

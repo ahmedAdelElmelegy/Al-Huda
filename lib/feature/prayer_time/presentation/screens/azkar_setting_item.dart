@@ -83,6 +83,7 @@ class _AzkarSettingItemState extends State<AzkarSettingItem> {
                     widget.title,
                     "صلي الله عليه وسلم",
                     sound: 'salyalmohamed',
+                    payload: 'sallehAlMohamed',
                   );
                 } else {
                   final hour = widget.index == 0 ? 6 : 18;
@@ -102,6 +103,7 @@ class _AzkarSettingItemState extends State<AzkarSettingItem> {
                     chanelName: widget.index == 0
                         ? "أذكار الصباح"
                         : "أذكار المساء",
+                    payload: 'azkar',
                   );
                 }
               }

@@ -1,6 +1,5 @@
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/feature/home/presentation/widgets/all_prayers_headline.dart';
-
 import 'package:al_huda/feature/home/presentation/widgets/home_date_and_location.dart';
 import 'package:al_huda/feature/home/presentation/widgets/home_prayer_banner.dart';
 import 'package:al_huda/feature/home/presentation/widgets/home_prayer_time_listview.dart';

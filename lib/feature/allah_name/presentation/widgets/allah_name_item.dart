@@ -31,7 +31,7 @@ class AllahNameItem extends StatelessWidget {
         children: [
           AzkarContentItem(count: index, text: name),
           verticalSpace(24),
-          AzkarActionBtn(count: 1),
+          AzkarActionBtn(count: 1, title: name),
         ],
       ),
     );

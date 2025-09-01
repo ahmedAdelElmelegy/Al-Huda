@@ -1,5 +1,6 @@
 import 'package:al_huda/core/services/api_services.dart';
 import 'package:al_huda/core/services/azkar_services.dart';
+import 'package:al_huda/core/services/doaa_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
 import 'package:al_huda/feature/allah_name/data/repo/allah_name_repo.dart';
@@ -8,6 +9,7 @@ import 'package:al_huda/feature/azkar/data/repo/azkar_repo.dart';
 import 'package:al_huda/feature/azkar/presentation/manager/cubit/azkar_cubit.dart';
 import 'package:al_huda/feature/doaa/data/repo/doaa_repo.dart';
 import 'package:al_huda/feature/doaa/presentation/manager/cubit/doaa_cubit.dart';
+import 'package:al_huda/feature/favorite/presentation/manager/cubit/favorite_cubit.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:al_huda/feature/nearst_mosque/presentation/manager/cubit/google_map_cubit.dart';
 import 'package:al_huda/feature/prayer_time/data/repo/prayer_repo.dart';
@@ -42,6 +44,7 @@ void init() async {
   getIt.registerLazySingleton<PrayerRepo>(
     () => PrayerRepo(getIt<ApiService>()),
   );
+  getIt.registerLazySingleton<DoaaServices>(() => DoaaServices());
   getIt.registerLazySingleton<AzkarServices>(() => AzkarServices());
 
   getIt.registerLazySingleton<AllahNameRepo>(() => AllahNameRepo());
@@ -49,6 +52,9 @@ void init() async {
   // cubits
   getIt.registerLazySingleton<TasbehCubit>(
     () => TasbehCubit(getIt<TasbehServices>()),
+  );
+  getIt.registerLazySingleton<FavoriteCubit>(
+    () => FavoriteCubit(getIt<DoaaServices>(), getIt<AzkarServices>()),
   );
 
   getIt.registerLazySingleton<AzkarCubit>(

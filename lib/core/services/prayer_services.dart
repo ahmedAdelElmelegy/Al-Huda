@@ -200,6 +200,7 @@ class PrayerServices {
           Constants.keyPrefixNotification,
         ),
         sound: 'athan',
+        payload: 'prayer',
       );
     }
   }

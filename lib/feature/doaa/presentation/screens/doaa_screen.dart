@@ -40,6 +40,7 @@ class DoaaScreen extends StatelessWidget {
                         DoaaDetailsScreen(
                           title: Constants.doaaNameList[index].tr(),
                           data: AppURL.doaaListUrl[index],
+                          doaaHeaderindex: index,
                         ),
                       );
                     },

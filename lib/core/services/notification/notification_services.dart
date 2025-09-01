@@ -1,4 +1,8 @@
+import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/utils/constants.dart';
+import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
+import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_screen.dart';
+import 'package:al_huda/feature/settings/presentation/screens/azkar_setting_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz; // الاستيراد كـ tz
 import 'package:timezone/data/latest_all.dart' as tz; // لتهيئة بيانات التوقيت
@@ -22,7 +26,16 @@ class NotificationService {
       android: androidSettings,
       iOS: iosSettings,
     );
-    await _localNotificationsPlugin.initialize(settings);
+    await _localNotificationsPlugin.initialize(
+      settings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        final payload = response.payload;
+        if (payload != null && payload.isNotEmpty) {
+          _handleNotificationClick(payload);
+        }
+      },
+    );
+    await requestNotificationPermissions();
   }
 
   static Future<void> requestNotificationPermissions() async {
@@ -31,9 +44,7 @@ class NotificationService {
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >();
-
     await androidPlugin?.requestNotificationsPermission();
-
     // iOS
     final iosPlugin = _localNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -57,6 +68,7 @@ class NotificationService {
     String sound = 'athan',
     String chanelId = 'prayer_channel',
     String chanelName = 'مواعيد الصلاة',
+    String payload = 'prayer',
   }) async {
     if (scheduleTime.isBefore(DateTime.now())) {
       return;
@@ -91,6 +103,7 @@ class NotificationService {
       platformChannelDetails,
 
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      payload: payload,
     );
   }
 
@@ -130,6 +143,7 @@ class NotificationService {
     String sound = 'salyalmohamed',
     String chanelId = Constants.saleAlMohamedChannelId,
     String chanelName = 'صلي علي محمد',
+    String payload = 'sallehAlMohamed',
   }) async {
     AndroidNotificationDetails androidDaily = AndroidNotificationDetails(
       chanelId,
@@ -161,6 +175,17 @@ class NotificationService {
       RepeatInterval.everyMinute,
       platformDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      payload: payload,
     );
+  }
+
+  static void _handleNotificationClick(String payload) {
+    if (payload == 'azkar') {
+      push(AzkarScreen());
+    } else if (payload == 'prayer') {
+      push(PrayerTimeScreen());
+    } else if (payload == 'sallehAlMohamed') {
+      push(AzkarSettingScreen());
+    }
   }
 }

@@ -15,7 +15,7 @@ class FavoriteBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 16.w),
+      margin: EdgeInsets.only(left: 16.w),
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
       decoration: BoxDecoration(

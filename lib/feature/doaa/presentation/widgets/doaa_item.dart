@@ -8,7 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoaaItem extends StatelessWidget {
   final DoaaModelData doaaModelData;
-  const DoaaItem({super.key, required this.doaaModelData});
+  final int index;
+  final int? doaaHeaderIndex;
+  const DoaaItem({
+    super.key,
+    required this.doaaModelData,
+    required this.index,
+    this.doaaHeaderIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,11 @@ class DoaaItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DoaaHeader(),
+          DoaaHeader(
+            doaaModelData: doaaModelData,
+            index: index,
+            doaaHeaderIndex: doaaHeaderIndex,
+          ),
 
           Expanded(
             child: Padding(

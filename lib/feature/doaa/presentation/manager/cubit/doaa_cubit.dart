@@ -14,6 +14,7 @@ class DoaaCubit extends Cubit<DoaaState> {
     emit(DoaaLoading());
     try {
       doaaList = await doaaRepo.laadAllDoaa(doaaName);
+
       emit(DoaaSuccess());
     } catch (e) {
       emit(DoaaError(e.toString()));

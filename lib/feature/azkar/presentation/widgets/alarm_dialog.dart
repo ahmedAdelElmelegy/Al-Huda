@@ -30,6 +30,7 @@ Future<void> saveAzkarTime(
           0,
           Constants.keyPrefixAzkar,
         ),
+        payload: 'azkar',
 
         chanelId: Constants.azkarAlsabahChannelId,
         chanelName: "أذكار الصباح",
@@ -49,6 +50,7 @@ Future<void> saveAzkarTime(
           1,
           Constants.keyPrefixAzkar,
         ),
+        payload: 'azkar',
         chanelId: Constants.azkarElmassaaChannelId,
         chanelName: "أذكار المساء",
       );
