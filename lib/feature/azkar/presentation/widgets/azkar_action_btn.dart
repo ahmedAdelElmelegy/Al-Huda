@@ -1,5 +1,6 @@
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
@@ -98,7 +99,12 @@ class AzkarActionBtn extends StatelessWidget {
                   ),
             horizontalSpace(24),
 
-            SvgIcon(assetName: AppIcons.share),
+            GestureDetector(
+              onTap: () {
+                AzkarServices.copyText(zikr!.text);
+              },
+              child: Icon(Icons.copy, color: ColorManager.primary, size: 24.sp),
+            ),
           ],
         );
       },

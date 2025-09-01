@@ -24,13 +24,13 @@ class QranScreen extends StatelessWidget {
                 children: [
                   SvgIcon(
                     assetName: AppIcons.qranA,
-                    color: ColorManager.primaryText2,
+                    color: ColorManager.primary,
                   ),
                   horizontalSpace(8),
                   Text(
                     'quran'.tr(),
                     style: TextSTyle.f18CairoSemiBoldPrimary.copyWith(
-                      color: ColorManager.primaryText2,
+                      color: ColorManager.primary,
                     ),
                   ),
                 ],

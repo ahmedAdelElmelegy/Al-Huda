@@ -4,6 +4,7 @@ import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 class AzkarServices {
@@ -114,5 +115,10 @@ class AzkarServices {
   Future<void> clearAll() async {
     final box = await openBox();
     await box.clear();
+  }
+
+  static void copyText(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    print('Text copied to clipboard!');
   }
 }

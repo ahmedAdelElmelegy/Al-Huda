@@ -130,7 +130,7 @@ class _AyatScreenState extends State<AyatScreen> {
       final previousAyah = cubit.ayatList[_currentAyahIndex - 1];
 
       setState(() {
-        _currentAyahIndex--; // تخفيض الفهرس مرة واحدة فقط
+        _currentAyahIndex--;
       });
 
       playAyahAudio(previousAyah.audio, previousAyah.numberInSurah);
