@@ -191,37 +191,36 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
   String countryName = '';
 
   // Reverse geocoding to get city and country
-  Future<void> getCityNameAndCountryName(LatLng position) async {
-    final url =
-        'https://nominatim.openstreetmap.org/reverse?lat=${position.latitude}&lon=${position.longitude}&format=json';
-    final response = await http.get(
-      Uri.parse(url),
-      headers: {'User-Agent': 'flutter_map_example'},
-    );
+  // Future<void> getCityNameAndCountryName(LatLng position) async {
+  //   final url = '';
+  //   final response = await http.get(
+  //     Uri.parse(url),
+  //     headers: {'User-Agent': 'flutter_map_example'},
+  //   );
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final address = data['address'];
+  //   if (response.statusCode == 200) {
+  //     final data = jsonDecode(response.body);
+  //     final address = data['address'];
 
-      final city =
-          address['city'] ??
-          address['town'] ??
-          address['village'] ??
-          address['municipality'] ??
-          '';
+  //     final city =
+  //         address['city'] ??
+  //         address['town'] ??
+  //         address['village'] ??
+  //         address['municipality'] ??
+  //         '';
 
-      final country = address['country'] ?? '';
+  //     final country = address['country'] ?? '';
 
-      debugPrint('City: $city');
-      debugPrint('Country: $country');
+  //     debugPrint('City: $city');
+  //     debugPrint('Country: $country');
 
-      cityName = city;
-      countryName = country;
-      emit(GetCityNameAndCountryNameSuccess());
-    } else {
-      debugPrint('Reverse geocoding failed: ${response.statusCode}');
-    }
-  }
+  //     cityName = city;
+  //     countryName = country;
+  //     emit(GetCityNameAndCountryNameSuccess());
+  //   } else {
+  //     debugPrint('Reverse geocoding failed: ${response.statusCode}');
+  //   }
+  // }
 
   /// Get nearest mosque using Overpass API (OpenStreetMap)
   Future<LatLng?> getNearestMosque(double lat, double lng) async {

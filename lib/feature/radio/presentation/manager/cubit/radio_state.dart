@@ -13,6 +13,6 @@ final class RadioSuccess extends RadioState {
 }
 
 final class RadioError extends RadioState {
-  final String message;
-  RadioError({required this.message});
+  final ServerFailure failure;
+  RadioError({required this.failure});
 }

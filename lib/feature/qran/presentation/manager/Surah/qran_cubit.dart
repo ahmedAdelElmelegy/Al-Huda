@@ -37,16 +37,10 @@ class QranCubit extends Cubit<QranState> {
           await QranServices().addSouraToHive(surahList);
           emit(QranSuccess(data: surahList));
         } else {
-          emit(QranError(message: "Invalid data received from server"));
+          emit(QranError(failure: ServerFailure(response.error)));
         }
       } else {
-        emit(
-          QranError(
-            message: ServerFailure(
-              response.error?.message ?? "Unknown error",
-            ).errMessage,
-          ),
-        );
+        emit(QranError(failure: ServerFailure(response.error)));
       }
     } else {
       surahList.addAll(surahListFromHive);

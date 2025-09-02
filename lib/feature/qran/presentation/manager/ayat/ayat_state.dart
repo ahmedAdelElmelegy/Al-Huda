@@ -13,6 +13,6 @@ final class AyatSuccess extends AyatState {
 }
 
 final class AyatError extends AyatState {
-  final String message;
-  AyatError({required this.message});
+  final ServerFailure failure;
+  AyatError({required this.failure});
 }

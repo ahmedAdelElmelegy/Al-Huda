@@ -17,20 +17,19 @@ class AyatCubit extends Cubit<AyatState> {
 
   Future<ApiResponse> getAyat(int surahNumber, String readerName) async {
     emit(AyatLoading());
+
+    ayatList.clear();
     final response = await ayatRepo.getAyat(surahNumber, readerName);
-    if (response.response!.statusCode == 200 &&
-        response.response != null &&
+    if (response.response != null &&
+        response.response!.statusCode == 200 &&
         response.response!.data != null) {
       quranModel = QuranModel.fromJson(response.response!.data);
       if (quranModel!.code == 200) {
-        ayatList.clear();
         ayatList.addAll(quranModel!.data.ayahs);
       }
       emit(AyatSuccess(ayatList: ayatList));
     } else {
-      emit(
-        AyatError(message: ServerFailure(response.error!.message).errMessage),
-      );
+      emit(AyatError(failure: ServerFailure(response.error)));
     }
     return response;
   }

@@ -40,7 +40,7 @@ class AzkarContentItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Text(
                   text,
-                  style: TextSTyle.f16AmiriRegPrimary.copyWith(height: 1.7),
+                  style: TextSTyle.f16SSTArabicRegBlack.copyWith(height: 1.6),
                 ),
               ),
             ),

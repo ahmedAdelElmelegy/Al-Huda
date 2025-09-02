@@ -17,16 +17,14 @@ class RadioCubit extends Cubit<RadioState> {
   Future<ApiResponse> getRadio() async {
     emit(RadioLoading());
     var response = await radioRepo.getRadio();
-    if (response.response?.statusCode == 200 &&
-        response.response?.data != null &&
-        response.response?.data is Map<String, dynamic>) {
+    if (response.response != null &&
+        response.response?.statusCode == 200 &&
+        response.response!.data != null) {
       radioModel = RadioModel.fromJson(response.response?.data);
       radioList.addAll(radioModel!.radios ?? []);
       emit(RadioSuccess(data: radioModel!));
     } else {
-      emit(
-        RadioError(message: ServerFailure(response.error!.message).errMessage),
-      );
+      emit(RadioError(failure: ServerFailure(response.error)));
     }
 
     return response;

@@ -13,6 +13,6 @@ final class QranSuccess extends QranState {
 }
 
 final class QranError extends QranState {
-  final String message;
-  QranError({required this.message});
+  final Failure failure;
+  QranError({required this.failure});
 }

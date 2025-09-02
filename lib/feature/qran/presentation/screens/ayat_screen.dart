@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:al_huda/core/data/api_url/app_url.dart';
+import 'package:al_huda/core/func/internet_dialog.dart';
+import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/services/qran_services.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
@@ -50,8 +52,10 @@ class _AyatScreenState extends State<AyatScreen> {
     });
   }
 
+  String? readerName;
+
   updateAyat(int surahNumber) async {
-    String? readerName = await SharedPrefServices.getValue(Constants.reader);
+    readerName = await SharedPrefServices.getValue(Constants.reader);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AyatCubit>().getAyat(
         surahNumber,
@@ -155,7 +159,20 @@ class _AyatScreenState extends State<AyatScreen> {
               return const LoadingListView();
             }
             if (state is AyatError) {
-              return Center(child: Text(state.message));
+              if (state.failure.errMessage.contains("No internet connection")) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  internetDialog(
+                    context,
+                    onPressed: () {
+                      cubit.getAyat(
+                        widget.surahData.number!,
+                        readerName ?? AppURL.readerName,
+                      );
+                      pop();
+                    },
+                  );
+                });
+              }
             }
 
             return SingleChildScrollView(
@@ -163,6 +180,7 @@ class _AyatScreenState extends State<AyatScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   children: [
+                    verticalSpace(16),
                     AyatAppBar(surahData: widget.surahData),
                     verticalSpace(24),
                     AyatSouraNameFrame(surahData: widget.surahData),

@@ -1,4 +1,5 @@
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/services/location_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
@@ -9,7 +10,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:latlong2/latlong.dart';
 
 class HomeDateAndLocation extends StatefulWidget {
   final bool isPrayerTime;
@@ -25,33 +25,41 @@ class HomeDateAndLocation extends StatefulWidget {
 }
 
 class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
+  String? _cityName;
+
   @override
   void initState() {
+    super.initState();
+
     final cubit = context.read<GoogleMapCubit>();
 
     cubit.getCurrentLocation().then((_) {
-      if (cubit.currentLocation != null) {
-        cubit.getCityNameAndCountryName(
-          LatLng(
-            cubit.currentLocation!.latitude!,
-            cubit.currentLocation!.longitude!,
-          ),
-        );
-        SharedPrefServices.setValue(
-          'lat',
-          cubit.currentLocation!.latitude!.toString(),
-        );
-        SharedPrefServices.setValue(
-          'lng',
-          cubit.currentLocation!.longitude!.toString(),
-        );
-      }
+      LocationService.checkPermissionAndGetLocation().then((locationData) {
+        if (locationData != null) {
+          SharedPrefServices.setValue('lat', locationData.latitude!.toString());
+          SharedPrefServices.setValue(
+            'lng',
+            locationData.longitude!.toString(),
+          );
+        }
+      });
+
+      LocationService.getCityName().then((cityName) {
+        if (cityName != null) {
+          SharedPrefServices.setValue('city', cityName);
+
+          if (mounted) {
+            setState(() {
+              _cityName = cityName;
+            });
+          }
+        }
+      });
+
       if (mounted) {
         context.read<PrayerCubit>().getPrayerTimes();
       }
     });
-
-    super.initState();
   }
 
   @override
@@ -62,6 +70,7 @@ class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // التاريخ
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -80,25 +89,26 @@ class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
               ),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('place'.tr(), style: TextSTyle.f12CairoRegGrey),
-              verticalSpace(4),
-              BlocBuilder<GoogleMapCubit, GoogleMapState>(
-                builder: (context, state) {
-                  final cubit = context.read<GoogleMapCubit>();
-                  return Text(
-                    cubit.cityName.isEmpty ? "..." : cubit.cityName,
-                    style: widget.isPrayerTime
-                        ? TextSTyle.f16CairoMediumBlack.copyWith(
-                            color: ColorManager.primaryText,
-                          )
-                        : TextSTyle.f16SSTArabicRegBlack,
-                  );
-                },
-              ),
-            ],
+          // المكان
+          SizedBox(
+            width: 100.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('place'.tr(), style: TextSTyle.f12CairoRegGrey),
+                verticalSpace(4),
+                Text(
+                  _cityName ?? "...", // ✅ التعديل هنا
+                  style: widget.isPrayerTime
+                      ? TextSTyle.f16CairoMediumBlack.copyWith(
+                          color: ColorManager.primaryText,
+                        )
+                      : TextSTyle.f16SSTArabicRegBlack,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -80,6 +80,10 @@
  "doaa"    :"الادعية",
 "doaa_form_qran_karem":"ادعية من القرآن الكريم",
 "doaa_from_sonaa_nabweya":"ادعية من السنة النبوية",
-"alroqia_sharia":"الروقية الشرعية"
+"alroqia_sharia":"الروقية الشرعية",
+"refresh":"تحديث",
+"no_internet":"لا يوجد اتصال بالانترنت",
+"try_again":"حاول مرة اخرى"
+
    
 }

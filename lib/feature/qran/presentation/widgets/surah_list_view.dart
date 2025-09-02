@@ -1,8 +1,10 @@
+import 'package:al_huda/core/func/internet_dialog.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/widgets/loading_list_view.dart';
 import 'package:al_huda/feature/qran/presentation/manager/Surah/qran_cubit.dart';
 import 'package:al_huda/feature/qran/presentation/screens/ayat_screen.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/sura_item.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +22,17 @@ class SurahListView extends StatelessWidget {
         final cubit = context.read<QranCubit>();
 
         if (state is QranError) {
-          return Center(child: Text(state.message));
+          if (state.failure.errMessage.contains("No internet connection")) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              internetDialog(
+                context,
+                onPressed: () {
+                  cubit.fetchSurah();
+                  pop();
+                },
+              );
+            });
+          }
         }
 
         return ListView.builder(

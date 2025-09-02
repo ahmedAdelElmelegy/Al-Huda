@@ -1,3 +1,4 @@
+import 'package:al_huda/core/func/internet_dialog.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/widgets/loading_list_view.dart';
 import 'package:al_huda/feature/radio/presentation/manager/cubit/radio_cubit.dart';
@@ -18,7 +19,15 @@ class RadioReaderListView extends StatelessWidget {
           return LoadingListView();
         }
         if (state is RadioError) {
-          return Center(child: Text(state.message));
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            internetDialog(
+              context,
+              onPressed: () {
+                cubit.getRadio();
+                pop();
+              },
+            );
+          });
         }
         return ListView.builder(
           shrinkWrap: true,

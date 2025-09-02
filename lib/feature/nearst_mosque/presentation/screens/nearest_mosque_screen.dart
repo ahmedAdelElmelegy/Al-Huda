@@ -33,124 +33,59 @@ class _NearestMosqueScreenState extends State<NearestMosqueScreen> {
             icon: AppIcons.mosque,
           ),
           body: SafeArea(
-            child: Stack(
-              children: [
-                FlutterMap(
-                  mapController: bloc.mapController,
-                  options: MapOptions(
-                    initialCenter: LatLng(
-                      currentLocation?.latitude ?? 24.7136,
-                      currentLocation?.longitude ?? 46.6753,
-                    ),
-                    onTap: (tapPosition, latLng) {
-                      bloc.addDestinationMarker(latLng);
-                      bloc.getCityNameAndCountryName(latLng);
+            child: FlutterMap(
+              mapController: bloc.mapController,
+              options: MapOptions(
+                initialCenter: LatLng(
+                  currentLocation?.latitude ?? 24.7136,
+                  currentLocation?.longitude ?? 46.6753,
+                ),
+                onTap: (tapPosition, latLng) {
+                  bloc.addDestinationMarker(latLng);
 
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Destination'),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('City: ${bloc.cityName}'),
-                                Text('Country: ${bloc.countryName}'),
-                              ],
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    initialZoom: 14,
-                  ),
-                  children: [
-                    TileLayer(
-                      urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      userAgentPackageName: 'com.example.uber',
-                    ),
-                    MarkerLayer(markers: bloc.markers),
-
-                    if (bloc.routeCoordinates.isNotEmpty)
-                      PolylineLayer(
-                        polylines: [
-                          Polyline(
-                            points: bloc.routeCoordinates,
-                            color: Colors.red,
-                            strokeWidth: 4,
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text('Destination'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('City: ${bloc.cityName}'),
+                            Text('Country: ${bloc.countryName}'),
+                          ],
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
                           ),
                         ],
-                      ),
-                  ],
+                      );
+                    },
+                  );
+                },
+                initialZoom: 14,
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.example.uber',
                 ),
-                Positioned(
-                  top: 20,
-                  left: 20,
-                  right: 20,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: bloc.searchController,
-                          decoration: InputDecoration(
-                            hintText: 'Search',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            prefixIcon: Icon(Icons.search),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                bloc.searchController.clear();
-                              },
-                              child: Icon(Icons.clear),
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 10,
-                              horizontal: 20,
-                            ),
-                          ),
-                          onSubmitted: (value) {
-                            bloc.searchPlace(value, (latLng) {
-                              bloc.addDestinationMarker(latLng);
-                              bloc.getCityNameAndCountryName(latLng);
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {
-                          bloc.searchPlace(bloc.searchController.text, (
-                            latLng,
-                          ) {
-                            bloc.addDestinationMarker(latLng);
-                            // bloc.getCityNameAndCountryName(latLng);
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Icon(Icons.search),
-                        ),
+                MarkerLayer(markers: bloc.markers),
+
+                if (bloc.routeCoordinates.isNotEmpty)
+                  PolylineLayer(
+                    polylines: [
+                      Polyline(
+                        points: bloc.routeCoordinates,
+                        color: Colors.red,
+                        strokeWidth: 4,
                       ),
                     ],
                   ),
-                ),
               ],
             ),
           ),
@@ -172,12 +107,12 @@ class _NearestMosqueScreenState extends State<NearestMosqueScreen> {
                     Constants.lng,
                   );
                   if (bloc.currentLocation != null) {
-                    bloc.getCityNameAndCountryName(
-                      LatLng(
-                        bloc.currentLocation?.latitude ?? 0,
-                        bloc.currentLocation?.longitude ?? 0,
-                      ),
-                    );
+                    // bloc.getCityNameAndCountryName(
+                    //   LatLng(
+                    //     bloc.currentLocation?.latitude ?? 0,
+                    //     bloc.currentLocation?.longitude ?? 0,
+                    //   ),
+                    // );
                   }
                   context.read<PrayerCubit>().getPrayerTimes();
                 },

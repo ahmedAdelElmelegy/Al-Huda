@@ -26,9 +26,16 @@ class Ayah {
   });
 
   factory Ayah.fromJson(Map<String, dynamic> json) {
-    var audioSecondaryList = json['audioSecondary'] as List;
-    List<String> audioSecondary = audioSecondaryList.cast<String>();
-
+    List<String> audioSecondary =
+        (json['audioSecondary'] as List<dynamic>?)?.cast<String>() ?? [];
+    bool sajdaValue = false;
+    if (json['sajda'] != null) {
+      if (json['sajda'] is bool) {
+        sajdaValue = json['sajda'];
+      } else if (json['sajda'] is Map<String, dynamic>) {
+        sajdaValue = (json['sajda']['recommended'] ?? false) as bool;
+      }
+    }
     return Ayah(
       number: json['number'],
       audio: json['audio'],
@@ -40,7 +47,7 @@ class Ayah {
       page: json['page'],
       ruku: json['ruku'],
       hizbQuarter: json['hizbQuarter'],
-      sajda: json['sajda'],
+      sajda: sajdaValue,
     );
   }
 
