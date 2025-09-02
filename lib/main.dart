@@ -56,7 +56,6 @@ void main() async {
   Hive.registerAdapter(SurahDataAdapter());
   await TasbehServices().openBox();
   await DoaaServices().openBox();
-
   await QranServices().openBox();
 
   await TasbehServices().initTasbeh();
