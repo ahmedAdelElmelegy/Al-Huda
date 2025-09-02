@@ -16,9 +16,7 @@ class SettingsScreen extends StatelessWidget {
         icon: AppIcons.settingActive,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(children: [verticalSpace(24), SettingScreenAction()]),
-        ),
+        child: Column(children: [verticalSpace(24), SettingScreenAction()]),
       ),
     );
   }

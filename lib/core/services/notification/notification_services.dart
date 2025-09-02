@@ -2,7 +2,7 @@ import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_screen.dart';
-import 'package:al_huda/feature/settings/presentation/screens/azkar_setting_screen.dart';
+import 'package:al_huda/feature/settings/presentation/screens/setting_azkar_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz; // الاستيراد كـ tz
 import 'package:timezone/data/latest_all.dart' as tz; // لتهيئة بيانات التوقيت
@@ -185,7 +185,7 @@ class NotificationService {
     } else if (payload == 'prayer') {
       push(PrayerTimeScreen());
     } else if (payload == 'sallehAlMohamed') {
-      push(AzkarSettingScreen());
+      push(SettingAzkarScreen());
     }
   }
 }

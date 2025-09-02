@@ -83,7 +83,9 @@
 "alroqia_sharia":"الروقية الشرعية",
 "refresh":"تحديث",
 "no_internet":"لا يوجد اتصال بالانترنت",
-"try_again":"حاول مرة اخرى"
+"try_again":"حاول مرة اخرى",
+"active_notification_prayer":"تفعيل اشعارات الصلاة",
 
+  "notification_prayer":"استقبال تنبيهات دقيقة تساعدك علي اداء الصلوات في وقتها"
    
 }

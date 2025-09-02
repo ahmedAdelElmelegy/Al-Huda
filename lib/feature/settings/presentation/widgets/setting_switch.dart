@@ -22,14 +22,3 @@ class SettingSwitch extends StatelessWidget {
     );
   }
 }
-
-// //  Checkbox(
-//         side: BorderSide(color: ColorManager.primary, width: 2.w),
-//         activeColor: ColorManager.primary,
-//         checkColor: ColorManager.white,
-//         shape: CircleBorder(),
-//         value: value,
-//         onChanged: (value) {
-//           onChanged!(value!);
-//         },
-//       ),

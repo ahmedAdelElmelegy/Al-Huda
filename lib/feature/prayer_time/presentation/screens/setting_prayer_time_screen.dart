@@ -1,7 +1,8 @@
-import 'package:al_huda/core/utils/constants.dart';
+import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/theme/colors.dart';
+import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/widgets/custom_appbar_with_arrow.dart';
-
-import 'package:al_huda/feature/prayer_time/presentation/widgets/prayer_time_detail_item.dart';
+import 'package:al_huda/feature/prayer_time/presentation/widgets/setting_prayer_list.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +20,29 @@ class SettingPrayerTimeScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 24.h),
             child: Column(
-              children: List.generate(
-                Constants.prayer.length,
-                (index) => PrayerTimeDetailItem(
-                  index: index,
-                  title: Constants.prayer[index].name.tr(),
+              children: [
+                CircleAvatar(
+                  radius: 30.r,
+                  backgroundColor: ColorManager.primaryBg,
+                  child: Icon(
+                    Icons.notifications_active_outlined,
+                    size: 30.sp,
+                    color: ColorManager.primary,
+                  ),
                 ),
-              ),
+                verticalSpace(16),
+                Text(
+                  'active_notification_prayer'.tr(),
+                  style: TextSTyle.f16SSTArabicMediumPrimary,
+                ),
+                verticalSpace(10),
+                Text(
+                  'notification_prayer'.tr(),
+                  style: TextSTyle.f12CairoRegGrey,
+                ),
+                verticalSpace(10),
+                SettingPrayerList(),
+              ],
             ),
           ),
         ),

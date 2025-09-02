@@ -15,14 +15,18 @@ class SettingActionBtn extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 8.w),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: ColorManager.greyLight,
-        // border: Border.all(color: ColorManager.primary),
+        border: Border.all(color: ColorManager.gray.withValues(alpha: 0.4)),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextSTyle.f16SSTArabicRegBlack),
+          Text(
+            title,
+            style: TextSTyle.f14SSTArabicMediumPrimary.copyWith(
+              color: ColorManager.primaryText2,
+            ),
+          ),
           child ?? Icon(Icons.arrow_forward),
         ],
       ),
