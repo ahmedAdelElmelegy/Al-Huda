@@ -71,20 +71,20 @@ class _AyatScreenState extends State<AyatScreen> {
     try {
       final cubit = context.read<AyatCubit>();
 
-      // ابني لينك التحميل
+      //  download link
       final url =
           "https://cdn.islamic.network/quran/audio/128/${readerName ?? AppURL.readerName}/$ayahNumber.mp3";
 
-      // مسار التخزين المحلي
+      //  store path
       final dir = await getApplicationDocumentsDirectory();
       final filePath = "${dir.path}/ayah_$ayahNumber.mp3";
 
       String audioSource;
       if (File(filePath).existsSync()) {
-        // الملف موجود في الجهاز
+        // file in device
         audioSource = filePath;
       } else {
-        // نزّل الملف
+        // download file
         await Dio().download(url, filePath);
         audioSource = filePath;
       }
