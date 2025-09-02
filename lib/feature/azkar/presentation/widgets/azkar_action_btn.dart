@@ -39,7 +39,7 @@ class AzkarActionBtn extends StatelessWidget {
                 ? GestureDetector(
                     onTap: () {
                       if (index != null) {
-                        cubit.deleteAzkar(index!);
+                        cubit.deleteAzkarById(zikr!.id);
                       }
                     },
                     child: Icon(
@@ -50,8 +50,10 @@ class AzkarActionBtn extends StatelessWidget {
                   )
                 : GestureDetector(
                     onTap: () {
-                      if (zikr != null) {
-                        context.read<FavoriteCubit>().addAzkar(zikr!);
+                      if (cubit.isFav(zikr!)) {
+                        cubit.deleteAzkarById(zikr!.id);
+                      } else {
+                        cubit.addAzkar(zikr!);
                       }
                     },
                     child: SvgIcon(

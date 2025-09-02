@@ -96,7 +96,7 @@ class AzkarServices {
 
   Future<void> addZikr(Zikr zikr) async {
     final box = await openBox();
-    await box.add(zikr);
+    await box.put(zikr.id, zikr);
   }
 
   // get all zikr
@@ -110,9 +110,10 @@ class AzkarServices {
     await box.putAt(index, zikr);
   }
 
-  Future<void> deleteZikr(int index) async {
+  // delete zikr by id
+  Future<void> deleteZikrById(int id) async {
     final box = await openBox();
-    await box.deleteAt(index);
+    await box.delete(id);
   }
 
   Future<void> clearAll() async {

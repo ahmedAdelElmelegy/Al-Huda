@@ -66,19 +66,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
   }
 
-  Future<void> deleteAzkar(int index) async {
-    emit(AzkarDeleteLoading());
-    try {
-      await azkarServices.deleteZikr(index);
-      emit(AzkarDeleteSuccess());
-      getAllZikr();
-      Fluttertoast.showToast(msg: 'تم حذف الذكر');
-    } catch (e) {
-      emit(AzkarDeleteError());
-      Fluttertoast.showToast(msg: 'حدث خطأ');
-    }
-  }
-
   // for doaa
   void addDoaa(DoaaModelData doaa, int index) {
     emit(FavoriteAddDoaaLoading());
@@ -118,7 +105,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     return doaaList.any((element) => element.id == doaa.id);
   }
 
-  // delete doaa
+  // // delete doaa
   void deleteDoaa(int index) {
     emit(FavoriteDeleteDoaaLoading());
     try {
@@ -132,15 +119,28 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
   }
 
-  void deleteDoaaFromScreen(int id) {
-    emit(FavoriteDeleteDoaaLoading());
+  void deleteAzkarById(int id) {
+    emit(AzkarDeleteByIdLoading());
     try {
-      doaaServices.deleteDoaaFromScreen(id);
-      getDoaaByCategory(doaaList[id].category!);
-      emit(FavoriteDeleteDoaaSuccess());
+      azkarServices.deleteZikrById(id);
+      getAllZikr();
+      emit(AzkarDeleteByIdSuccess());
+      Fluttertoast.showToast(msg: 'تم حذف الذكر');
+    } catch (e) {
+      emit(AzkarDeleteByIdError(e.toString()));
+      Fluttertoast.showToast(msg: 'حدث خطأ');
+    }
+  }
+
+  void deleteDoaaById(String id, int index) {
+    emit(FavoriteDeleteDoaaByIdLoading());
+    try {
+      doaaServices.deleteDoaaById(id);
+      getDoaaByCategory(Constants.doaaNameList[index]);
+      emit(FavoriteDeleteDoaaByIdSuccess());
       Fluttertoast.showToast(msg: 'تم حذف الدعاء');
     } catch (e) {
-      emit(FavoriteDeleteDoaaError(e.toString()));
+      emit(FavoriteDeleteDoaaByIdError(e.toString()));
       Fluttertoast.showToast(msg: 'حدث خطأ');
     }
   }

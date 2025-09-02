@@ -1,9 +1,20 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
+
+part 'surah_data.g.dart';
+
+@HiveType(typeId: 5)
 class SurahData {
-  int? number;
+  @HiveField(0)
+  final int? number;
+  @HiveField(1)
   final String? name;
+  @HiveField(2)
   final String? englishName;
+  @HiveField(3)
   final String? englishNameTranslation;
+  @HiveField(4)
   final int? numberOfAyahs;
+  @HiveField(5)
   final String? revelationType;
 
   SurahData({

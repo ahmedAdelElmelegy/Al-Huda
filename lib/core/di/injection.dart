@@ -2,6 +2,7 @@ import 'package:al_huda/core/services/api_services.dart';
 import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/services/doaa_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
+import 'package:al_huda/core/services/qran_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
 import 'package:al_huda/feature/allah_name/data/repo/allah_name_repo.dart';
 import 'package:al_huda/feature/allah_name/presentation/manager/cubit/allah_name_cubit.dart';
@@ -56,6 +57,7 @@ void init() async {
   getIt.registerLazySingleton<FavoriteCubit>(
     () => FavoriteCubit(getIt<DoaaServices>(), getIt<AzkarServices>()),
   );
+  getIt.registerLazySingleton<QranServices>(() => QranServices());
 
   getIt.registerLazySingleton<AzkarCubit>(
     () => AzkarCubit(getIt<AzkarRepo>(), getIt<AzkarServices>()),

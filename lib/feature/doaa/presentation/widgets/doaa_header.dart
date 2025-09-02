@@ -57,21 +57,24 @@ class _DoaaHeaderState extends State<DoaaHeader> {
               widget.doaaHeaderIndex == null
                   ? GestureDetector(
                       onTap: () {
-                        context.read<FavoriteCubit>().deleteDoaa(widget.index);
+                        cubit.deleteDoaa(widget.index);
+                      },
+                      child: Icon(Icons.delete, color: ColorManager.red),
+                    )
+                  : cubit.isDoaaInFavorite(widget.doaaModelData)
+                  ? GestureDetector(
+                      onTap: () {
+                        cubit.deleteDoaaById(
+                          widget.doaaModelData.id,
+                          widget.doaaHeaderIndex!,
+                        );
                       },
                       child: SvgIcon(
-                        assetName: AppIcons.delete,
+                        assetName: AppIcons.favorite,
                         width: 16.w,
                         height: 16.h,
                         color: ColorManager.red,
                       ),
-                    )
-                  : cubit.isDoaaInFavorite(widget.doaaModelData)
-                  ? SvgIcon(
-                      assetName: AppIcons.favorite,
-                      width: 16.w,
-                      height: 16.h,
-                      color: ColorManager.red,
                     )
                   : GestureDetector(
                       onTap: () {

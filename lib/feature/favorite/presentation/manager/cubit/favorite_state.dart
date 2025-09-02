@@ -51,6 +51,16 @@ final class AzkarClearSuccess extends FavoriteState {}
 
 final class AzkarClearError extends FavoriteState {}
 
+// azkar delete by id state
+final class AzkarDeleteByIdLoading extends FavoriteState {}
+
+final class AzkarDeleteByIdSuccess extends FavoriteState {}
+
+final class AzkarDeleteByIdError extends FavoriteState {
+  final String message;
+  AzkarDeleteByIdError(this.message);
+}
+
 // doaa
 
 final class FavoriteAddDoaaLoading extends FavoriteState {}
@@ -80,4 +90,14 @@ final class FavoriteDeleteDoaaSuccess extends FavoriteState {}
 final class FavoriteDeleteDoaaError extends FavoriteState {
   final String message;
   FavoriteDeleteDoaaError(this.message);
+}
+
+// delete doaa by id
+final class FavoriteDeleteDoaaByIdLoading extends FavoriteState {}
+
+final class FavoriteDeleteDoaaByIdSuccess extends FavoriteState {}
+
+final class FavoriteDeleteDoaaByIdError extends FavoriteState {
+  final String message;
+  FavoriteDeleteDoaaByIdError(this.message);
 }

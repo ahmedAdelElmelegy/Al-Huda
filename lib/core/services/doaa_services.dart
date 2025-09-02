@@ -13,7 +13,7 @@ class DoaaServices {
 
   Future<void> addDoaa(DoaaModelData doaa) async {
     final box = await openBox();
-    await box.add(doaa);
+    await box.put(doaa.id, doaa);
   }
 
   // get all zikr
@@ -30,6 +30,12 @@ class DoaaServices {
   // delete from doaa screen
   Future<void> deleteDoaaFromScreen(int id) async {
     // delete by id
+    final box = await openBox();
+    await box.delete(id);
+  }
+
+  // doaa delete by id
+  Future<void> deleteDoaaById(String id) async {
     final box = await openBox();
     await box.delete(id);
   }

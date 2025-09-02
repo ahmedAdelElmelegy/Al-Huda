@@ -29,9 +29,10 @@ class EventItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Expanded(
+            flex: 2,
             child: Text(
               name,
               style: TextSTyle.f14SSTArabicMediumPrimary,
@@ -40,12 +41,13 @@ class EventItem extends StatelessWidget {
             ),
           ),
 
-          SizedBox(
-            width: 170.w,
+          Expanded(
+            flex: 3,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                Flexible(
+                  flex: 1,
                   child: Text(
                     DateFormat('yyyy/MM/dd', 'ar').format(date),
                     style: TextSTyle.f12CairoBoldGrey,
@@ -54,17 +56,16 @@ class EventItem extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-
                 horizontalSpace(4),
-
-                Expanded(
+                Flexible(
+                  flex: 1,
                   child: Text(
                     '${tr('remaining')} ${CalenderServices.toArabicNumber(remainingDays)} ${tr('days')}',
                     style: TextSTyle.f12CairoSemiBoldPrimary.copyWith(
                       color: ColorManager.primaryText2,
                     ),
-                    overflow: TextOverflow.ellipsis,
                     maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.end,
                   ),
                 ),

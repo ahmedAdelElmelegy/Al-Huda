@@ -43,6 +43,8 @@ class Constants {
   static const saleAlMohamedChannelId = "sale_al_mohamed_channel";
   static const zikrBoxName = "zikrBox";
   static const doaaBoxName = "doaaBox";
+  static const surahBoxName = "surahBox";
+  static const ayatBoxName = "ayatBox";
   static List<IslamicEvent> islamicEvents = [
     IslamicEvent(name: "رأس السنة الهجرية", hMonth: 1, hDay: 1),
     IslamicEvent(name: "عاشوراء", hMonth: 1, hDay: 10),
