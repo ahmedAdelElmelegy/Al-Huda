@@ -8,6 +8,9 @@ import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/ayat.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
 
 class QranServices {
   static List<Widget> buildPageSeparators(List<Ayah> ayatList) {
@@ -99,4 +102,6 @@ class QranServices {
     final box = await openBoxAyah();
     return box.get(surahNumber);
   }
+
+  // dounload ayat
 }

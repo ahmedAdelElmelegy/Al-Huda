@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:al_huda/core/data/api_url/app_url.dart';
 import 'package:al_huda/core/func/internet_dialog.dart';
 import 'package:al_huda/core/helper/extentions.dart';
@@ -15,10 +16,12 @@ import 'package:al_huda/feature/qran/presentation/widgets/ayat_app_bar.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/ayat_buttom_nav_bar.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/ayat_soura_name_frame.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AyatScreen extends StatefulWidget {
   final SurahData surahData;
@@ -64,9 +67,27 @@ class _AyatScreenState extends State<AyatScreen> {
     });
   }
 
-  Future<void> playAyahAudio(String url, int ayahNumber) async {
+  Future<void> playAyahAudio(int ayahNumber) async {
     try {
       final cubit = context.read<AyatCubit>();
+
+      // ابني لينك التحميل
+      final url =
+          "https://cdn.islamic.network/quran/audio/128/${readerName ?? AppURL.readerName}/$ayahNumber.mp3";
+
+      // مسار التخزين المحلي
+      final dir = await getApplicationDocumentsDirectory();
+      final filePath = "${dir.path}/ayah_$ayahNumber.mp3";
+
+      String audioSource;
+      if (File(filePath).existsSync()) {
+        // الملف موجود في الجهاز
+        audioSource = filePath;
+      } else {
+        // نزّل الملف
+        await Dio().download(url, filePath);
+        audioSource = filePath;
+      }
 
       final newIndex = cubit.ayatList.indexWhere(
         (ayah) => ayah.numberInSurah == ayahNumber,
@@ -75,11 +96,11 @@ class _AyatScreenState extends State<AyatScreen> {
       setState(() {
         _currentlyPlayingAyah = ayahNumber;
         _isPlaying = true;
-        _currentAyahIndex = newIndex; // تحديث الفهرس فقط
+        _currentAyahIndex = newIndex;
       });
 
       await _audioPlayer.stop();
-      await _audioPlayer.play(UrlSource(url));
+      await _audioPlayer.play(DeviceFileSource(audioSource));
     } catch (e) {
       debugPrint("Error playing ayah audio: $e");
       setState(() {
@@ -102,7 +123,7 @@ class _AyatScreenState extends State<AyatScreen> {
       if (cubit.ayatList.isNotEmpty &&
           _currentAyahIndex < cubit.ayatList.length) {
         final ayah = cubit.ayatList[_currentAyahIndex];
-        playAyahAudio(ayah.audio, ayah.numberInSurah);
+        playAyahAudio(ayah.numberInSurah);
       }
     }
   }
@@ -117,7 +138,7 @@ class _AyatScreenState extends State<AyatScreen> {
         _currentAyahIndex++; // زيادة الفهرس مرة واحدة فقط
       });
 
-      playAyahAudio(nextAyah.audio, nextAyah.numberInSurah);
+      playAyahAudio(nextAyah.numberInSurah);
     } else {
       setState(() {
         _isPlaying = false;
@@ -137,7 +158,7 @@ class _AyatScreenState extends State<AyatScreen> {
         _currentAyahIndex--;
       });
 
-      playAyahAudio(previousAyah.audio, previousAyah.numberInSurah);
+      playAyahAudio(previousAyah.numberInSurah);
     }
   }
 
@@ -221,10 +242,7 @@ class _AyatScreenState extends State<AyatScreen> {
                                             _currentlyPlayingAyah = null;
                                           });
                                         }
-                                        playAyahAudio(
-                                          ayah.audio,
-                                          ayah.numberInSurah,
-                                        );
+                                        playAyahAudio(ayah.numberInSurah);
                                       },
                                   ),
                                   TextSpan(
@@ -246,10 +264,7 @@ class _AyatScreenState extends State<AyatScreen> {
                                             _currentlyPlayingAyah = null;
                                           });
                                         }
-                                        playAyahAudio(
-                                          ayah.audio,
-                                          ayah.numberInSurah,
-                                        );
+                                        playAyahAudio(ayah.numberInSurah);
                                       },
                                   ),
                                 ],
