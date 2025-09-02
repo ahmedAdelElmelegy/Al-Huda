@@ -108,10 +108,20 @@ class PrayerServices {
     final currentPrayerTime = cubit.getCurrentPrayerTime();
 
     final remainingTime = currentPrayerTime.difference(now);
+
+    if (remainingTime.isNegative) {
+      return "00:00:00";
+    }
+
     final remainingHours = remainingTime.inHours;
     final remainingMinutes = remainingTime.inMinutes.remainder(60);
     final remainingSeconds = remainingTime.inSeconds.remainder(60);
-    return '$remainingSeconds : $remainingMinutes : $remainingHours';
+
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+
+    return "${twoDigits(remainingHours)}:"
+        "${twoDigits(remainingMinutes)}:"
+        "${twoDigits(remainingSeconds)}";
   }
 
   static Duration getDelayUnitMidnight() {
