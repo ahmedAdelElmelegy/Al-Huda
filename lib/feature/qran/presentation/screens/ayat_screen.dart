@@ -71,13 +71,21 @@ class _AyatScreenState extends State<AyatScreen> {
     try {
       final cubit = context.read<AyatCubit>();
 
+      // الآية هنا لازم تكون global ID مش numberInSurah
+      final ayah = cubit.ayatList.firstWhere(
+        (a) => a.numberInSurah == ayahNumber,
+      );
+
+      final globalAyahNumber = ayah.number; // ده اللي السيرفر بيشتغل بيه
+
       //  download link
       final url =
-          "https://cdn.islamic.network/quran/audio/128/${readerName ?? AppURL.readerName}/$ayahNumber.mp3";
+          "https://cdn.islamic.network/quran/audio/128/${readerName ?? AppURL.readerName}/$globalAyahNumber.mp3";
 
       //  store path
       final dir = await getApplicationDocumentsDirectory();
-      final filePath = "${dir.path}/ayah_$ayahNumber.mp3";
+      final filePath =
+          "${dir.path}/ayah_${globalAyahNumber}_${readerName ?? AppURL.readerName}.mp3";
 
       String audioSource;
       if (File(filePath).existsSync()) {
@@ -90,7 +98,7 @@ class _AyatScreenState extends State<AyatScreen> {
       }
 
       final newIndex = cubit.ayatList.indexWhere(
-        (ayah) => ayah.numberInSurah == ayahNumber,
+        (a) => a.numberInSurah == ayahNumber,
       );
 
       setState(() {
