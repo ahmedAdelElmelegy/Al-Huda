@@ -1,10 +1,22 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
+
+part 'edition.g.dart';
+
+@HiveType(typeId: 8)
 class Edition {
+  @HiveField(0)
   final String identifier;
+  @HiveField(1)
   final String language;
+  @HiveField(2)
   final String name;
+  @HiveField(3)
   final String englishName;
+  @HiveField(4)
   final String format;
+  @HiveField(5)
   final String type;
+  @HiveField(6)
   final dynamic direction;
 
   Edition({

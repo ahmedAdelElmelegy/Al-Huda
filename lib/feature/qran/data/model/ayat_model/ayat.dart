@@ -1,14 +1,30 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
+
+part 'ayat.g.dart';
+
+@HiveType(typeId: 7)
 class Ayah {
+  @HiveField(0)
   final int number;
+  @HiveField(1)
   final String audio;
+  @HiveField(2)
   final List<String> audioSecondary;
+  @HiveField(3)
   final String text;
+  @HiveField(4)
   final int numberInSurah;
+  @HiveField(5)
   final int juz;
+  @HiveField(6)
   final int manzil;
+  @HiveField(7)
   final int page;
+  @HiveField(8)
   final int ruku;
+  @HiveField(9)
   final int hizbQuarter;
+  @HiveField(10)
   final bool sajda;
 
   Ayah({

@@ -90,16 +90,13 @@ class QranServices {
     }
   }
 
-  Future<void> addAyahOfSoura(
-    SurahModelData surahModelData,
-    int surahNumber,
-  ) async {
+  Future<void> addAyahOfSoura(SurahModelData surahModelData) async {
     final box = await openBoxAyah();
-    await box.put(surahNumber, surahModelData);
+    await box.put(surahModelData.number, surahModelData);
   }
 
-  Future<SurahModelData> getAllAyahFromHive() async {
+  Future<SurahModelData?> getAllAyahFromHive(int surahNumber) async {
     final box = await openBoxAyah();
-    return box.values.first;
+    return box.get(surahNumber);
   }
 }

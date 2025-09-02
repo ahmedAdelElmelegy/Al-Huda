@@ -7,6 +7,9 @@ import 'package:al_huda/core/services/qran_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/doaa/data/model/doaa_model.dart';
+import 'package:al_huda/feature/qran/data/model/ayat_model/ayat.dart';
+import 'package:al_huda/feature/qran/data/model/ayat_model/edition.dart';
+import 'package:al_huda/feature/qran/data/model/ayat_model/surah_model_data.dart';
 import 'package:al_huda/feature/qran/data/model/surah_model/surah_data.dart';
 import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +57,13 @@ void main() async {
   Hive.registerAdapter(ZikrAdapter());
   Hive.registerAdapter(DoaaModelDataAdapter());
   Hive.registerAdapter(SurahDataAdapter());
+  Hive.registerAdapter(SurahModelDataAdapter());
+  Hive.registerAdapter(AyahAdapter());
+  Hive.registerAdapter(EditionAdapter());
   await TasbehServices().openBox();
   await DoaaServices().openBox();
   await QranServices().openBox();
+  await QranServices().openBoxAyah();
 
   await TasbehServices().initTasbeh();
 

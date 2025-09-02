@@ -1,14 +1,33 @@
 import 'package:al_huda/feature/qran/data/model/ayat_model/ayat.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/edition.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
+part 'surah_model_data.g.dart';
+
+@HiveType(typeId: 6)
 class SurahModelData {
+  @HiveField(0)
   final int number;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String englishName;
+
+  @HiveField(3)
   final String englishNameTranslation;
+
+  @HiveField(4)
   final String revelationType;
+
+  @HiveField(5)
   final int numberOfAyahs;
+
+  @HiveField(6)
   final List<Ayah> ayahs;
+
+  @HiveField(7)
   final Edition edition;
 
   SurahModelData({

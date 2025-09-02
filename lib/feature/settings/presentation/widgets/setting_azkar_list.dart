@@ -1,7 +1,6 @@
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/theme/colors.dart';
-import 'package:al_huda/core/utils/constants.dart';
-import 'package:al_huda/feature/prayer_time/presentation/screens/setting_azkar_item.dart';
+import 'package:al_huda/feature/prayer_time/presentation/widgets/setting_azkar_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +25,7 @@ class SettingAzkarList extends StatelessWidget {
         itemCount: azkar.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
+            padding: EdgeInsets.symmetric(vertical: 16.h),
             child: SettingAzkarItem(
               title: azkar[index].tr(),
               index: index,

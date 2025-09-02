@@ -22,7 +22,7 @@ class SettingPrayerList extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.h),
+          padding: EdgeInsets.symmetric(vertical: 16.h),
           child: SettingPrayerItem(
             index: index,
             title: Constants.prayer[index].name.tr(),
