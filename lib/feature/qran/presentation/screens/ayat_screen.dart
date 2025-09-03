@@ -37,11 +37,16 @@ class _AyatScreenState extends State<AyatScreen> {
   StreamSubscription<PlayerState>? _playerStateSubscription;
   bool _isPlaying = false;
   int _currentAyahIndex = 0;
+  final ScrollController _scrollController = ScrollController();
+  late List<GlobalKey> _ayahKeys;
 
   @override
   void initState() {
     updateAyat(widget.surahData.number!);
     _setupAudioPlayerListeners();
+    final cubit = context.read<AyatCubit>();
+    _ayahKeys = List.generate(cubit.ayatList.length, (_) => GlobalKey());
+
     super.initState();
   }
 
@@ -56,9 +61,12 @@ class _AyatScreenState extends State<AyatScreen> {
   }
 
   String? readerName;
-
+  int? number;
   updateAyat(int surahNumber) async {
     readerName = await SharedPrefServices.getValue(Constants.reader);
+    number = Constants.quranReader
+        .firstWhere((element) => element.url == readerName)
+        .number;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AyatCubit>().getAyat(
         surahNumber,
@@ -67,20 +75,29 @@ class _AyatScreenState extends State<AyatScreen> {
     });
   }
 
+  void _scrollPage() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.offset + 20,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   Future<void> playAyahAudio(int ayahNumber) async {
     try {
       final cubit = context.read<AyatCubit>();
 
-      // الآية هنا لازم تكون global ID مش numberInSurah
       final ayah = cubit.ayatList.firstWhere(
         (a) => a.numberInSurah == ayahNumber,
       );
 
-      final globalAyahNumber = ayah.number; // ده اللي السيرفر بيشتغل بيه
+      final globalAyahNumber = ayah.number;
 
       //  download link
       final url =
-          "https://cdn.islamic.network/quran/audio/128/${readerName ?? AppURL.readerName}/$globalAyahNumber.mp3";
+          "https://cdn.islamic.network/quran/audio/$number/${readerName ?? AppURL.readerName}/$globalAyahNumber.mp3";
 
       //  store path
       final dir = await getApplicationDocumentsDirectory();
@@ -145,7 +162,7 @@ class _AyatScreenState extends State<AyatScreen> {
       setState(() {
         _currentAyahIndex++; // زيادة الفهرس مرة واحدة فقط
       });
-
+      _scrollPage();
       playAyahAudio(nextAyah.numberInSurah);
     } else {
       setState(() {
@@ -174,6 +191,7 @@ class _AyatScreenState extends State<AyatScreen> {
   void dispose() {
     _playerStateSubscription?.cancel();
     _audioPlayer.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -205,6 +223,7 @@ class _AyatScreenState extends State<AyatScreen> {
             }
 
             return SingleChildScrollView(
+              controller: _scrollController,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
@@ -225,6 +244,8 @@ class _AyatScreenState extends State<AyatScreen> {
                               final ayah = cubit.ayatList[index];
                               final isPlaying =
                                   _currentlyPlayingAyah == ayah.numberInSurah;
+
+                              // افترض عندك _ayahKeys = List.generate(cubit.ayatList.length, (_) => GlobalKey());
 
                               return TextSpan(
                                 children: [
@@ -292,11 +313,27 @@ class _AyatScreenState extends State<AyatScreen> {
           },
         ),
       ),
-      bottomNavigationBar: AyatButtomNavBar(
-        playPreviousAyah: _playPreviousAyah,
-        playPauseAyah: _playPauseAyah,
-        playNextAyah: _playNextAyah,
-        isPlaying: _isPlaying,
+
+      bottomNavigationBar: AnimatedSwitcher(
+        switchInCurve: Curves.easeInOut,
+        switchOutCurve: Curves.easeInOut,
+
+        duration: const Duration(milliseconds: 1000),
+        transitionBuilder: (child, animation) {
+          return SizeTransition(
+            sizeFactor: animation,
+            axis: Axis.vertical,
+            child: child,
+          );
+        },
+        child: _isPlaying
+            ? AyatButtomNavBar(
+                playPreviousAyah: _playPreviousAyah,
+                playPauseAyah: _playPauseAyah,
+                playNextAyah: _playNextAyah,
+                isPlaying: _isPlaying,
+              )
+            : const SizedBox(),
       ),
     );
   }

@@ -48,6 +48,8 @@ class _PrayerTimeItemState extends State<PrayerTimeItem> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<PrayerCubit>();
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       margin: EdgeInsets.symmetric(horizontal: 8.h),
@@ -82,28 +84,26 @@ class _PrayerTimeItemState extends State<PrayerTimeItem> {
                 value = !value;
               });
 
-              // حفظ الحالة
               await PrayerServices.saveSwitchState(
                 widget.index,
                 value,
                 Constants.keyPrefixNotification,
               );
 
-              // ignore: use_build_context_synchronously
-              final cubit = context.read<PrayerCubit>();
-              final prayerTime = cubit.prayerTimes[widget.index];
+              if (mounted) {
+                // ignore: use_build_context_synchronously
+                final prayerTime = cubit.prayerTimes[widget.index];
 
-              // إلغاء أي إشعار قديم
-              await NotificationService.cancelNotification(widget.index);
+                await NotificationService.cancelNotification(widget.index);
 
-              // إعادة جدولة جديدة بالحالة الصحيحة
-              await NotificationService.scheduleNotification(
-                widget.index,
-                'حان الآن موعد ${prayerTime.key.tr()}',
-                'وقت الصلاة: ${prayerTime.key.tr()}',
-                prayerTime.value,
-                playSound: value, // mute أو بصوت
-              );
+                await NotificationService.scheduleNotification(
+                  widget.index,
+                  'حان الآن موعد ${prayerTime.key.tr()}',
+                  'وقت الصلاة: ${prayerTime.key.tr()}',
+                  prayerTime.value,
+                  playSound: value,
+                );
+              }
             },
             child: SvgIcon(
               assetName: value == true ? AppIcons.on : AppIcons.mute,

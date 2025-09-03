@@ -13,19 +13,44 @@ class Constants {
     PrayerModel(icon: AppIcons.moon, name: 'isha'),
   ];
   static List<QuranReaderModel> quranReader = [
-    QuranReaderModel(name: 'مشاري راشد العفاسي', url: 'ar.alafasy'),
-    QuranReaderModel(name: 'محمود خليل الحصري', url: 'ar.husary'),
-    QuranReaderModel(name: 'محمد صديق المنشاوي', url: 'ar.minshawi'),
-    QuranReaderModel(name: 'أبو بكر الشاطري', url: 'ar.shaatree'),
-    QuranReaderModel(name: 'عبد الله بصفر', url: 'ar.abdullahbasfar'),
-    QuranReaderModel(name: 'عبد الرحمن السديس', url: 'ar.abdurrahmaansudais'),
+    QuranReaderModel(
+      name: 'مشاري راشد العفاسي',
+      url: 'ar.alafasy',
+      number: 128,
+    ),
+    QuranReaderModel(name: 'محمود خليل الحصري', url: 'ar.husary', number: 128),
+    QuranReaderModel(
+      name: 'محمد صديق المنشاوي',
+      url: 'ar.minshawi',
+      number: 128,
+    ),
+    QuranReaderModel(name: 'أبو بكر الشاطري', url: 'ar.shaatree', number: 128),
+    QuranReaderModel(
+      name: 'عبد الله بصفر',
+      url: 'ar.abdullahbasfar',
+      number: 192,
+    ),
+    QuranReaderModel(
+      name: 'عبد الرحمن السديس',
+      url: 'ar.abdurrahmaansudais',
+      number: 192,
+    ),
     QuranReaderModel(
       name: 'عبد الباسط عبد الصمد (مرتل)',
       url: 'ar.abdulbasitmurattal',
+      number: 192,
     ),
-    QuranReaderModel(name: 'علي الحذيفي', url: 'ar.hudhaify'),
-    QuranReaderModel(name: 'ماهر المعيقلي', url: 'ar.mahermuaiqly'),
-    QuranReaderModel(name: 'محمد جبريل', url: 'ar.muhammadjibreel'),
+    QuranReaderModel(name: 'علي الحذيفي', url: 'ar.hudhaify', number: 128),
+    QuranReaderModel(
+      name: 'ماهر المعيقلي',
+      url: 'ar.mahermuaiqly',
+      number: 128,
+    ),
+    QuranReaderModel(
+      name: 'محمد جبريل',
+      url: 'ar.muhammadjibreel',
+      number: 128,
+    ),
   ];
   static String reader = 'reader';
   static String lat = 'lat';
