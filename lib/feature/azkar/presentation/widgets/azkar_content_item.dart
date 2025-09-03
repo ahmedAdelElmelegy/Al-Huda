@@ -10,7 +10,13 @@ import 'package:flutter_svg/svg.dart';
 class AzkarContentItem extends StatelessWidget {
   final int count;
   final String text;
-  const AzkarContentItem({super.key, required this.count, required this.text});
+  final bool? isAsmaa;
+  const AzkarContentItem({
+    super.key,
+    required this.count,
+    required this.text,
+    this.isAsmaa = false,
+  });
 
   @override
   Widget build(BuildContext context) {

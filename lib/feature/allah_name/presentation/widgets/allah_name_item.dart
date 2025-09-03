@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AllahNameItem extends StatelessWidget {
   final int index;
   final String name;
+
   const AllahNameItem({super.key, required this.index, required this.name});
 
   @override
@@ -31,7 +32,6 @@ class AllahNameItem extends StatelessWidget {
         children: [
           AzkarContentItem(count: index, text: name),
           verticalSpace(24),
-          AzkarActionBtn(count: 1, title: name),
         ],
       ),
     );
