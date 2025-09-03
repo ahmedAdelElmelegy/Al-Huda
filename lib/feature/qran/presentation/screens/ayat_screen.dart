@@ -38,14 +38,11 @@ class _AyatScreenState extends State<AyatScreen> {
   bool _isPlaying = false;
   int _currentAyahIndex = 0;
   final ScrollController _scrollController = ScrollController();
-  late List<GlobalKey> _ayahKeys;
 
   @override
   void initState() {
     updateAyat(widget.surahData.number!);
     _setupAudioPlayerListeners();
-    final cubit = context.read<AyatCubit>();
-    _ayahKeys = List.generate(cubit.ayatList.length, (_) => GlobalKey());
 
     super.initState();
   }
@@ -64,9 +61,13 @@ class _AyatScreenState extends State<AyatScreen> {
   int? number;
   updateAyat(int surahNumber) async {
     readerName = await SharedPrefServices.getValue(Constants.reader);
-    number = Constants.quranReader
-        .firstWhere((element) => element.url == readerName)
-        .number;
+    final reader = Constants.quranReader.firstWhere(
+      (element) => element.url == readerName,
+      orElse: () => Constants.quranReader.first,
+    );
+    setState(() {
+      number = reader.number;
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AyatCubit>().getAyat(
         surahNumber,

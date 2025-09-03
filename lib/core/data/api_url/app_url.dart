@@ -9,6 +9,7 @@ class AppURL {
   static const String surah = "surah";
 
   static const String readerName = "ar.alafasy";
+  static int readerNumber = 128;
   static const String radio = "https://data-rosy.vercel.app/radio.json";
   static const String allahNames = "assets/data/6_allah_names.json";
 
