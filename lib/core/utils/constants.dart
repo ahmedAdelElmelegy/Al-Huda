@@ -85,4 +85,5 @@ class Constants {
     "doaa_from_sonaa_nabweya",
     "alroqia_sharia",
   ];
+  static String qranFontSize = 'qranFontSize';
 }

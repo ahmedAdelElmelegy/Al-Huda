@@ -34,11 +34,14 @@ class _CalenderPickerTableState extends State<CalenderPickerTable> {
             color: ColorManager.primary.withValues(alpha: 0.5),
             shape: BoxShape.circle,
           ),
+
           todayTextStyle: TextStyle(color: Colors.white),
         ),
         focusedDay: daySelected ?? DateTime.now(),
         firstDay: DateTime(2020),
         lastDay: DateTime(2030),
+        locale: 'ar',
+
         calendarFormat: CalendarFormat.month,
         startingDayOfWeek: StartingDayOfWeek.saturday,
         onDaySelected: (selectedDay, focusedDay) {

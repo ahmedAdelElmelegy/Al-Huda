@@ -16,3 +16,5 @@ final class AyatError extends AyatState {
   final ServerFailure failure;
   AyatError({required this.failure});
 }
+
+// audio setting

@@ -26,6 +26,7 @@ class HomeDateAndLocation extends StatefulWidget {
 
 class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
   String? _cityName;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
           if (mounted) {
             setState(() {
               _cityName = cityName;
+              _isLoading = false;
             });
           }
         }
@@ -97,15 +99,20 @@ class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
               children: [
                 Text('place'.tr(), style: TextSTyle.f12CairoRegGrey),
                 verticalSpace(4),
-                Text(
-                  _cityName ?? "...", // ✅ التعديل هنا
-                  style: widget.isPrayerTime
-                      ? TextSTyle.f16CairoMediumBlack.copyWith(
-                          color: ColorManager.primaryText,
-                        )
-                      : TextSTyle.f16SSTArabicRegBlack,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    _isLoading ? "..." : _cityName ?? 'location'.tr(),
+                    style: widget.isPrayerTime
+                        ? TextSTyle.f16CairoMediumBlack.copyWith(
+                            color: ColorManager.primaryText,
+                          )
+                        : TextSTyle.f14SSTArabicMediumPrimary.copyWith(
+                            color: ColorManager.primaryText2,
+                          ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ],
             ),

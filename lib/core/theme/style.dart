@@ -230,4 +230,10 @@ abstract class TextSTyle {
     fontSize: 14.sp,
     fontFamily: sSTArabicMedium,
   );
+  // 12
+  static TextStyle f12SSTArabicRegBlack = TextStyle(
+    color: ColorManager.black,
+    fontSize: 12.sp,
+    fontFamily: sSTArabicRoman,
+  );
 }

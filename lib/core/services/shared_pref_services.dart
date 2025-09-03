@@ -13,6 +13,18 @@ class SharedPrefServices {
     return sharedPreferences.getString(key);
   }
 
+  static Future<void> setDoubleValue(double value, String key) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setDouble(key, value);
+  }
+
+  static Future<double?> getDoubleValue(String key) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    return sharedPreferences.getDouble(key);
+  }
+
   static Future<void> setBool(bool value, String key) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();

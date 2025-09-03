@@ -38,12 +38,16 @@ class _AyatScreenState extends State<AyatScreen> {
   bool _isPlaying = false;
   int _currentAyahIndex = 0;
   final ScrollController _scrollController = ScrollController();
-
+  double _fontSize = 16;
   @override
   void initState() {
     updateAyat(widget.surahData.number!);
     _setupAudioPlayerListeners();
-
+    SharedPrefServices.getDoubleValue(Constants.qranFontSize).then((value) {
+      setState(() {
+        _fontSize = value ?? 16;
+      });
+    });
     super.initState();
   }
 
@@ -246,8 +250,6 @@ class _AyatScreenState extends State<AyatScreen> {
                               final isPlaying =
                                   _currentlyPlayingAyah == ayah.numberInSurah;
 
-                              // افترض عندك _ayahKeys = List.generate(cubit.ayatList.length, (_) => GlobalKey());
-
                               return TextSpan(
                                 children: [
                                   TextSpan(
@@ -255,7 +257,7 @@ class _AyatScreenState extends State<AyatScreen> {
                                     style: TextSTyle.f16UthmanicHafs1Primary
                                         .copyWith(
                                           height: 2.2,
-                                          fontSize: 20.sp,
+                                          fontSize: _fontSize.sp,
                                           color: isPlaying
                                               ? ColorManager.primary
                                               : ColorManager.primaryText2,
@@ -280,7 +282,7 @@ class _AyatScreenState extends State<AyatScreen> {
                                         " ${ayah.numberInSurah.toString().replaceAllMapped(RegExp(r'\d'), (match) => '٠١٢٣٤٥٦٧٨٩'[int.parse(match[0]!)])} ",
                                     style: TextSTyle.f16UthmanicHafs1Primary
                                         .copyWith(
-                                          fontSize: 16.sp,
+                                          fontSize: _fontSize.sp,
                                           color: isPlaying
                                               ? ColorManager.primary
                                               : ColorManager.primaryText2,

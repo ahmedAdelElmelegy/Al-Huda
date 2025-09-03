@@ -1,12 +1,12 @@
 import 'package:al_huda/core/data/api_url/app_url.dart';
-import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/custom_appbar_with_arrow.dart';
-import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/qran/data/model/qran_reader_model.dart';
+import 'package:al_huda/feature/settings/presentation/widgets/qran_change_font_size_setting.dart';
+import 'package:al_huda/feature/settings/presentation/widgets/qran_name_drop_down.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,34 +49,23 @@ class _QranSettingScreenState extends State<QranSettingScreen> {
         // icon: AppIcons.qranA,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            children: [
-              verticalSpace(16),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: ColorManager.primary),
-                ),
-                child: DropdownButtonFormField(
-                  borderRadius: BorderRadius.circular(12.r),
-                  decoration: InputDecoration(border: InputBorder.none),
-                  hint: Row(
-                    children: [
-                      horizontalSpace(4),
-                      SvgIcon(assetName: AppIcons.qranA),
-                      horizontalSpace(4),
-                      Text('select_reader'.tr()),
-                    ],
-                  ),
-                  value: selectedReader,
-
-                  items: Constants.quranReader
-                      .map(
-                        (e) => DropdownMenuItem(value: e, child: Text(e.name)),
-                      )
-                      .toList(),
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            decoration: BoxDecoration(
+              color: ColorManager.white,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: ColorManager.gray.withValues(alpha: 0.2),
+              ),
+            ),
+            child: Column(
+              children: [
+                QranChangFontSizeSetting(),
+                verticalSpace(16),
+                ReaderNameDropDown(
+                  selectedReader: selectedReader,
                   onChanged: (value) {
                     setState(() {
                       selectedReader = value;
@@ -84,8 +73,8 @@ class _QranSettingScreenState extends State<QranSettingScreen> {
                     });
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
