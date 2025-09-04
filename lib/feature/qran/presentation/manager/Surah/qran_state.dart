@@ -16,3 +16,5 @@ final class QranError extends QranState {
   final Failure failure;
   QranError({required this.failure});
 }
+
+final class QranSearch extends QranState {}

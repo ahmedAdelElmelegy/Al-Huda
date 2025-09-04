@@ -49,4 +49,31 @@ class QranCubit extends Cubit<QranState> {
 
     return response;
   }
+
+  List<SurahData> searchList = [];
+  // search for soura
+  String removeDiacritics(String text) {
+    final arabicDiacritics = RegExp(r'[\u064B-\u0652]');
+    return text.replaceAll(arabicDiacritics, '');
+  }
+
+  void searchSurah(String query) {
+    emit(QranLoading());
+
+    final cleanQuery = removeDiacritics(query);
+
+    final filteredSurahList = surahList.where((surah) {
+      final cleanName = removeDiacritics(
+        surah.name!.replaceFirst('سورة', '').trim(),
+      );
+
+      return cleanName.contains(cleanQuery);
+    }).toList();
+
+    searchList
+      ..clear()
+      ..addAll(filteredSurahList);
+
+    emit(QranSearch());
+  }
 }

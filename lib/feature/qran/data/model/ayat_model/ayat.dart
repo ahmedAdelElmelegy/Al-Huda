@@ -66,6 +66,33 @@ class Ayah {
       sajda: sajdaValue,
     );
   }
+  Ayah copyWith({
+    int? number,
+    String? audio,
+    List<String>? audioSecondary,
+    String? text,
+    int? numberInSurah,
+    int? juz,
+    int? manzil,
+    int? page,
+    int? ruku,
+    int? hizbQuarter,
+    bool? sajda,
+  }) {
+    return Ayah(
+      number: number ?? this.number,
+      audio: audio ?? this.audio,
+      audioSecondary: audioSecondary ?? this.audioSecondary,
+      text: text ?? this.text,
+      numberInSurah: numberInSurah ?? this.numberInSurah,
+      juz: juz ?? this.juz,
+      manzil: manzil ?? this.manzil,
+      page: page ?? this.page,
+      ruku: ruku ?? this.ruku,
+      hizbQuarter: hizbQuarter ?? this.hizbQuarter,
+      sajda: sajda ?? this.sajda,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

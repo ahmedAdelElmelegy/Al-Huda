@@ -28,6 +28,7 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
             android:allowBackup="false"
+            android:fullBackupContent="false"
 
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"

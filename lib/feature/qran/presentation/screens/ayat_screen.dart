@@ -16,6 +16,7 @@ import 'package:al_huda/feature/qran/presentation/manager/ayat/ayat_cubit.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/ayat_app_bar.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/ayat_buttom_nav_bar.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/ayat_soura_name_frame.dart';
+import 'package:al_huda/feature/qran/presentation/widgets/remove_basmalla.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
@@ -228,13 +229,15 @@ class _AyatScreenState extends State<AyatScreen> {
                 List<Ayah> ayatList = List.from(cubit.ayatList);
                 String? basmala;
                 if (ayatList.isNotEmpty &&
-                    ayatList.first.text.contains(
+                    ayatList.first.text.trim().startsWith(
                       'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
-                    ) &&
-                    widget.surahList[index].number != 1) {
-                  basmala = ayatList.first.text;
-                  ayatList.removeAt(0);
+                    )) {
+                  ayatList[0] = ayatList.first.copyWith(
+                    text: ayatList.first.text.removeBasmala(),
+                  );
+                  basmala = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
                 }
+
                 if (state is AyatLoading) {
                   return const LoadingListView();
                 }
