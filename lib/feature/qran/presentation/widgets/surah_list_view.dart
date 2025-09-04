@@ -42,7 +42,13 @@ class SurahListView extends StatelessWidget {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                push(AyatScreen(surahData: cubit.surahList[index]));
+                push(
+                  AyatScreen(
+                    index: index,
+                    surahData: cubit.surahList[index],
+                    surahList: cubit.surahList,
+                  ),
+                );
               },
               child: SurahItem(surahData: cubit.surahList[index]),
             );
