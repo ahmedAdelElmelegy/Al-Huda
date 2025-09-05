@@ -209,6 +209,7 @@ class PrayerServices {
           i,
           Constants.keyPrefixNotification,
         ),
+        chanelId: 'prayer_channel $i',
         sound: 'athan',
         payload: 'prayer',
       );

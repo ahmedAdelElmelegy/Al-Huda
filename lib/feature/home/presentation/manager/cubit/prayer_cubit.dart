@@ -41,16 +41,19 @@ class PrayerCubit extends Cubit<PrayerState> {
           i,
           Constants.keyPrefix,
         );
+        bool isMute = await PrayerServices.getSwitchState(
+          i,
+          Constants.keyPrefixNotification,
+        );
+        debugPrint(isMute.toString());
         if (isSwitchedOn) {
           NotificationService.scheduleNotification(
             i,
             'صلاة ${prayerTimes[i].key.tr()}',
             'حان وقت الصلاة ${prayerTimes[i].key.tr()}',
             scheduledTime,
-            playSound: await PrayerServices.getSwitchState(
-              i,
-              Constants.keyPrefixNotification,
-            ),
+            playSound: isMute,
+            prayer: true,
             sound: 'athan',
             payload: 'prayer',
           );

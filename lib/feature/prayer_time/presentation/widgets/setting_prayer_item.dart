@@ -86,9 +86,11 @@ class _SettingPrayerItemState extends State<SettingPrayerItem> {
               );
               NotificationService.scheduleNotification(
                 widget.index,
+
                 'حان الآن موعد ${prayerTime.key.tr()}',
                 'وقت الصلاة: ${prayerTime.key.tr()}',
                 scheduledTime,
+                prayer: true,
                 payload: 'prayer',
               );
             }

@@ -101,6 +101,7 @@ class _PrayerTimeItemState extends State<PrayerTimeItem> {
                   'حان الآن موعد ${prayerTime.key.tr()}',
                   'وقت الصلاة: ${prayerTime.key.tr()}',
                   prayerTime.value,
+                  prayer: true,
                   playSound: value,
                 );
               }

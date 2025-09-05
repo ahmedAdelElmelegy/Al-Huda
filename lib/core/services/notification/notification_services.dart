@@ -69,14 +69,24 @@ class NotificationService {
     String chanelId = 'prayer_channel',
     String chanelName = 'مواعيد الصلاة',
     String payload = 'prayer',
+    bool prayer = false,
   }) async {
     if (scheduleTime.isBefore(DateTime.now())) {
       return;
     }
 
     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      chanelId, // Channel ID
-      chanelName, // Channel Name
+      prayer
+          ? playSound
+                ? 'prayer_sound_channel'
+                : 'prayer_mute_channel'
+          : chanelId,
+      prayer
+          ? playSound
+                ? 'Prayer Notifications (Sound)'
+                : 'Prayer Notifications (Mute)'
+          : chanelName,
+
       importance: Importance.max,
       priority: Priority.high,
       playSound: playSound,
