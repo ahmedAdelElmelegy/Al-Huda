@@ -45,5 +45,32 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+    <!-- السماح بعمل Background fetch + remote notifications -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+
+    <!-- إذن الإشعارات -->
+    <key>UIUserNotificationAlertStyle</key>
+    <string>alert</string>
+
+    <!-- Tracking (لو عايز تطلبه ل analytics أو notifications) -->
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This will be used to send you notifications and keep you updated.</string>
+
+    <!-- إذن استخدام الموقع -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app uses your location to calculate accurate prayer times.</string>
+
+    <!-- إذن استخدام الميكروفون (لو بتشغل الأذان أو تسجل صوت) -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app needs microphone access to play and manage prayer sounds.</string>
+
+    <!-- إذن استخدام الإشعارات المحلية -->
+    <key>NSUserNotificationUsageDescription</key>
+    <string>This app uses notifications to alert you about prayer times.</string>
 </dict>
 </plist>
