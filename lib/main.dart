@@ -16,12 +16,12 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:workmanager/workmanager.dart';
 import 'core/services/notification/notification_services.dart';
 
 GetIt getIt = GetIt.instance;
 GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
-
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
@@ -43,7 +43,7 @@ void main() async {
   await Workmanager().registerPeriodicTask(
     "dailyPrayerTask",
     "refreshPrayerTimes",
-    frequency: const Duration(hours: 24),
+    frequency: const Duration(hours: 1), // كل ساعة
     initialDelay: PrayerServices.getDelayUnitMidnight(),
   );
   await NotificationService.init();
@@ -68,7 +68,9 @@ void main() async {
   await TasbehServices().initTasbeh();
   await Hive.openBox('completedPrayersBox');
   await Hive.openBox('doaaDaily');
+  tz.initializeTimeZones();
 
+  // Start AlarmManager service
   init();
 
   runApp(
@@ -80,4 +82,6 @@ void main() async {
       child: MyApp(),
     ),
   );
+
+  /// Task function to run daily
 }
