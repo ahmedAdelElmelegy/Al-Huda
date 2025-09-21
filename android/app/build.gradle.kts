@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.al_huda"
     ndkVersion = "27.0.12077973"
-    compileSdk =35
+    compileSdk =36
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
