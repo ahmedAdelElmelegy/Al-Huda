@@ -27,7 +27,7 @@ class AzkarContentItem extends StatelessWidget {
           topRight: Radius.circular(20.r),
         ),
 
-        color: ColorManager.primaryBg,
+        color: ColorManager.primary.withValues(alpha: .1),
       ),
       child: Column(
         children: [

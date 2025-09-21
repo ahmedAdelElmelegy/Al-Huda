@@ -12,6 +12,8 @@ class HomePrayerTimeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return BlocBuilder<PrayerCubit, PrayerState>(
       builder: (context, state) {
         final cubit = context.read<PrayerCubit>();
@@ -26,23 +28,42 @@ class HomePrayerTimeListView extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.r),
           ),
           // height: 106.h,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                cubit.prayerTimes.length,
-                (index) => HomePrayerTimeItem(
-                  time: DateFormat(
-                    'hh:mm',
-                  ).format(cubit.prayerTimes[index].value),
-                  isSelected:
-                      cubit.getCurrentPrayer() == cubit.prayerTimes[index].key,
-                  prayerTime: Constants.prayer[index],
+          child: isLandscape
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                    cubit.prayerTimes.length,
+                    (index) => Expanded(
+                      child: HomePrayerTimeItem(
+                        time: DateFormat(
+                          'hh:mm',
+                        ).format(cubit.prayerTimes[index].value),
+                        isSelected:
+                            cubit.getCurrentPrayer() ==
+                            cubit.prayerTimes[index].key,
+                        prayerTime: Constants.prayer[index],
+                      ),
+                    ),
+                  ),
+                )
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      cubit.prayerTimes.length,
+                      (index) => HomePrayerTimeItem(
+                        time: DateFormat(
+                          'hh:mm',
+                        ).format(cubit.prayerTimes[index].value),
+                        isSelected:
+                            cubit.getCurrentPrayer() ==
+                            cubit.prayerTimes[index].key,
+                        prayerTime: Constants.prayer[index],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
         );
       },
     );

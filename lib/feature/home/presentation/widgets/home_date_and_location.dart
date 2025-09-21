@@ -73,27 +73,36 @@ class _HomeDateAndLocationState extends State<HomeDateAndLocation> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // التاريخ
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                PrayerServices.getFormattedGregorianDate(date),
-                style: TextSTyle.f12CairoRegGrey,
-              ),
-              verticalSpace(4),
-              Text(
-                PrayerServices.getFormattedHijriDate(date),
-                style: widget.isPrayerTime
-                    ? TextSTyle.f16CairoMediumBlack.copyWith(
-                        color: ColorManager.primaryText,
-                      )
-                    : TextSTyle.f16SSTArabicRegBlack,
-              ),
-            ],
+          SizedBox(
+            width: 150.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    PrayerServices.getFormattedGregorianDate(date, context),
+                    style: TextSTyle.f12CairoRegGrey,
+                  ),
+                ),
+                verticalSpace(4),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    PrayerServices.getFormattedHijriDate(date, context),
+                    style: widget.isPrayerTime
+                        ? TextSTyle.f16CairoMediumBlack.copyWith(
+                            color: ColorManager.primaryText,
+                          )
+                        : TextSTyle.f16SSTArabicRegBlack,
+                  ),
+                ),
+              ],
+            ),
           ),
           // المكان
           SizedBox(
-            width: 100.w,
+            width: 120.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

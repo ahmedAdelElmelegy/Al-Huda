@@ -173,7 +173,12 @@ abstract class TextSTyle {
   static TextStyle f20AmiriBoldWhite = TextStyle(
     color: ColorManager.white,
     fontSize: 20.sp,
-    fontFamily: bold,
+    fontFamily: amiriBold,
+  );
+  static TextStyle f30AmiriBoldWhite = TextStyle(
+    color: ColorManager.white,
+    fontSize: 30.sp,
+    fontFamily: amiriBold,
   );
   // for uthmanic
   static TextStyle f16UthmanicHafs1Primary = TextStyle(
@@ -224,6 +229,11 @@ abstract class TextSTyle {
     fontSize: 24.sp,
     fontFamily: sSTArabicMedium,
   );
+  static TextStyle f30SSTArabicMediumPrimary = TextStyle(
+    color: ColorManager.primaryText2,
+    fontSize: 30.sp,
+    fontFamily: sSTArabicMedium,
+  );
   // 14
   static TextStyle f14SSTArabicMediumPrimary = TextStyle(
     color: ColorManager.primary,
@@ -235,5 +245,10 @@ abstract class TextSTyle {
     color: ColorManager.black,
     fontSize: 12.sp,
     fontFamily: sSTArabicRoman,
+  );
+  static TextStyle f12SSTArabicMediumBlack = TextStyle(
+    color: ColorManager.black,
+    fontSize: 12.sp,
+    fontFamily: sSTArabicMedium,
   );
 }

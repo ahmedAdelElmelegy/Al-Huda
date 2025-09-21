@@ -1,6 +1,5 @@
 import 'package:al_huda/core/services/notification/notification_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
-import 'package:al_huda/core/utils/constants.dart';
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -32,33 +31,33 @@ class PrayerCubit extends Cubit<PrayerState> {
 
       emit(PrayerSucess());
 
-      for (int i = 0; i < prayerTimes.length; i++) {
-        final scheduledTime = tz.TZDateTime.from(
-          prayerTimes[i].value,
-          tz.local,
-        );
-        bool isSwitchedOn = await PrayerServices.getSwitchState(
-          i,
-          Constants.keyPrefix,
-        );
-        bool isMute = await PrayerServices.getSwitchState(
-          i,
-          Constants.keyPrefixNotification,
-        );
-        debugPrint(isMute.toString());
-        if (isSwitchedOn) {
-          NotificationService.scheduleNotification(
-            i,
-            'صلاة ${prayerTimes[i].key.tr()}',
-            'حان وقت الصلاة ${prayerTimes[i].key.tr()}',
-            scheduledTime,
-            playSound: isMute,
-            prayer: true,
-            sound: 'athan',
-            payload: 'prayer',
-          );
-        }
-      }
+      // for (int i = 0; i < prayerTimes.length; i++) {
+      // final scheduledTime = tz.TZDateTime.from(
+      //   prayerTimes[i].value,
+      //   tz.local,
+      // );
+      // bool isSwitchedOn = await PrayerServices.getSwitchState(
+      //   i,
+      //   Constants.keyPrefix,
+      // );
+      // bool isMute = await PrayerServices.getSwitchState(
+      //   i,
+      //   Constants.keyPrefixNotification,
+      // );
+      // debugPrint(isMute.toString());
+      // if (isSwitchedOn) {
+      //   NotificationService.scheduleNotification(
+      //     i,
+      //     'صلاة ${prayerTimes[i].key.tr()}',
+      //     'حان وقت الصلاة ${prayerTimes[i].key.tr()}',
+      //     scheduledTime,
+      //     playSound: isMute,
+      //     prayer: true,
+      //     sound: 'athan',
+      //     payload: 'prayer',
+      //   );
+      // }
+      // }
     } catch (e) {
       emit(PrayerFailure());
     }

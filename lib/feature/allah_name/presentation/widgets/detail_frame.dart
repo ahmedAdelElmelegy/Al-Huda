@@ -27,9 +27,14 @@ class DetailFrame extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(12.r),
-            image: DecorationImage(
-              image: AssetImage(AppImages.ribbon1),
-              fit: BoxFit.cover,
+            color: ColorManager.primary,
+            gradient: LinearGradient(
+              colors: [
+                ColorManager.primary,
+                ColorManager.primary.withValues(alpha: .5),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
           child: Center(

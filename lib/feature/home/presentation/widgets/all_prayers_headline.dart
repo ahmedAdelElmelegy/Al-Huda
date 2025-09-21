@@ -11,15 +11,11 @@ class AllPrayersHeadline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Container(
-        alignment: Alignment.center,
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 4.w),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.r),
-          border: Border.all(color: ColorManager.primaryText2),
+      child: Text(
+        'all_features'.tr(),
+        style: TextSTyle.f18CairoBoldWhite.copyWith(
+          color: ColorManager.primary2,
         ),
-        child: Text('azkar'.tr(), style: TextSTyle.f14CairoBoldPrimary),
       ),
     );
   }

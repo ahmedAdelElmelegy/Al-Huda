@@ -2,7 +2,6 @@ import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/home/presentation/screens/home_screen.dart';
-import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_screen.dart';
 import 'package:al_huda/feature/qran/presentation/screens/qran_screen.dart';
 import 'package:al_huda/feature/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    PrayerTimeScreen(),
+    // PrayerTimeScreen(),
     QranScreen(),
     SettingsScreen(),
   ];
@@ -58,24 +57,33 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 buildBottomNavigationBar(
+                  color: _selectedIndex == 0
+                      ? ColorManager.primary
+                      : ColorManager.gray,
                   icon: _selectedIndex == 0
                       ? AppIcons.homActive
                       : AppIcons.home,
                   onTap: () => onItemTapped(0),
                 ),
+                // buildBottomNavigationBar(
+                //   icon: _selectedIndex == 1 ? AppIcons.clockA : AppIcons.clock,
+                //   onTap: () => onItemTapped(1),
+                // ),
                 buildBottomNavigationBar(
-                  icon: _selectedIndex == 1 ? AppIcons.clockA : AppIcons.clock,
+                  color: _selectedIndex == 1
+                      ? ColorManager.primary
+                      : ColorManager.gray,
+                  icon: _selectedIndex == 1 ? AppIcons.qranA : AppIcons.qran,
                   onTap: () => onItemTapped(1),
                 ),
                 buildBottomNavigationBar(
-                  icon: _selectedIndex == 2 ? AppIcons.qranA : AppIcons.qran,
-                  onTap: () => onItemTapped(2),
-                ),
-                buildBottomNavigationBar(
-                  icon: _selectedIndex == 3
+                  color: _selectedIndex == 2
+                      ? ColorManager.primary
+                      : ColorManager.gray,
+                  icon: _selectedIndex == 2
                       ? AppIcons.settingActive
                       : AppIcons.setttings,
-                  onTap: () => onItemTapped(3),
+                  onTap: () => onItemTapped(2),
                 ),
               ],
             ),
@@ -88,11 +96,11 @@ class _MainScreenState extends State<MainScreen> {
 
 Widget buildBottomNavigationBar({
   required String icon,
-
+  required Color color,
   required void Function() onTap,
 }) {
   return GestureDetector(
     onTap: onTap,
-    child: SvgIcon(assetName: icon),
+    child: SvgIcon(assetName: icon, color: color),
   );
 }

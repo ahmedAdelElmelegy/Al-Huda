@@ -36,4 +36,14 @@ class SharedPrefServices {
         await SharedPreferences.getInstance();
     return sharedPreferences.getBool(key);
   }
+
+  static Future<void> setList(String key, List<String> value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(key, value);
+  }
+
+  static Future<List<String>?> getList(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(key);
+  }
 }

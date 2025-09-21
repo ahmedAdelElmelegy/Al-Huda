@@ -35,7 +35,6 @@ class NotificationService {
         }
       },
     );
-    await requestNotificationPermissions();
   }
 
   static Future<void> requestNotificationPermissions() async {
@@ -123,8 +122,8 @@ class NotificationService {
     required String body,
   }) async {
     const androidDetails = AndroidNotificationDetails(
-      'prayer_channel',
-      'Prayer Times',
+      'instance',
+      'instance',
       channelDescription: 'Default notifications',
       importance: Importance.max,
       priority: Priority.high,

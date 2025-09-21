@@ -1,6 +1,9 @@
 import 'package:al_huda/core/data/api_url/app_url.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/extentions.dart';
+import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/theme/colors.dart';
+import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/custom_bg_app_bar.dart';
 
@@ -17,18 +20,49 @@ class DoaaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              collapsedHeight: 150.h,
-              flexibleSpace: CustomBgAppBar(
-                bgImage: AppImages.doaaBg,
-                logoImage: AppImages.doaaLogo,
-              ),
-              automaticallyImplyLeading: false,
-            ),
+            isLandscape
+                ? SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              pop();
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: ColorManager.primaryText2,
+                              size: 24.sp,
+                            ),
+                          ),
+                          horizontalSpace(8),
+                          Text(
+                            'doaa'.tr(),
+                            style: TextSTyle.f18SSTArabicMediumPrimary.copyWith(
+                              color: ColorManager.primaryText2,
+                              height: 1.6,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SliverAppBar(
+                    collapsedHeight: 150.h,
+                    flexibleSpace: CustomBgAppBar(
+                      title: 'doaa',
+                      bgImage: AppImages.doaaBg,
+                      logoImage: AppImages.doaaLogo,
+                    ),
+                    automaticallyImplyLeading: false,
+                  ),
 
             SliverPadding(
               padding: EdgeInsets.symmetric(vertical: 16.h),

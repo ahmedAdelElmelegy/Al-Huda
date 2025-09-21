@@ -49,6 +49,7 @@ abstract class AppIcons {
   static const String copy = "assets/icons/copy.svg";
   static const String check = "assets/icons/check.svg";
   static const String notification = "assets/icons/notification.svg";
+  static const String calender2 = "assets/icons/calender2.svg";
 }
 
 abstract class AppImages {
@@ -76,4 +77,6 @@ abstract class AppImages {
   static const String doaaLogo = "assets/images/doaa_icon.png";
   static const String bgSetting = "assets/images/bg_setting.webp";
   static const String bg2 = "assets/images/bg.jpg";
+  static const String home = "assets/images/home.png";
+  static const String qranIcon = "assets/images/qran_icon.png";
 }

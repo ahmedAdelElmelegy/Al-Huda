@@ -53,7 +53,7 @@ class CalenderServices {
     final christmas = DateTime(fromDate.year, 12, 25);
     if (christmas.isAfter(fromDate)) {
       events.add({
-        "name": "عيد الميلاد",
+        "name": "eid_al_melad",
         "gregorian": christmas,
         "remaining": christmas.difference(fromDate).inDays,
       });
@@ -62,7 +62,7 @@ class CalenderServices {
     final newYear = DateTime(fromDate.year + 1, 1, 1);
     if (newYear.isAfter(fromDate)) {
       events.add({
-        "name": "رأس السنة",
+        "name": "new_year",
         "gregorian": newYear,
         "remaining": newYear.difference(fromDate).inDays,
       });

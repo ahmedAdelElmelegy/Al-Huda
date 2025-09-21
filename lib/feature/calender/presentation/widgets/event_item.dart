@@ -20,6 +20,8 @@ class EventItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isArabic =
+        EasyLocalization.of(context)!.currentLocale!.languageCode == 'ar';
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
@@ -34,7 +36,7 @@ class EventItem extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              name,
+              name.tr(),
               style: TextSTyle.f14SSTArabicMediumPrimary,
 
               maxLines: 1,
@@ -60,7 +62,9 @@ class EventItem extends StatelessWidget {
                 Flexible(
                   flex: 1,
                   child: Text(
-                    '${tr('remaining')} ${CalenderServices.toArabicNumber(remainingDays)} ${tr('days')}',
+                    isArabic
+                        ? '${tr('remaining')} ${CalenderServices.toArabicNumber(remainingDays)} ${tr('days')}'
+                        : '${tr('remaining')} $remainingDays ${tr('days')}',
                     style: TextSTyle.f12CairoSemiBoldPrimary.copyWith(
                       color: ColorManager.primaryText2,
                     ),

@@ -52,10 +52,14 @@ class _SettingAzkarItemState extends State<SettingAzkarItem> {
           height: 20.h,
         ),
         horizontalSpace(8),
-        Text(
-          widget.title,
-          style: TextSTyle.f14SSTArabicMediumPrimary.copyWith(
-            color: ColorManager.primaryText2,
+        Expanded(
+          child: Text(
+            widget.title,
+            // overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextSTyle.f14SSTArabicMediumPrimary.copyWith(
+              color: ColorManager.primaryText2,
+            ),
           ),
         ),
         horizontalSpace(16),

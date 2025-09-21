@@ -12,7 +12,9 @@ part 'qran_state.dart';
 class QranCubit extends Cubit<QranState> {
   QranCubit(this.qranRepo) : super(QranInitial());
   QranRepo qranRepo;
+
   SurahModel? surahModel;
+
   ServerFailure? serverFailure;
 
   List<SurahData> surahList = [];

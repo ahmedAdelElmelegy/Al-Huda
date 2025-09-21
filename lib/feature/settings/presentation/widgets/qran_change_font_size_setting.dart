@@ -3,6 +3,7 @@ import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class QranChangFontSizeSetting extends StatefulWidget {
@@ -41,7 +42,7 @@ class _QranChangFontSizeSettingState extends State<QranChangFontSizeSetting> {
             Icon(Icons.format_size, color: ColorManager.gray),
             horizontalSpace(4),
             Text(
-              "حجم الخط",
+              "font_size".tr(),
               style: TextSTyle.f12CairoRegGrey.copyWith(
                 color: ColorManager.black,
                 fontFamily: TextSTyle.sSTArabicLight,

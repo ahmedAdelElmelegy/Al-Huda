@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest_10y.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class PrayerServices {
@@ -19,7 +20,7 @@ class PrayerServices {
       return Coordinates(double.parse(latValue), double.parse(lngValue));
     }
 
-    return Coordinates(30.0444, 31.2357);
+    return Coordinates(30.033333, 31.233334);
   }
 
   final params = CalculationMethod.egyptian.getParameters();
@@ -28,7 +29,8 @@ class PrayerServices {
     return PrayerTimes.today(coordinates, params);
   }
 
-  static String getFormattedGregorianDate(DateTime date) {
+  static String getFormattedGregorianDate(DateTime date, BuildContext context) {
+    final locale = EasyLocalization.of(context)!.currentLocale;
     const daysAr = [
       "الأحد",
       "الاثنين",
@@ -37,6 +39,15 @@ class PrayerServices {
       "الخميس",
       "الجمعة",
       "السبت",
+    ];
+    const daysEn = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
     ];
 
     const monthsAr = [
@@ -53,14 +64,33 @@ class PrayerServices {
       "نوفمبر",
       "ديسمبر",
     ];
+    const monthsEn = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
-    String dayName = daysAr[date.weekday % 7]; // weekday: 1=Mon..7=Sun
-    String monthName = monthsAr[date.month - 1];
+    String dayName = locale?.languageCode == 'ar'
+        ? daysAr[date.weekday % 7]
+        : daysEn[date.weekday % 7]; // weekday: 1=Mon..7=Sun
+    String monthName = locale?.languageCode == 'ar'
+        ? monthsAr[date.month - 1]
+        : monthsEn[date.month - 1];
 
     return "${date.day} $dayName $monthName ${date.year}";
   }
 
-  static String getFormattedHijriDate(DateTime date) {
+  static String getFormattedHijriDate(DateTime date, BuildContext context) {
+    final locale = EasyLocalization.of(context)!.currentLocale;
     final hijriDate = HijriCalendar.fromDate(date);
 
     const monthsHijri = [
@@ -77,6 +107,18 @@ class PrayerServices {
       "ذو القعدة",
       "ذو الحجة",
     ];
+    const monthsEn = [
+      "Muharram",
+      "Safar",
+      "Rabi' al-awwal",
+      "Rabi' al-thani",
+      "Jamadah al-awwal",
+      "Jamadah al-thani",
+      "Rajab",
+      "Shawwal",
+      "Dhul Qadah",
+      "Dhul Hijjah",
+    ];
 
     const daysAr = [
       "الأحد",
@@ -87,10 +129,23 @@ class PrayerServices {
       "الجمعة",
       "السبت",
     ];
+    const daysEn = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
 
-    String dayName = daysAr[date.weekday % 7];
+    String dayName = locale?.languageCode == 'ar'
+        ? daysAr[date.weekday % 7]
+        : daysEn[date.weekday % 7];
 
-    String monthName = monthsHijri[hijriDate.hMonth - 1];
+    String monthName = locale?.languageCode == 'ar'
+        ? monthsHijri[hijriDate.hMonth - 1]
+        : monthsEn[hijriDate.hMonth - 1];
 
     return "$dayName $monthName ${hijriDate.hYear}";
   }
@@ -125,12 +180,11 @@ class PrayerServices {
   }
 
   static Duration getDelayUnitMidnight() {
-    final now = DateTime.now();
-    final tomorrow = DateTime(now.year, now.month, now.day + 1, 0, 5);
-    return tomorrow.difference(now);
+    tz.initializeTimeZones();
+    final now = tz.TZDateTime.now(tz.local);
+    final midnight = tz.TZDateTime(tz.local, now.year, now.month, now.day + 1);
+    return midnight.difference(now);
   }
-
-  // for notificaton  setting
 
   static Future<void> saveSwitchState(
     int index,
@@ -174,11 +228,17 @@ class PrayerServices {
     return null;
   }
 
+  @pragma('vm:entry-point')
   static Future<void> workManagerTask() async {
     final prayerServices = PrayerServices();
     final times = await prayerServices.getPrayerTimes();
     await NotificationService.init();
-
+    NotificationService.showInstantNotification(
+      id: 501,
+      title: 'اهلا بكم في تظبيق الهدي',
+      body: 'تم تحديث مواعيد الصلاة',
+    );
+    debugPrint("✅ Workmanager PrayerTimes first time");
     final labels = {
       "fagr": "الفجر",
       "shurooq": "الشروق",
@@ -209,10 +269,19 @@ class PrayerServices {
           i,
           Constants.keyPrefixNotification,
         ),
-        chanelId: 'prayer_channel $i',
+        prayer: true,
         sound: 'athan',
         payload: 'prayer',
       );
+    }
+  }
+
+  static Future<void> runFirstTimeTask() async {
+    final isFirstRun = await SharedPrefServices.getBool("firstRun") ?? true;
+
+    if (isFirstRun) {
+      await workManagerTask(); // تحديث فوري
+      await SharedPrefServices.setBool(false, "firstRun"); // مايتكررش تاني
     }
   }
 }

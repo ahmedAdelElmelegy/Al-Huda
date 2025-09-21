@@ -19,7 +19,7 @@ class AzkarItem extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: ColorManager.primary, width: .5.w),
         borderRadius: BorderRadius.circular(12.r),
-        color: ColorManager.primaryBg,
+        color: ColorManager.primary.withValues(alpha: .1),
       ),
       child: Row(
         children: [

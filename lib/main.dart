@@ -46,9 +46,9 @@ void main() async {
     frequency: const Duration(hours: 24),
     initialDelay: PrayerServices.getDelayUnitMidnight(),
   );
-
   await NotificationService.init();
   await NotificationService.requestNotificationPermissions();
+  await PrayerServices.runFirstTimeTask();
   // azkar
   await AzkarServices().azkarInit();
 
@@ -66,6 +66,8 @@ void main() async {
   await QranServices().openBoxAyah();
 
   await TasbehServices().initTasbeh();
+  await Hive.openBox('completedPrayersBox');
+  await Hive.openBox('doaaDaily');
 
   init();
 

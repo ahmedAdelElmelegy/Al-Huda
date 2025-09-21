@@ -1,8 +1,10 @@
 import 'package:al_huda/core/func/internet_dialog.dart';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/helper/spacing.dart';
+import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
+import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/loading_list_view.dart';
 import 'package:al_huda/feature/qran/data/model/surah_model/surah_data.dart';
 import 'package:al_huda/feature/qran/presentation/manager/Surah/qran_cubit.dart';
@@ -80,6 +82,10 @@ class SurahListView extends StatelessWidget {
                         surahData: surahList[index],
                         surahList: surahList,
                       ),
+                    );
+                    SharedPrefServices.setValue(
+                      '${surahList[index].number}_${surahList[index].name}',
+                      Constants.lastQuranSuraAndAyah,
                     );
                   },
                   child: SurahItem(surahData: surahList[index]),

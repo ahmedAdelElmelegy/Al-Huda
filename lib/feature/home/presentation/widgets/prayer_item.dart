@@ -23,11 +23,13 @@ class PrayerItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgIcon(
-            assetName: icon,
-            width: 35.w,
-            height: 35.h,
-            color: ColorManager.primary,
+          Expanded(
+            child: SvgIcon(
+              assetName: icon,
+              width: 35.w,
+              height: 35.h,
+              color: ColorManager.primary,
+            ),
           ),
           verticalSpace(4),
           FittedBox(

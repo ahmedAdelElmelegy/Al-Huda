@@ -13,11 +13,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PrayersList extends StatelessWidget {
-  const PrayersList({super.key});
+class PrayerGridView extends StatelessWidget {
+  const PrayerGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       width: double.infinity,
@@ -34,7 +36,7 @@ class PrayersList extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
+            crossAxisCount: isLandscape ? 8 : 4,
             childAspectRatio: .83,
             mainAxisSpacing: 8.h,
             crossAxisSpacing: 8.w,

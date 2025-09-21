@@ -28,6 +28,7 @@ class AyatCubit extends Cubit<AyatState> {
           response.response!.statusCode == 200 &&
           response.response!.data != null) {
         quranModel = QuranModel.fromJson(response.response!.data);
+
         if (quranModel!.code == 200) {
           await QranServices().addAyahOfSoura(quranModel!.data);
 

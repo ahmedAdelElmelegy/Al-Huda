@@ -26,14 +26,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AyatScreen extends StatefulWidget {
-  final SurahData surahData;
-  final List<SurahData> surahList;
+  final SurahData? surahData;
+  final bool? isFromHome;
+  final List<SurahData>? surahList;
   final int index;
   const AyatScreen({
     super.key,
-    required this.surahData,
-    required this.surahList,
+    this.surahData,
+    this.surahList,
     required this.index,
+    this.isFromHome = false,
   });
 
   @override
@@ -52,7 +54,9 @@ class _AyatScreenState extends State<AyatScreen> {
 
   @override
   void initState() {
-    updateAyat(widget.surahData.number!);
+    if (!widget.isFromHome!) {
+      updateAyat(widget.surahData?.number ?? widget.index);
+    }
     _setupAudioPlayerListeners();
     SharedPrefServices.getDoubleValue(Constants.qranFontSize).then((value) {
       setState(() {
@@ -76,6 +80,9 @@ class _AyatScreenState extends State<AyatScreen> {
   String? readerName;
   int? number;
   updateAyat(int surahNumber) async {
+    final cubit = context.read<AyatCubit>();
+    cubit.ayatList.clear();
+
     readerName = await SharedPrefServices.getValue(Constants.reader);
     final reader = Constants.quranReader.firstWhere(
       (element) => element.url == readerName,
@@ -218,10 +225,10 @@ class _AyatScreenState extends State<AyatScreen> {
       body: SafeArea(
         child: PageView.builder(
           onPageChanged: (index) {
-            updateAyat(widget.surahList[index].number ?? 0);
+            updateAyat(widget.surahList?[index].number ?? 0);
           },
           controller: pageController,
-          itemCount: widget.surahList.length,
+          itemCount: widget.surahList?.length ?? 0,
           itemBuilder: (context, index) {
             return BlocBuilder<AyatCubit, AyatState>(
               builder: (context, state) {
@@ -250,7 +257,7 @@ class _AyatScreenState extends State<AyatScreen> {
                         context,
                         onPressed: () {
                           cubit.getAyat(
-                            widget.surahData.number!,
+                            widget.surahData?.number ?? widget.index,
                             readerName ?? AppURL.readerName,
                           );
                           pop();
@@ -267,9 +274,15 @@ class _AyatScreenState extends State<AyatScreen> {
                     child: Column(
                       children: [
                         verticalSpace(16),
-                        AyatAppBar(surahData: widget.surahList[index]),
+                        AyatAppBar(
+                          surahData:
+                              widget.surahList?[index] ?? widget.surahData!,
+                        ),
                         verticalSpace(24),
-                        AyatSouraNameFrame(surahData: widget.surahList[index]),
+                        AyatSouraNameFrame(
+                          surahData:
+                              widget.surahList?[index] ?? widget.surahData!,
+                        ),
                         verticalSpace(12),
                         if (basmala != null)
                           ConstrainedBox(

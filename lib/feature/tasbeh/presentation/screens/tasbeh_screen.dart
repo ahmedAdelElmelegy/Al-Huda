@@ -63,7 +63,7 @@ class _TasbehScreenState extends State<TasbehScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        backgroundColor: ColorManager.blue,
+        backgroundColor: ColorManager.white.withValues(alpha: .1),
         shape: const CircleBorder(),
         onPressed: () {
           push(TasbehListScreen());

@@ -47,4 +47,5 @@ class QranServices {
   }
 
   // dounload ayat
+  // add last sura and ayah to hive
 }
