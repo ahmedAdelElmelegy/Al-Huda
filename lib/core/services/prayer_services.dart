@@ -3,6 +3,7 @@ import 'package:al_huda/core/services/notification/notification_services.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
 
+
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,12 @@ class PrayerServices {
   Future<PrayerTimes> getPrayerTimes() async {
     final coordinates = await getCoordinates();
     return PrayerTimes.today(coordinates, params);
+  }
+
+  Future<PrayerTimes> getPrayerTimesForDate(DateTime date) async {
+    final coordinates = await getCoordinates();
+    final dateComponents = DateComponents(date.year, date.month, date.day);
+    return PrayerTimes(coordinates, dateComponents, params);
   }
 
   static String getFormattedGregorianDate(DateTime date, BuildContext context) {
@@ -228,51 +235,77 @@ class PrayerServices {
     return null;
   }
 
+  static Future<void> schedulePrayerNotifications() async {
+    // Cancel existing notifications to avoid duplicates if re-running
+    await NotificationService.cancelAllNotifications();
+
+    final prayerService = PrayerServices();
+    
+    // Schedule for today, tomorrow, and day after
+    for (int dayOffset = 0; dayOffset < 3; dayOffset++) {
+       final date = DateTime.now().add(Duration(days: dayOffset));
+       final prayerTimes = await prayerService.getPrayerTimesForDate(date);
+       
+        final labels = {
+          "fagr": "الفجر",
+          "shurooq": "الشروق",
+          "dhuhr": "الظهر",
+          "asr": "العصر",
+          "maghrib": "المغرب",
+          "isha": "العشاء",
+        };
+
+        final prayers = [
+          MapEntry("fagr", prayerTimes.fajr),
+          MapEntry("shurooq", prayerTimes.sunrise),
+          MapEntry("dhuhr", prayerTimes.dhuhr),
+          MapEntry("asr", prayerTimes.asr),
+          MapEntry("maghrib", prayerTimes.maghrib),
+          MapEntry("isha", prayerTimes.isha),
+        ];
+
+        for (int i = 0; i < prayers.length; i++) {
+           final prayerName = prayers[i].key;
+           final prayerTime = prayers[i].value;
+           
+           // ID Strategy: DayOfYear * 100 + PrayerIndex
+           // Example: Day 365 -> 36500 + 0 (Fajr) = 36500.
+           final id = (date.day + (date.month * 31) + (date.year * 372)) * 10 + i; 
+
+           if (prayerTime.isAfter(DateTime.now())) {
+             // Check sound preference
+             bool playSound = await getSwitchState(i, Constants.keyPrefixNotification);
+             
+             await NotificationService.scheduleNotification(
+                id,
+                'صلاة ${labels[prayerName]}',
+                'حان وقت الصلاة ${labels[prayerName]}',
+                prayerTime,
+                playSound: playSound,
+                sound: 'athan',
+                chanelId: playSound ? 'prayer_sound_channel' : 'prayer_mute_channel',
+                chanelName: playSound ? 'Prayer Notifications (Sound)' : 'Prayer Notifications (Mute)',
+                payload: 'prayer',
+                prayer: true,
+             );
+             debugPrint("⏰ Scheduled Notification: $prayerName at $prayerTime (ID: $id)");
+           }
+        }
+    }
+  }
+
   @pragma('vm:entry-point')
   static Future<void> workManagerTask() async {
-    final prayerServices = PrayerServices();
-    final times = await prayerServices.getPrayerTimes();
-    await NotificationService.init();
-    NotificationService.showInstantNotification(
-      id: 501,
-      title: 'اهلا بكم في تظبيق الهدي',
-      body: 'تم تحديث مواعيد الصلاة',
-    );
-    debugPrint("✅ Workmanager PrayerTimes first time");
-    final labels = {
-      "fagr": "الفجر",
-      "shurooq": "الشروق",
-      "dhuhr": "الظهر",
-      "asr": "العصر",
-      "maghrib": "المغرب",
-      "isha": "العشاء",
-    };
+    debugPrint("🔄 WorkManager: Starting Daily Sync...");
+    try {
+      await NotificationService.init();
+      
+      // Reschedule next 3 days of alarms
+      await schedulePrayerNotifications();
 
-    final prayerTimes = [
-      MapEntry("fagr", times.fajr),
-      MapEntry("shurooq", times.sunrise),
-      MapEntry("dhuhr", times.dhuhr),
-      MapEntry("asr", times.asr),
-      MapEntry("maghrib", times.maghrib),
-      MapEntry("isha", times.isha),
-    ];
-
-    for (int i = 0; i < prayerTimes.length; i++) {
-      final prayer = prayerTimes[i];
-      final scheduledTime = tz.TZDateTime.from(prayer.value, tz.local);
-      NotificationService.scheduleNotification(
-        i,
-        'صلاة ${labels[prayer.key]}',
-        'حان وقت الصلاة ${labels[prayer.key]}',
-        scheduledTime,
-        playSound: await PrayerServices.getSwitchState(
-          i,
-          Constants.keyPrefixNotification,
-        ),
-        prayer: true,
-        sound: 'athan',
-        payload: 'prayer',
-      );
+      debugPrint("✅ WorkManager: Sync Complete. Alarms Refreshed.");
+    } catch (e) {
+      debugPrint("❌ WorkManager Error: $e");
     }
   }
 
@@ -282,6 +315,9 @@ class PrayerServices {
     if (isFirstRun) {
       await workManagerTask(); // تحديث فوري
       await SharedPrefServices.setBool(false, "firstRun"); // مايتكررش تاني
+    } else {
+       // Ensure schedules are up to date on every app start, not just first run
+       await schedulePrayerNotifications();
     }
   }
 }

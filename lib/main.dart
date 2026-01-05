@@ -3,6 +3,7 @@ import 'package:al_huda/core/di/injection.dart';
 import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/services/doaa_services.dart';
 import 'package:al_huda/core/services/prayer_services.dart';
+
 import 'package:al_huda/core/services/qran_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
@@ -14,6 +15,7 @@ import 'package:al_huda/feature/qran/data/model/surah_model/surah_data.dart';
 import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -35,6 +37,19 @@ void callbackDispatcher() {
 @pragma('vm:entry-point')
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // set status bar and ensure its work portrade only
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await EasyLocalization.ensureInitialized();
 
   await Workmanager().initialize(callbackDispatcher);
@@ -43,8 +58,12 @@ void main() async {
   await Workmanager().registerPeriodicTask(
     "dailyPrayerTask",
     "refreshPrayerTimes",
-    frequency: const Duration(hours: 1), // كل ساعة
+    frequency: const Duration(hours: 24), // run daily
     initialDelay: PrayerServices.getDelayUnitMidnight(),
+    existingWorkPolicy: ExistingPeriodicWorkPolicy.update,
+    constraints: Constraints(
+      requiresBatteryNotLow: false,
+    ),
   );
   await NotificationService.init();
   await NotificationService.requestNotificationPermissions();
@@ -70,7 +89,8 @@ void main() async {
   await Hive.openBox('doaaDaily');
   tz.initializeTimeZones();
 
-  // Start AlarmManager service
+
+  
   init();
 
   runApp(

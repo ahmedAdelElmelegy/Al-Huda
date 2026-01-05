@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   adhan: ^2.0.0+1
+
   audioplayers: ^6.5.0
   bloc: ^9.0.0
   connectivity_plus: ^6.1.5

@@ -58,6 +58,10 @@ class NotificationService {
     await _localNotificationsPlugin.cancel(id);
   }
 
+  static Future<void> cancelAllNotifications() async {
+    await _localNotificationsPlugin.cancelAll();
+  }
+
   static Future<void> scheduleNotification(
     int id,
     String title,
@@ -142,6 +146,40 @@ class NotificationService {
     );
 
     await _localNotificationsPlugin.show(id, title, body, details);
+  }
+
+  static Future<void> showPrayerNotification({
+    required int id,
+    required String title,
+    required String body,
+    bool playSound = true,
+    String sound = 'athan',
+  }) async {
+    AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      playSound ? 'prayer_sound_channel' : 'prayer_mute_channel',
+      playSound ? 'Prayer Notifications (Sound)' : 'Prayer Notifications (Mute)',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: playSound,
+      icon: 'logo',
+      sound: playSound ? RawResourceAndroidNotificationSound(sound) : null,
+      audioAttributesUsage: AudioAttributesUsage.alarm, // Important for alarms
+    );
+
+    DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+      sound: playSound ? '$sound.mp3' : null,
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: playSound,
+      interruptionLevel: InterruptionLevel.timeSensitive,
+    );
+
+    NotificationDetails platformDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
+
+    await _localNotificationsPlugin.show(id, title, body, platformDetails, payload: 'prayer');
   }
 
   static Future<void> showPeriodicallyNotification(
