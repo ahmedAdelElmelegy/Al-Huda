@@ -20,7 +20,7 @@ class _CalenderPickerTableState extends State<CalenderPickerTable> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: ColorManager.primary, width: .5.w),
-        color: ColorManager.primaryBg,
+        color: ColorManager.primary.withValues(alpha: .1),
       ),
       child: TableCalendar(
         headerStyle: HeaderStyle(formatButtonVisible: false),

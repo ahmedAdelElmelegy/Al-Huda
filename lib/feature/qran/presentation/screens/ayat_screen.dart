@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+
 import 'package:al_huda/core/data/api_url/app_url.dart';
 import 'package:al_huda/core/func/internet_dialog.dart';
 import 'package:al_huda/core/helper/app_constants.dart';
@@ -18,12 +18,12 @@ import 'package:al_huda/feature/qran/presentation/widgets/ayat_buttom_nav_bar.da
 import 'package:al_huda/feature/qran/presentation/widgets/ayat_soura_name_frame.dart';
 import 'package:al_huda/feature/qran/presentation/widgets/remove_basmalla.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:al_huda/core/services/qran_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 
 class AyatScreen extends StatefulWidget {
   final SurahData? surahData;
@@ -119,24 +119,12 @@ class _AyatScreenState extends State<AyatScreen> {
 
       final globalAyahNumber = ayah.number;
 
-      //  download link
-      final url =
-          "https://cdn.islamic.network/quran/audio/$number/${readerName ?? AppURL.readerName}/$globalAyahNumber.mp3";
-
-      //  store path
-      final dir = await getApplicationDocumentsDirectory();
-      final filePath =
-          "${dir.path}/ayah_${globalAyahNumber}_${readerName ?? AppURL.readerName}.mp3";
-
-      String audioSource;
-      if (File(filePath).existsSync()) {
-        // file in device
-        audioSource = filePath;
-      } else {
-        // download file
-        await Dio().download(url, filePath);
-        audioSource = filePath;
-      }
+      // Use QranServices to get audio path
+      final String audioSource = await QranServices().getAyahAudioPath(
+        globalAyahNumber: globalAyahNumber,
+        readerName: readerName ?? AppURL.readerName,
+        bitrate: number ?? 128,
+      );
 
       final newIndex = cubit.ayatList.indexWhere(
         (a) => a.numberInSurah == ayahNumber,

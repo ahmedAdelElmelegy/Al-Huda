@@ -28,6 +28,11 @@ class HomePrayerItem extends StatelessWidget {
             ? ColorManager.primary2
             : Colors.grey.withValues(alpha: .1),
         borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: !isSelected
+              ? ColorManager.primary2.withValues(alpha: .5)
+              : Colors.transparent,
+        ),
       ),
       padding: EdgeInsets.only(right: 8.w, top: 8.w, bottom: 8.h, left: 8.w),
       child: Column(

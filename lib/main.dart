@@ -42,7 +42,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
     ),
   );
 
@@ -61,9 +61,7 @@ void main() async {
     frequency: const Duration(hours: 24), // run daily
     initialDelay: PrayerServices.getDelayUnitMidnight(),
     existingWorkPolicy: ExistingPeriodicWorkPolicy.update,
-    constraints: Constraints(
-      requiresBatteryNotLow: false,
-    ),
+    constraints: Constraints(requiresBatteryNotLow: false),
   );
   await NotificationService.init();
   await NotificationService.requestNotificationPermissions();
@@ -89,8 +87,6 @@ void main() async {
   await Hive.openBox('doaaDaily');
   tz.initializeTimeZones();
 
-
-  
   init();
 
   runApp(

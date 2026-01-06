@@ -3,6 +3,7 @@ import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/home/presentation/screens/widget/home_category_item.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePrayerCategoryLIst extends StatelessWidget {
   const HomePrayerCategoryLIst({super.key});
@@ -13,6 +14,7 @@ class HomePrayerCategoryLIst extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return DynamicHeightGridView(
       shrinkWrap: true,
+      mainAxisSpacing: 16.w,
       physics: const NeverScrollableScrollPhysics(),
       builder: (context, index) {
         return InkWell(
@@ -23,7 +25,7 @@ class HomePrayerCategoryLIst extends StatelessWidget {
         );
       },
       itemCount: Constants.homePrayerCategory.length,
-      crossAxisCount: isLandScape ? 8 : 5,
+      crossAxisCount: isLandScape ? 8 : 4,
     );
   }
 }

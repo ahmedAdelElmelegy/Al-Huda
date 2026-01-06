@@ -1,7 +1,10 @@
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/surah_model_data.dart';
 import 'package:al_huda/feature/qran/data/model/surah_model/surah_data.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 class QranServices {
   // open box
@@ -48,4 +51,27 @@ class QranServices {
 
   // dounload ayat
   // add last sura and ayah to hive
+
+  Future<String> getAyahAudioPath({
+    required int globalAyahNumber,
+    required String readerName,
+    required int bitrate,
+  }) async {
+    // 1. Construct URL
+    // Pattern: https://cdn.islamic.network/quran/audio/{bitrate}/{readerIdentifier}/{ayahNumber}.mp3
+    final url =
+        "https://cdn.islamic.network/quran/audio/$bitrate/$readerName/$globalAyahNumber.mp3";
+
+    // 2. Construct Local Path
+    final dir = await getApplicationDocumentsDirectory();
+    final filePath = "${dir.path}/ayah_${globalAyahNumber}_$readerName.mp3";
+
+    // 3. Check / Download
+    if (File(filePath).existsSync()) {
+      return filePath;
+    } else {
+      await Dio().download(url, filePath);
+      return filePath;
+    }
+  }
 }

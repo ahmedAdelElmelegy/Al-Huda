@@ -1,10 +1,8 @@
-import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
-import 'package:al_huda/feature/home/presentation/screens/widget/home_last_surah.dart';
 import 'package:al_huda/feature/home/presentation/screens/widget/home_prayer_category_list.dart';
 import 'package:al_huda/feature/home/presentation/screens/widget/home_top_container.dart';
-import 'package:al_huda/feature/home/presentation/screens/widget/prayer_tracking.dart';
+import 'package:al_huda/feature/home/presentation/screens/widget/prayer_traker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,48 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: HomePrayerCategoryLIst(),
                         ),
                         verticalSpace(24),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Container(
-                            width: double.infinity,
-                            height: 150.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(24.r),
-                              color: ColorManager.primary2,
-                              gradient: LinearGradient(
-                                colors: [
-                                  ColorManager.primary2,
-                                  ColorManager.primary2.withValues(alpha: .8),
-                                  ColorManager.primary2.withValues(alpha: .6),
-                                  ColorManager.primary2.withValues(alpha: .5),
-                                  ColorManager.primary2.withValues(alpha: .3),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: 16.h,
-                                  right: 24.w,
-                                  child: Image.asset(
-                                    AppImages.qranIcon,
-                                    width: 100.w,
-                                    height: 100.h,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 16.h,
-                                  left: 36.w,
-                                  child: HomeLastSurah(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        verticalSpace(24),
-                        PrayerTracking(),
+                        PrayerTraker(),
+
                         // verticalSpace(24),
                         // DailyDoaa(),
                       ],

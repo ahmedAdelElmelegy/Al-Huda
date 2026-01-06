@@ -108,6 +108,9 @@
     "elfateha": "الفاتحة",
    "continue":"اكمل",
  "all_features":"جميع الميزات",
- "daily_doaa":"الدعاء اليومي"
-  
+ "daily_doaa":"الدعاء اليومي",
+ "start_in":"البدء في",
+ "prayer_tracking":"متتبع الصلوات",
+ "keep_up_with_your_daily_salah":" حافظ على صلواتك اليومية"
+ 
 }

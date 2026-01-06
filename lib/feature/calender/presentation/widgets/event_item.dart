@@ -26,7 +26,7 @@ class EventItem extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
       decoration: BoxDecoration(
-        color: ColorManager.primaryBg,
+        color: ColorManager.primary.withValues(alpha: .1),
         border: Border.all(color: ColorManager.primary, width: .5.w),
         borderRadius: BorderRadius.circular(16.r),
       ),

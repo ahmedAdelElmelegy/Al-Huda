@@ -41,7 +41,7 @@ class PrayerTimeScreen extends StatelessWidget {
                       verticalSpace(16),
                       PrayerTime(),
                       verticalSpace(20),
-                      PrayerTimeList(),
+                      PrayerTimeList(onChanged: (index) {}),
                     ],
                   ),
                 ],
