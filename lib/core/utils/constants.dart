@@ -20,6 +20,13 @@ class Constants {
     PrayerModel(icon: AppIcons.magrib, name: 'maghrib'),
     PrayerModel(icon: AppIcons.moon, name: 'isha'),
   ];
+  static List<PrayerModel> prayerWithoutShurooq = [
+    PrayerModel(icon: AppIcons.fagr, name: 'fagr'),
+    PrayerModel(icon: AppIcons.sun, name: 'dhuhr'),
+    PrayerModel(icon: AppIcons.cloud, name: 'asr'),
+    PrayerModel(icon: AppIcons.magrib, name: 'maghrib'),
+    PrayerModel(icon: AppIcons.moon, name: 'isha'),
+  ];
   static const String completePrayer = 'completePrayer';
   static List<QuranReaderModel> quranReader = [
     QuranReaderModel(

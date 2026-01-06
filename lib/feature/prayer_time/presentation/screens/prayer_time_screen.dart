@@ -5,7 +5,6 @@ import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:al_huda/feature/home/presentation/widgets/home_date_and_location.dart';
 import 'package:al_huda/feature/prayer_time/presentation/widgets/prayer_time.dart';
 import 'package:al_huda/feature/prayer_time/presentation/widgets/custom_app_bar.dart';
-import 'package:al_huda/feature/prayer_time/presentation/widgets/prayer_time_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +40,10 @@ class PrayerTimeScreen extends StatelessWidget {
                       verticalSpace(16),
                       PrayerTime(),
                       verticalSpace(20),
-                      PrayerTimeList(onChanged: (index) {}),
+                      // PrayerTimeList(
+                      //   onChanged: (index) {},
+                      //   completedPrayers: List.generate(5, (_) => false),
+                      // ),
                     ],
                   ),
                 ],

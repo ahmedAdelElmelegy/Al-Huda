@@ -5,6 +5,7 @@ import 'package:al_huda/feature/prayer_time/presentation/widgets/prayer_time_lis
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 class PrayerTraker extends StatefulWidget {
   const PrayerTraker({super.key});
@@ -14,17 +15,65 @@ class PrayerTraker extends StatefulWidget {
 }
 
 class _PrayerTrakerState extends State<PrayerTraker> {
-  int selectedPrayerIndex = 0;
+  List<bool> completedPrayers = List.generate(5, (_) => false);
+
+  late Box box;
+  static const String prefKey = 'completed_prayers';
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box('completedPrayersBox');
+    _loadPrayersFromHive();
+  }
+
+  void _loadPrayersFromHive() {
+    final saved = box.get(prefKey);
+
+    String today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    if (saved != null && saved is Map) {
+      String savedDate = saved['date'] ?? '';
+      List savedValues = saved['values'] ?? [];
+
+      if (savedDate == today) {
+        // نفس اليوم → استخدم القيم المخزنة
+        setState(() {
+          completedPrayers = List<bool>.from(savedValues);
+        });
+      } else {
+        // يوم جديد → reset للقيم
+        setState(() {
+          completedPrayers = List.generate(5, (_) => false);
+        });
+        _savePrayersToHive(); // نحفظ مع التاريخ الجديد
+      }
+    } else {
+      // مفيش بيانات → نعمل reset
+      _savePrayersToHive();
+    }
+  }
+
+  void _savePrayersToHive() {
+    String today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    box.put(prefKey, {"date": today, "values": completedPrayers});
+  }
+
+  void togglePrayer(int index) {
+    setState(() {
+      completedPrayers[index] = !completedPrayers[index];
+    });
+    _savePrayersToHive();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-        // height: 100.h,
-        width: double.infinity,
+        padding: EdgeInsets.all(16.r),
         decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.gray.withValues(alpha: 0.3)),
+          border: Border.all(color: ColorManager.gray.withValues(alpha: .3)),
           color: ColorManager.white,
           borderRadius: BorderRadius.circular(8.r),
         ),
@@ -56,11 +105,11 @@ class _PrayerTrakerState extends State<PrayerTraker> {
                     vertical: 4.h,
                   ),
                   decoration: BoxDecoration(
-                    color: ColorManager.primary.withValues(alpha: .8),
+                    color: ColorManager.primary,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
-                    'Complete  ${selectedPrayerIndex + 1}/ 5'.tr(),
+                    'Complete ${completedPrayers.where((e) => e).length}/5',
                     style: TextSTyle.f12CairoBoldGrey.copyWith(
                       color: ColorManager.white,
                     ),
@@ -69,14 +118,11 @@ class _PrayerTrakerState extends State<PrayerTraker> {
               ],
             ),
             verticalSpace(16),
-            Divider(color: ColorManager.gray, thickness: .3),
+            Divider(color: ColorManager.gray.withValues(alpha: .3)),
             verticalSpace(16),
             PrayerTimeList(
-              onChanged: (index) {
-                setState(() {
-                  selectedPrayerIndex = index;
-                });
-              },
+              completedPrayers: completedPrayers,
+              onChanged: togglePrayer,
             ),
           ],
         ),
