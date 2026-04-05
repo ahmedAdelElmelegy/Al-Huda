@@ -70,17 +70,12 @@ class PrayerCubit extends Cubit<PrayerState> {
     for (int i = 0; i < prayerTimes.length; i++) {
       final prayer = prayerTimes[i];
       if (now.isBefore(prayer.value)) {
-        final nextIndex = (i + 1) % prayerTimes.length;
-        nextPrayer = prayerTimes[nextIndex].key;
-        nextPrayerTime = prayerTimes[nextIndex].value;
         return prayer.key;
       }
     }
 
-    // After last prayer
-    nextPrayer = "fagr";
-    nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
-    return "isha";
+    // After last prayer (Isha), the next prayer is Fajr (of tomorrow)
+    return "fagr";
   }
 
   DateTime getCurrentPrayerTime() {
@@ -90,14 +85,13 @@ class PrayerCubit extends Cubit<PrayerState> {
     for (int i = 0; i < prayerTimes.length; i++) {
       final prayer = prayerTimes[i];
       if (now.isBefore(prayer.value)) {
-        nextPrayerTime = prayerTimes[(i + 1) % prayerTimes.length].value;
         return prayer.value;
       }
     }
 
-    // After last prayer
-    nextPrayerTime = prayerTimes[0].value.add(const Duration(days: 1));
-    return prayerTimes.last.value;
+    // After last prayer (Isha), return tomorrow's Fajr time
+    // We add 1 day to today's Fajr time stored in prayerTimes[0]
+    return prayerTimes[0].value.add(const Duration(days: 1));
   }
 
   void scheduleSabah(DateTime time, String sound, int id) {

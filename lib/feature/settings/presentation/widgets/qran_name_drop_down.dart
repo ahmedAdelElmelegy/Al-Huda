@@ -45,7 +45,7 @@ class ReaderNameDropDown extends StatelessWidget {
                 Text('select_reader'.tr()),
               ],
             ),
-            value: selectedReader,
+            initialValue: selectedReader,
 
             items: Constants.quranReader
                 .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))

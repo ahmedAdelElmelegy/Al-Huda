@@ -188,6 +188,7 @@ class LangCheckBoxItem extends StatelessWidget {
       children: [
         Radio(
           value: value,
+
           groupValue: groupValue,
           onChanged: (value) {
             onChanged(value);

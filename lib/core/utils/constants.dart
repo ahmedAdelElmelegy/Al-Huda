@@ -9,7 +9,17 @@ import 'package:al_huda/feature/home/data/model/prayer_model.dart';
 import 'package:al_huda/feature/nearst_mosque/presentation/screens/nearest_mosque_screen.dart';
 import 'package:al_huda/feature/qran/data/model/qran_reader_model.dart';
 import 'package:al_huda/feature/radio/presentation/screens/radio_screen.dart';
+import 'package:al_huda/feature/quiz/presentation/screens/quiz_screen.dart';
+import 'package:al_huda/feature/pharmacy/presentation/screens/pharmacy_screen.dart';
+import 'package:al_huda/feature/library/presentation/screens/library_screen.dart';
+import 'package:al_huda/feature/sunnah/presentation/screens/hadith_books_screen.dart';
+import 'package:al_huda/feature/sunnah/presentation/screens/sunnah_habits_screen.dart';
 import 'package:al_huda/feature/tasbeh/presentation/screens/tasbeh_screen.dart';
+import 'package:al_huda/feature/hajj/presentation/screens/hajj_umrah_screen.dart';
+import 'package:al_huda/feature/ramadan/presentation/screens/ramadan_screen.dart';
+import 'package:al_huda/feature/hifz/presentation/screens/hifz_dashboard_screen.dart';
+import 'package:al_huda/feature/family/presentation/screens/family_screen.dart';
+import 'package:al_huda/feature/ramadan/presentation/screens/khatma_screen.dart';
 
 class Constants {
   static List<PrayerModel> prayer = [
@@ -129,6 +139,52 @@ class Constants {
       name: 'favorite',
       icon: AppIcons.favorite,
       screen: FavoriteScreen(),
+    ),
+    PrayerModel(name: 'quiz', icon: AppIcons.edit, screen: QuizScreen()),
+    PrayerModel(
+      name: 'pharmacy',
+      icon: AppIcons.azkarTop,
+      screen: PharmacyScreen(),
+    ),
+    PrayerModel(
+      name: 'library',
+      icon: AppIcons.azkar,
+      screen: const LibraryScreen(),
+    ),
+    PrayerModel(
+      name: 'sunnah_habits',
+      icon: AppIcons.salah,
+      screen: const SunnahHabitsScreen(),
+    ),
+    PrayerModel(
+      name: 'hadith_books_title',
+      icon: AppIcons.azkar,
+      screen: const HadithBooksScreen(),
+    ),
+    PrayerModel(
+      name: 'hajj_umrah_guide',
+      icon: AppIcons.maka,
+      screen: const HajjUmrahScreen(),
+    ),
+    PrayerModel(
+      name: 'ramadan_portal',
+      icon: AppIcons.moon,
+      screen: const RamadanScreen(),
+    ),
+    PrayerModel(
+      name: "hifz_tracker",
+      icon: AppIcons.azkar,
+      screen: const HifzDashboardScreen(),
+    ),
+    PrayerModel(
+      name: "family_mode",
+      icon: AppIcons.favorite,
+      screen: const FamilyScreen(),
+    ),
+    PrayerModel(
+      name: "global_khatma",
+      icon: AppIcons.qran,
+      screen: const KhatmaScreen(),
     ),
   ];
 }

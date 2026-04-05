@@ -5,17 +5,23 @@
 import 'package:hive_ce/hive.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
 import 'package:al_huda/feature/doaa/data/model/doaa_model.dart';
+import 'package:al_huda/feature/family/data/model/family_member.dart';
+import 'package:al_huda/feature/hifz/data/model/hifz_model.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/ayat.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/edition.dart';
 import 'package:al_huda/feature/qran/data/model/ayat_model/surah_model_data.dart';
+import 'package:al_huda/feature/qran/data/model/bookmark_model/bookmark_model.dart';
 import 'package:al_huda/feature/qran/data/model/surah_model/surah_data.dart';
 import 'package:al_huda/feature/tasbeh/data/model/tasbeh_model.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(AyahAdapter());
+    registerAdapter(BookmarkModelAdapter());
     registerAdapter(DoaaModelDataAdapter());
     registerAdapter(EditionAdapter());
+    registerAdapter(FamilyMemberAdapter());
+    registerAdapter(HifzVerseAdapter());
     registerAdapter(SurahDataAdapter());
     registerAdapter(SurahModelDataAdapter());
     registerAdapter(TasbehModelAdapter());
@@ -26,8 +32,11 @@ extension HiveRegistrar on HiveInterface {
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(AyahAdapter());
+    registerAdapter(BookmarkModelAdapter());
     registerAdapter(DoaaModelDataAdapter());
     registerAdapter(EditionAdapter());
+    registerAdapter(FamilyMemberAdapter());
+    registerAdapter(HifzVerseAdapter());
     registerAdapter(SurahDataAdapter());
     registerAdapter(SurahModelDataAdapter());
     registerAdapter(TasbehModelAdapter());

@@ -1,18 +1,14 @@
 import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/core/helper/spacing.dart';
-import 'package:al_huda/core/services/notification/notification_services.dart';
+
 import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
-import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
 import 'package:al_huda/feature/settings/presentation/widgets/setting_switch.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:timezone/timezone.dart' as tz;
 
 class SettingPrayerItem extends StatefulWidget {
   final String title;
@@ -35,11 +31,9 @@ class _SettingPrayerItemState extends State<SettingPrayerItem> {
   @override
   void initState() {
     super.initState();
-    PrayerServices.getSwitchState(widget.index, Constants.keyPrefix).then((
-      value,
-    ) {
+    PrayerServices.getSwitchState(widget.index, Constants.keyPrefix).then((v) {
       setState(() {
-        this.value = value;
+        value = v;
       });
     });
   }
@@ -65,35 +59,29 @@ class _SettingPrayerItemState extends State<SettingPrayerItem> {
         const Spacer(),
         SettingSwitch(
           value: value,
-          onChanged: (newValue) {
+          onChanged: (newValue) async {
             setState(() {
               value = newValue;
             });
-            PrayerServices.saveSwitchState(
+
+            // Save sound preference toggle for this prayer index
+            // keyPrefix is used for showing/hiding notification,
+            // keyPrefixNotification is used for sound/silent in scheduling
+            await PrayerServices.saveSwitchState(
               widget.index,
               newValue,
               Constants.keyPrefix,
             );
+            await PrayerServices.saveSwitchState(
+              widget.index,
+              newValue,
+              Constants.keyPrefixNotification,
+            );
 
-            if (!newValue) {
-              NotificationService.cancelNotification(widget.index);
-            } else {
-              final cubit = context.read<PrayerCubit>();
-              final prayerTime = cubit.prayerTimes[widget.index];
-              final scheduledTime = tz.TZDateTime.from(
-                prayerTime.value,
-                tz.local,
-              );
-              NotificationService.scheduleNotification(
-                widget.index,
+            // Reschedule ALL prayer notifications for the next 3 days
+            // This applies the updated sound preference across all scheduled times
+            await PrayerServices.schedulePrayerNotifications();
 
-                'حان الآن موعد ${prayerTime.key.tr()}',
-                'وقت الصلاة: ${prayerTime.key.tr()}',
-                scheduledTime,
-                prayer: true,
-                payload: 'prayer',
-              );
-            }
           },
         ),
       ],

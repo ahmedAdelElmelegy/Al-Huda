@@ -1,0 +1,244 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "كم عدد سور القرآن الكريم؟",
+            "options": [
+                "100",
+                "114",
+                "120",
+                "130"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 2,
+            "question": "ما هي أول سورة نزلت في القرآن الكريم؟",
+            "options": [
+                "الفاتحة",
+                "البقرة",
+                "العلق",
+                "المدثر"
+            ],
+            "correctIndex": 2,
+            "category": "quran"
+        },
+        {
+            "id": 3,
+            "question": "كم عدد أركان الإسلام؟",
+            "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+            ],
+            "correctIndex": 2,
+            "category": "sunnah"
+        },
+        {
+            "id": 4,
+            "question": "ما هي أطول سورة في القرآن الكريم؟",
+            "options": [
+                "آل عمران",
+                "البقرة",
+                "النساء",
+                "المائدة"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 5,
+            "question": "كم عدد أركان الإيمان؟",
+            "options": [
+                "4",
+                "5",
+                "6",
+                "7"
+            ],
+            "correctIndex": 2,
+            "category": "sunnah"
+        },
+        {
+            "id": 6,
+            "question": "ما هو اسم النبي الذي ابتلعه الحوت؟",
+            "options": [
+                "نوح",
+                "يونس",
+                "أيوب",
+                "زكريا"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 7,
+            "question": "كم عام صام النبي محمد ﷺ رمضان؟",
+            "options": [
+                "7 سنوات",
+                "8 سنوات",
+                "9 سنوات",
+                "10 سنوات"
+            ],
+            "correctIndex": 2,
+            "category": "sunnah"
+        },
+        {
+            "id": 8,
+            "question": "ما هي السورة التي تسمى قلب القرآن؟",
+            "options": [
+                "الفاتحة",
+                "البقرة",
+                "يس",
+                "الإخلاص"
+            ],
+            "correctIndex": 2,
+            "category": "quran"
+        },
+        {
+            "id": 9,
+            "question": "كم عدد الصلوات المفروضة في اليوم؟",
+            "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+            ],
+            "correctIndex": 2,
+            "category": "sunnah"
+        },
+        {
+            "id": 10,
+            "question": "ما هي السورة التي تعدل ثلث القرآن؟",
+            "options": [
+                "الفاتحة",
+                "الإخلاص",
+                "الناس",
+                "الفلق"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 11,
+            "question": "من هو خاتم الأنبياء والمرسلين؟",
+            "options": [
+                "موسى",
+                "عيسى",
+                "محمد ﷺ",
+                "إبراهيم"
+            ],
+            "correctIndex": 2,
+            "category": "sunnah"
+        },
+        {
+            "id": 12,
+            "question": "ما هي أقصر سورة في القرآن الكريم؟",
+            "options": [
+                "الإخلاص",
+                "الكوثر",
+                "الناس",
+                "الفلق"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 13,
+            "question": "في أي شهر أنزل القرآن الكريم؟",
+            "options": [
+                "شعبان",
+                "رمضان",
+                "ذو الحجة",
+                "محرم"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 14,
+            "question": "كم عدد المعوذات؟",
+            "options": [
+                "2",
+                "3",
+                "4",
+                "5"
+            ],
+            "correctIndex": 0,
+            "category": "quran"
+        },
+        {
+            "id": 15,
+            "question": "ما هي صلاة الوتر؟",
+            "options": [
+                "صلاة فرض",
+                "صلاة سنة مؤكدة",
+                "صلاة نافلة",
+                "صلاة العيد"
+            ],
+            "correctIndex": 1,
+            "category": "sunnah"
+        },
+        {
+            "id": 16,
+            "question": "كم عدد آيات سورة الفاتحة؟",
+            "options": [
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+            "correctIndex": 2,
+            "category": "quran"
+        },
+        {
+            "id": 17,
+            "question": "ما هو أول ركن من أركان الإسلام؟",
+            "options": [
+                "الصلاة",
+                "الشهادتان",
+                "الزكاة",
+                "الصوم"
+            ],
+            "correctIndex": 1,
+            "category": "sunnah"
+        },
+        {
+            "id": 18,
+            "question": "كم عدد الأنبياء المذكورين في القرآن؟",
+            "options": [
+                "20",
+                "25",
+                "30",
+                "35"
+            ],
+            "correctIndex": 1,
+            "category": "quran"
+        },
+        {
+            "id": 19,
+            "question": "ما هي السورة التي ليس فيها بسملة؟",
+            "options": [
+                "الفاتحة",
+                "البقرة",
+                "التوبة",
+                "النحل"
+            ],
+            "correctIndex": 2,
+            "category": "quran"
+        },
+        {
+            "id": 20,
+            "question": "متى تصلى صلاة الضحى؟",
+            "options": [
+                "بعد المغرب",
+                "بعد طلوع الشمس",
+                "قبل الفجر",
+                "بعد العشاء"
+            ],
+            "correctIndex": 1,
+            "category": "sunnah"
+        }
+    ]
+}

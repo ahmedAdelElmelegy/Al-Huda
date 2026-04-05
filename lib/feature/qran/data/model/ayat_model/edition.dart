@@ -17,7 +17,7 @@ class Edition {
   @HiveField(5)
   final String type;
   @HiveField(6)
-  final dynamic direction;
+  final String? direction;
 
   Edition({
     required this.identifier,

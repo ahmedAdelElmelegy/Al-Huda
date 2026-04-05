@@ -1,5 +1,3 @@
-import 'package:al_huda/feature/azkar/presentation/widgets/azkar_content_item.dart';
-import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,25 +10,70 @@ class AllahNameItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.only(bottom: 16.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: ColorManager.primary, width: .5.w),
+        color: isDark ? ColorManager.surfaceDark : Colors.white,
+        borderRadius: BorderRadius.circular(
+          24.r,
+        ), // More balanced for smaller grid items
         boxShadow: [
           BoxShadow(
-            color: ColorManager.gray.withValues(alpha: .2),
-            blurRadius: 6,
-            offset: Offset(2, 4),
+            color: ColorManager.primary.withValues(alpha: 0.08),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
         ],
-        color: ColorManager.white,
+        border: Border.all(
+          color: ColorManager.primary.withValues(alpha: 0.1),
+          width: 1.2,
+        ),
       ),
-      child: Column(
+      child: Stack(
         children: [
-          AzkarContentItem(count: index, text: name),
-          verticalSpace(24),
+          // Index Badge
+          Positioned(
+            top: 12.h,
+            left: 12.w,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+              decoration: BoxDecoration(
+                color: ColorManager.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Text(
+                index.toString(),
+                style: TextStyle(
+                  fontFamily: 'SSTArabicMedium',
+                  fontSize: 12.sp,
+                  color: ColorManager.primary,
+                ),
+              ),
+            ),
+          ),
+          // Name Content
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'AmiriBold',
+                      fontSize: 22.sp,
+                      color: isDark
+                          ? Colors.white.withValues(alpha: 0.9)
+                          : ColorManager.primary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:al_huda/core/helper/app_constants.dart';
 import 'package:al_huda/feature/radio/data/model/radio_data.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:al_huda/core/helper/spacing.dart';
 import 'package:al_huda/core/theme/colors.dart';
-import 'package:al_huda/core/widgets/svg_icon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RadioReaderAudio extends StatefulWidget {
@@ -124,96 +122,145 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
-                changeRadioRight(widget.radioData);
-              },
-              child: SvgIcon(assetName: AppIcons.skipRight),
-            ),
-            horizontalSpace(24),
-            InkWell(
-              onTap: () {
-                togglePlayPause(widget.radioData.url!, false);
-              },
-              child: Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ColorManager.primaryText2,
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorManager.primaryText2.withValues(alpha: 0.3),
-                      blurRadius: 10,
-                      offset: const Offset(4, 4),
-                    ),
-                  ],
-                ),
-                child: Icon(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  size: 40.sp,
-                  color: ColorManager.white,
-                ),
+            IconButton(
+              onPressed: () => changeRadioLeft(widget.radioData),
+              icon: Icon(
+                Icons.skip_previous_rounded,
+                color: ColorManager.primary.withValues(alpha: 0.6),
+                size: 32.sp,
               ),
             ),
             horizontalSpace(24),
             InkWell(
-              onTap: () {
-                changeRadioLeft(widget.radioData);
-              },
-              child: SvgIcon(assetName: AppIcons.skipLeft),
+              onTap: () => togglePlayPause(widget.radioData.url!, false),
+              child: Container(
+                width: 72.w,
+                height: 72.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorManager.primary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorManager.primary.withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                  size: 40.sp,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            horizontalSpace(24),
+            IconButton(
+              onPressed: () => changeRadioRight(widget.radioData),
+              icon: Icon(
+                Icons.skip_next_rounded,
+                color: ColorManager.primary.withValues(alpha: 0.6),
+                size: 32.sp,
+              ),
             ),
           ],
         ),
-
-        verticalSpace(20),
-
-        // شريط الوقت
-        // Slider(
-        //   value: position.inSeconds.toDouble(),
-        //   min: 0,
-        //   max: 0,
-        //   onChanged: (value) async {
-        //     // final newPosition = Duration(seconds: value.toInt());
-        //     // await audioPlayer.seek(newPosition);
-        //   },
-        // ),
+        verticalSpace(32),
+        // Time Indicators
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Divider(
-            color: ColorManager.primaryText2,
-            height: 5.h,
-            thickness: 2.h,
+          padding: EdgeInsets.symmetric(horizontal: 32.w),
+          child: Column(
+            children: [
+              Container(
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: ColorManager.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+                child: FractionallySizedBox(
+                  alignment: Alignment.centerLeft,
+                  widthFactor: duration.inSeconds > 0
+                      ? (position.inSeconds / duration.inSeconds).clamp(0, 1)
+                      : 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorManager.primary,
+                      borderRadius: BorderRadius.circular(2.r),
+                    ),
+                  ),
+                ),
+              ),
+              verticalSpace(8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    formatTime(position),
+                    style: TextStyle(
+                      fontFamily: 'SSTArabicRoman',
+                      fontSize: 12.sp,
+                      color: ColorManager.textLight.withValues(alpha: 0.7),
+                    ),
+                  ),
+                  Text(
+                    formatTime(duration),
+                    style: TextStyle(
+                      fontFamily: 'SSTArabicRoman',
+                      fontSize: 12.sp,
+                      color: ColorManager.textLight.withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
+        verticalSpace(24),
+        // Volume Control
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 40.w),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(formatTime(position)), Text(formatTime(duration))],
+            children: [
+              Icon(
+                Icons.volume_mute_rounded,
+                color: ColorManager.primary.withValues(alpha: 0.4),
+                size: 20.sp,
+              ),
+              Expanded(
+                child: SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    trackHeight: 2.h,
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.r),
+                    activeTrackColor: ColorManager.primary,
+                    inactiveTrackColor: ColorManager.primary.withValues(
+                      alpha: 0.1,
+                    ),
+                    thumbColor: ColorManager.primary,
+                  ),
+                  child: Slider(
+                    value: volume,
+                    min: 0,
+                    max: 1,
+                    onChanged: (value) {
+                      setState(() => volume = value);
+                      audioPlayer.setVolume(value);
+                    },
+                  ),
+                ),
+              ),
+              Icon(
+                Icons.volume_up_rounded,
+                color: ColorManager.primary.withValues(alpha: 0.4),
+                size: 20.sp,
+              ),
+            ],
           ),
-        ),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.volume_down, color: ColorManager.primaryText2),
-            Slider(
-              value: volume,
-              min: 0,
-              max: 1,
-              onChanged: (value) {
-                setState(() => volume = value);
-                audioPlayer.setVolume(value);
-              },
-            ),
-            Icon(Icons.volume_up, color: ColorManager.primaryText2),
-          ],
         ),
       ],
     );

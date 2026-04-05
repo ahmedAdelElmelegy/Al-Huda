@@ -23,7 +23,7 @@ class EditionAdapter extends TypeAdapter<Edition> {
       englishName: fields[3] as String,
       format: fields[4] as String,
       type: fields[5] as String,
-      direction: fields[6] as dynamic,
+      direction: fields[6] as String?,
     );
   }
 

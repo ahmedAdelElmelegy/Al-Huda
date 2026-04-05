@@ -1,0 +1,162 @@
+{
+  "hajj": [
+    {
+      "step": 1,
+      "title_ar": "الإحرام",
+      "title_en": "Ihram",
+      "description_ar": "النية ولبس ثياب الإحرام من الميقات",
+      "description_en": "Intention and wearing the Ihram clothes from the Miqat"
+    },
+    {
+      "step": 2,
+      "title_ar": "طواف القدوم",
+      "title_en": "Tawaf al-Qudum",
+      "description_ar": "سبعة أشواط حول الكعبة المشرفة",
+      "description_en": "Seven circuits around the Holy Kaaba"
+    },
+    {
+      "step": 3,
+      "title_ar": "السعي",
+      "title_en": "Sa'i",
+      "description_ar": "سبعة أشواط بين الصفا والمروة",
+      "description_en": "Seven rounds between Safa and Marwa"
+    },
+    {
+      "step": 4,
+      "title_ar": "يوم التروية",
+      "title_en": "Day of Tarwiyah",
+      "description_ar": "التوجه إلى منى 8 ذو الحجة",
+      "description_en": "Heading to Mina on the 8th of Dhu al-Hijjah"
+    },
+    {
+      "step": 5,
+      "title_ar": "الوقوف بعرفة",
+      "title_en": "Standing at Arafat",
+      "description_ar": "ركن الحج الأعظم 9 ذو الحجة",
+      "description_en": "The greatest pillar of Hajj on the 9th of Dhu al-Hijjah"
+    },
+    {
+      "step": 6,
+      "title_ar": "المبيت بمزدلفة",
+      "title_en": "Staying at Muzdalifah",
+      "description_ar": "جمع الحصى والمبيت",
+      "description_en": "Collecting pebbles and staying overnight"
+    },
+    {
+      "step": 7,
+      "title_ar": "رمي جمرة العقبة",
+      "title_en": "Stoning Jamrat al-Aqaba",
+      "description_ar": "7 حصيات يوم العيد",
+      "description_en": "Throwing 7 pebbles on the day of Eid"
+    },
+    {
+      "step": 8,
+      "title_ar": "الهدي والحلق",
+      "title_en": "Hadi and Halq",
+      "description_ar": "ذبح الهدي وحلق الرأس أو تقصيره",
+      "description_en": "Sacrificing and shaving or shortening the hair"
+    },
+    {
+      "step": 9,
+      "title_ar": "طواف الإفاضة",
+      "title_en": "Tawaf al-Ifadah",
+      "description_ar": "ركن من أركان الحج",
+      "description_en": "An essential pillar of Hajj"
+    },
+    {
+      "step": 10,
+      "title_ar": "أيام التشريق",
+      "title_en": "Days of Tashreeq",
+      "description_ar": "المبيت بمنى ورمي الجمرات",
+      "description_en": "Staying at Mina and stoning the three pillars"
+    },
+    {
+      "step": 11,
+      "title_ar": "طواف الوداع",
+      "title_en": "Farewell Tawaf",
+      "description_ar": "آخر ما يفعله الحاج قبل المغادرة",
+      "description_en": "The final act before leaving Makkah"
+    }
+  ],
+  "umrah": [
+    {
+      "step": 1,
+      "title_ar": "الإحرام",
+      "title_en": "Ihram",
+      "description_ar": "النية ولبس ثياب الإحرام من الميقات والتلبية",
+      "description_en": "Intention, wearing Ihram, and Talbiyah"
+    },
+    {
+      "step": 2,
+      "title_ar": "الطواف",
+      "title_en": "Tawaf",
+      "description_ar": "سبعة أشواط حول الكعبة بدءاً من الحجر الأسود",
+      "description_en": "Seven circuits around the Kaaba starting from the Black Stone"
+    },
+    {
+      "step": 3,
+      "title_ar": "صلاة ركعتين",
+      "title_en": "Two Rak'ahs Prayer",
+      "description_ar": "خلف مقام إبراهيم إن تيسر",
+      "description_en": "Behind Maqam Ibrahim if possible"
+    },
+    {
+      "step": 4,
+      "title_ar": "السعي",
+      "title_en": "Sa'i",
+      "description_ar": "سبعة أشواط بين الصفا والمروة",
+      "description_en": "Seven rounds between Safa and Marwa"
+    },
+    {
+      "step": 5,
+      "title_ar": "الحلق أو التقصير",
+      "title_en": "Halq or Taqsir",
+      "description_ar": "حلق الشعر أو تقصيره للتحلل",
+      "description_en": "Shaving or shortening hair to end the Ihram"
+    }
+  ],
+  "duas": [
+    {
+      "title_ar": "التلبية",
+      "title_en": "Talbiyah",
+      "text_ar": "لبيك اللهم لبيك، لبيك لا شريك لك لبيك، إن الحمد والنعمة لك والملك، لا شريك لك",
+      "text_en": "Labbayka Allahumma Labbayk, Labbayka la sharika laka Labbayk. Inna al-hamda wa-n-ni'mata laka wa-l-mulk, la sharika lak"
+    },
+    {
+      "title_ar": "دخول الحرم",
+      "title_en": "Entering the Haram",
+      "text_ar": "اللهم أنت السلام ومنك السلام، فحينا ربنا بالسلام",
+      "text_en": "O Allah, You are Peace and from You comes Peace. So greet us, our Lord, with Peace"
+    },
+    {
+      "title_ar": "رؤية الكعبة",
+      "title_en": "Seeing the Kaaba",
+      "text_ar": "اللهم زد هذا البيت تشريفاً وتعظيماً وتكريماً ومهابة",
+      "text_en": "O Allah, increase this House in honor, greatness, reverence, and awe"
+    },
+    {
+      "title_ar": "دعاء الطواف",
+      "title_en": "Tawaf Dua",
+      "text_ar": "ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار",
+      "text_en": "Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire"
+    },
+    {
+      "title_ar": "عند الصفا والمروة",
+      "title_en": "At Safa and Marwa",
+      "text_ar": "إن الصفا والمروة من شعائر الله",
+      "text_en": "Indeed, as-Safa and al-Marwa are among the symbols of Allah"
+    },
+    {
+      "title_ar": "دعاء يوم عرفة",
+      "title_en": "Day of Arafat Dua",
+      "text_ar": "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+      "text_en": "There is no god but Allah alone, with no partner. His is the sovereignty and His is the praise, and He is capable of everything"
+    },
+    {
+      "title_ar": "عند رمي الجمرات",
+      "title_en": "Stoning the Jamarat",
+      "text_ar": "بسم الله، الله أكبر",
+      "text_en": "In the name of Allah, Allah is Greatest"
+    }
+  ]
+}

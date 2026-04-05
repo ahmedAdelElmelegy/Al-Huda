@@ -1,4 +1,5 @@
 import 'package:adhan/adhan.dart';
+
 import 'package:al_huda/core/services/notification/notification_services.dart';
 import 'package:al_huda/core/services/shared_pref_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
@@ -171,10 +172,6 @@ class PrayerServices {
 
     final remainingTime = currentPrayerTime.difference(now);
 
-    if (remainingTime.isNegative) {
-      return "00:00:00";
-    }
-
     final remainingHours = remainingTime.inHours;
     final remainingMinutes = remainingTime.inMinutes.remainder(60);
     final remainingSeconds = remainingTime.inSeconds.remainder(60);
@@ -300,10 +297,10 @@ class PrayerServices {
     try {
       await NotificationService.init();
       
-      // Reschedule next 3 days of alarms
+      // flutter_local_notifications with exactAllowWhileIdle
       await schedulePrayerNotifications();
 
-      debugPrint("✅ WorkManager: Sync Complete. Alarms Refreshed.");
+      debugPrint("✅ WorkManager: Sync Complete. Notifications & Alarms Refreshed.");
     } catch (e) {
       debugPrint("❌ WorkManager Error: $e");
     }
@@ -313,11 +310,11 @@ class PrayerServices {
     final isFirstRun = await SharedPrefServices.getBool("firstRun") ?? true;
 
     if (isFirstRun) {
-      await workManagerTask(); // تحديث فوري
+      await workManagerTask(); // تحديث فوري عند أول تشغيل
       await SharedPrefServices.setBool(false, "firstRun"); // مايتكررش تاني
     } else {
-       // Ensure schedules are up to date on every app start, not just first run
-       await schedulePrayerNotifications();
+      // Ensure schedules are up to date on every app start
+      await schedulePrayerNotifications();
     }
   }
 }

@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'package:al_huda/core/helper/extentions.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/azkar/presentation/screens/azkar_screen.dart';
 import 'package:al_huda/feature/prayer_time/presentation/screens/prayer_time_screen.dart';
 import 'package:al_huda/feature/settings/presentation/screens/setting_azkar_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz; // الاستيراد كـ tz
 import 'package:timezone/data/latest_all.dart' as tz; // لتهيئة بيانات التوقيت
 
@@ -157,7 +160,9 @@ class NotificationService {
   }) async {
     AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
       playSound ? 'prayer_sound_channel' : 'prayer_mute_channel',
-      playSound ? 'Prayer Notifications (Sound)' : 'Prayer Notifications (Mute)',
+      playSound
+          ? 'Prayer Notifications (Sound)'
+          : 'Prayer Notifications (Mute)',
       importance: Importance.max,
       priority: Priority.high,
       playSound: playSound,
@@ -179,7 +184,13 @@ class NotificationService {
       iOS: iosDetails,
     );
 
-    await _localNotificationsPlugin.show(id, title, body, platformDetails, payload: 'prayer');
+    await _localNotificationsPlugin.show(
+      id,
+      title,
+      body,
+      platformDetails,
+      payload: 'prayer',
+    );
   }
 
   static Future<void> showPeriodicallyNotification(
@@ -234,5 +245,52 @@ class NotificationService {
     } else if (payload == 'sallehAlMohamed') {
       push(SettingAzkarScreen());
     }
+  }
+
+  /// Check if exact alarm permission is granted (Android 12+)
+  static Future<bool> canScheduleExactNotifications() async {
+    if (!Platform.isAndroid) return true;
+
+    try {
+      final status = await Permission.scheduleExactAlarm.status;
+      return status.isGranted;
+    } catch (e) {
+      debugPrint('Error checking exact alarm permission: $e');
+      return false;
+    }
+  }
+
+  /// Request exact alarm permission
+  static Future<bool> requestExactAlarmPermission() async {
+    if (!Platform.isAndroid) return true;
+
+    try {
+      final status = await Permission.scheduleExactAlarm.request();
+      return status.isGranted;
+    } catch (e) {
+      debugPrint('Error requesting exact alarm permission: $e');
+      return false;
+    }
+  }
+
+  /// Check if can schedule notifications with current permissions
+  static Future<Map<String, bool>> checkNotificationPermissions() async {
+    final Map<String, bool> permissions = {};
+
+    if (!Platform.isAndroid) {
+      permissions['notification'] = true;
+      permissions['exact_alarm'] = true;
+      return permissions;
+    }
+
+    // Check notification permission
+    final notificationStatus = await Permission.notification.status;
+    permissions['notification'] = notificationStatus.isGranted;
+
+    // Check exact alarm permission
+    final exactAlarmStatus = await Permission.scheduleExactAlarm.status;
+    permissions['exact_alarm'] = exactAlarmStatus.isGranted;
+
+    return permissions;
   }
 }

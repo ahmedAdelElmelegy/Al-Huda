@@ -11,7 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeLocation extends StatefulWidget {
-  const HomeLocation({super.key});
+  final bool compact;
+  const HomeLocation({super.key, this.compact = false});
 
   @override
   State<HomeLocation> createState() => _HomeLocationState();

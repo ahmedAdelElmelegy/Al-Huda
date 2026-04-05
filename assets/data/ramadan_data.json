@@ -1,0 +1,102 @@
+{
+  "daily_actions": [
+    {
+      "id": 1,
+      "title_ar": "صيام اليوم",
+      "title_en": "Today's Fasting",
+      "content_ar": "نويت صيام هذا اليوم من رمضان",
+      "content_en": "I intend to fast this day of Ramadan",
+      "icon": "restaurant"
+    },
+    {
+      "id": 2,
+      "title_ar": "دعاء الإفطار",
+      "title_en": "Iftar Supplication",
+      "content_ar": "ذهب الظمأ وابتلت العروق وثبت الأجر إن شاء الله",
+      "content_en": "The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills",
+      "icon": "wb_twilight"
+    },
+    {
+      "id": 3,
+      "title_ar": "دعاء السحور",
+      "title_en": "Suhoor Supplication",
+      "content_ar": "اللهم إني نويت صيام غد من شهر رمضان المبارك",
+      "content_en": "O Allah, I intend to fast tomorrow in the holy month of Ramadan",
+      "icon": "nightlight_round"
+    },
+    {
+      "id": 4,
+      "title_ar": "صلاة التراويح",
+      "title_en": "Tarawih Prayer",
+      "content_ar": "8 أو 20 ركعة بعد العشاء",
+      "content_en": "8 or 20 units of prayer after Isha",
+      "icon": "mosque"
+    },
+    {
+      "id": 5,
+      "title_ar": "قراءة القرآن",
+      "title_en": "Quran Reading",
+      "content_ar": "جزء من القرآن يومياً لختمه في رمضان",
+      "content_en": "One Juz daily to complete the Quran in Ramadan",
+      "icon": "menu_book"
+    },
+    {
+      "id": 6,
+      "title_ar": "صدقة اليوم",
+      "title_en": "Daily Charity",
+      "content_ar": "تصدق ولو بالقليل",
+      "content_en": "Give charity, even if it is a small amount",
+      "icon": "volunteer_activism"
+    },
+    {
+      "id": 7,
+      "title_ar": "الدعاء",
+      "title_en": "Supplication",
+      "content_ar": "اللهم إنك عفو تحب العفو فاعف عني",
+      "content_en": "O Allah, You are Forgiving and love forgiveness, so forgive me",
+      "icon": "auto_awesome"
+    }
+  ],
+  "tips": [
+    {
+      "ar": "تعجيل الفطر وتأخير السحور",
+      "en": "Hasten Iftar and delay Suhoor"
+    },
+    {
+      "ar": "الإكثار من قراءة القرآن",
+      "en": "Increase recitation of the Holy Quran"
+    },
+    {
+      "ar": "صلاة التراويح جماعة",
+      "en": "Perform Tarawih prayer in congregation"
+    },
+    {
+      "ar": "إطعام الصائمين",
+      "en": "Feeding people who are fasting"
+    },
+    {
+      "ar": "الإكثار من الصدقة",
+      "en": "Increase giving charity"
+    },
+    {
+      "ar": "حسن الخلق وترك الجدال",
+      "en": "Good character and avoiding arguments"
+    },
+    {
+      "ar": "كثرة الذكر والدعاء",
+      "en": "Frequent Dhikr and Supplication"
+    },
+    {
+      "ar": "قيام الليل خاصة العشر الأواخر",
+      "en": "Night prayer, especially in the last ten days"
+    },
+    {
+      "ar": "تحري ليلة القدر",
+      "en": "Seeking Laylat al-Qadr"
+    },
+    {
+      "ar": "إخراج زكاة الفطر قبل العيد",
+      "en": "Giving Zakat al-Fitr before Eid"
+    }
+  ]
+}

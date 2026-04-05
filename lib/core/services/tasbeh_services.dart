@@ -3,10 +3,39 @@ import 'package:hive_ce/hive.dart';
 
 class TasbehServices {
   static const String boxName = "tasbehBox";
+  static const String statsBoxName = "tasbehStatsBox";
 
   // create box
   Future<Box<TasbehModel>> openBox() async {
     return await Hive.openBox<TasbehModel>(boxName);
+  }
+
+  Future<Box> openStatsBox() async {
+    return await Hive.openBox(statsBoxName);
+  }
+
+  // get total tasbeh
+  Future<int> getTotalTasbeeh() async {
+    final box = await openStatsBox();
+    return box.get('totalTasbeeh', defaultValue: 0);
+  }
+
+  // save total tasbeh
+  Future<void> saveTotalTasbeeh(int total) async {
+    final box = await openStatsBox();
+    await box.put('totalTasbeeh', total);
+  }
+
+  // get trees planted
+  Future<int> getTreesPlanted() async {
+    final box = await openStatsBox();
+    return box.get('treesPlanted', defaultValue: 0);
+  }
+
+  // save trees planted
+  Future<void> saveTreesPlanted(int count) async {
+    final box = await openStatsBox();
+    await box.put('treesPlanted', count);
   }
 
   // add tasbeh

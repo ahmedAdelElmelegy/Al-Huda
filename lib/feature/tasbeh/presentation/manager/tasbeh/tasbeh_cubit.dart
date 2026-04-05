@@ -11,11 +11,15 @@ class TasbehCubit extends Cubit<TasbehState> {
 
   final TasbehServices tasbehServices;
   List<TasbehModel> tasbehList = [];
+  int totalTasbeeh = 0;
+  int treesPlanted = 0;
 
   Future<void> getTasbeh() async {
     emit(TasbehLoading());
     try {
       tasbehList = await tasbehServices.getTasbeh();
+      totalTasbeeh = await tasbehServices.getTotalTasbeeh();
+      treesPlanted = await tasbehServices.getTreesPlanted();
 
       emit(TasbehSuccess(tasbehList: tasbehList));
     } catch (e) {
@@ -46,6 +50,17 @@ class TasbehCubit extends Cubit<TasbehState> {
     if (tasbeh != null) {
       tasbeh.count++;
       await box.putAt(currentIndex, tasbeh);
+
+      // Jannah Trees Logic
+      totalTasbeeh++;
+      await tasbehServices.saveTotalTasbeeh(totalTasbeeh);
+
+      if (totalTasbeeh % 100 == 0) {
+        treesPlanted++;
+        await tasbehServices.saveTreesPlanted(treesPlanted);
+        emit(TasbehMilestoneReached(totalTrees: treesPlanted));
+      }
+
       emit(TasbehIncrementSuccess());
       getTasbehByIndex(currentIndex);
     }
@@ -69,6 +84,7 @@ class TasbehCubit extends Cubit<TasbehState> {
     emit(TasbehResetLoading());
     try {
       await tasbehServices.resetTasbeh(currentIndex);
+      getTasbehByIndex(currentIndex); // Refresh current tasbeh
       emit(TasbehResetSuccess());
     } catch (e) {
       emit(TasbehResetFailure(message: e.toString()));

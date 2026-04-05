@@ -11,12 +11,12 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: ColorManager.greyLight2,
+      baseColor: ColorManager.greyLight,
       highlightColor: ColorManager.grayMoreLight,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          color: ColorManager.greyLight2,
+          color: ColorManager.greyLight,
         ),
         height: height ?? 60.h,
         width: width ?? double.infinity,

@@ -61,3 +61,8 @@ final class TasbehDeleteFailure extends TasbehState {
 }
 
 final class TasbehChangeEditState extends TasbehState {}
+
+final class TasbehMilestoneReached extends TasbehState {
+  final int totalTrees;
+  TasbehMilestoneReached({required this.totalTrees});
+}

@@ -15,7 +15,7 @@ class SettingSwitch extends StatelessWidget {
 
       child: Switch(
         activeTrackColor: ColorManager.primary,
-        activeColor: ColorManager.white,
+        activeThumbColor: ColorManager.white,
         value: value,
         onChanged: onChanged,
       ),
