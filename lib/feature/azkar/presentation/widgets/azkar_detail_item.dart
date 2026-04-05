@@ -1,4 +1,4 @@
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
+import 'package:al_huda/feature/azkar/domain/entities/zikr_entity.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_action_btn.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_content_item.dart';
 import 'package:al_huda/core/helper/spacing.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AzkarDetailItem extends StatefulWidget {
   final int index;
-  final Zikr zikr;
+  final ZikrEntity zikr;
   final bool? isFav;
   final int? zikrIndex;
   final VoidCallback? onCountComplete;

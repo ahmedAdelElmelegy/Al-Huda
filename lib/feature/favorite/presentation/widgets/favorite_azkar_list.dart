@@ -1,10 +1,10 @@
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
+import 'package:al_huda/feature/azkar/domain/entities/zikr_entity.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_detail_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavoriteAzkarList extends StatelessWidget {
-  final List<Zikr> zikrList;
+  final List<ZikrEntity> zikrList;
   const FavoriteAzkarList({super.key, required this.zikrList});
 
   @override

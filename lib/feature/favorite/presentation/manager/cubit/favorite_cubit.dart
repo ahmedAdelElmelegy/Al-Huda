@@ -2,6 +2,7 @@ import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/services/doaa_services.dart';
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/azkar/data/model/zikr.dart';
+import 'package:al_huda/feature/azkar/domain/entities/zikr_entity.dart';
 import 'package:al_huda/feature/doaa/data/model/doaa_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -18,16 +19,16 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
   // for azkar
 
-  Future<void> addAzkar(Zikr zikr) async {
+  Future<void> addAzkar(ZikrEntity zikrEntity) async {
     emit(AzkarAddLoading());
     try {
       await getAllZikr();
-      if (zikrList.contains(zikr)) {
+      if (zikrList.contains(zikrEntity)) {
         emit(AzkarAddError());
         Fluttertoast.showToast(msg: 'تم إضافة الذكر');
         return;
       }
-      await azkarServices.addZikr(zikr);
+      await azkarServices.addZikr(Zikr.fromEntity(zikrEntity));
       emit(AzkarAddSuccess());
       Fluttertoast.showToast(msg: 'تم إضافة الذكر');
     } catch (e) {
@@ -36,17 +37,18 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
   }
 
-  bool isFav(Zikr zikr) {
+  bool isFav(ZikrEntity zikrEntity) {
     getAllZikr();
-    return zikrList.contains(zikr);
+    return zikrList.contains(zikrEntity);
   }
 
   // get all zikr
-  List<Zikr> zikrList = [];
+  List<ZikrEntity> zikrList = [];
   Future<void> getAllZikr() async {
     emit(AzkarGetAllLoading());
     try {
-      zikrList = await azkarServices.getAllZikr();
+      final models = await azkarServices.getAllZikr();
+      zikrList = models.map((e) => e.toEntity()).toList();
       emit(AzkarGetAllSuccess());
     } catch (e) {
       emit(AzkarGetAllError());
@@ -54,10 +56,10 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
   }
 
-  Future<void> updateAzkar(int index, Zikr zikr) async {
+  Future<void> updateAzkar(int index, ZikrEntity zikrEntity) async {
     emit(AzkarUpdateLoading());
     try {
-      await azkarServices.updateZikr(index, zikr);
+      await azkarServices.updateZikr(index, Zikr.fromEntity(zikrEntity));
       emit(AzkarUpdateSuccess());
       Fluttertoast.showToast(msg: 'تم تحديث الذكر');
     } catch (e) {

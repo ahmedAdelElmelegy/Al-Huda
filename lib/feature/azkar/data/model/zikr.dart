@@ -1,4 +1,5 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import '../../domain/entities/zikr_entity.dart';
 
 part 'zikr.g.dart';
 
@@ -22,6 +23,16 @@ class Zikr {
     required this.audio,
     required this.filename,
   });
+
+  ZikrEntity toEntity() {
+    return ZikrEntity(
+      id: id,
+      text: text,
+      count: count,
+      audio: audio,
+      filename: filename,
+    );
+  }
 
   factory Zikr.fromJson(Map<String, dynamic> json) {
     return Zikr(
@@ -47,6 +58,16 @@ class Zikr {
       audio: audio ?? this.audio,
       filename: filename ?? this.filename,
       // copy other properties...
+    );
+  }
+
+  factory Zikr.fromEntity(ZikrEntity entity) {
+    return Zikr(
+      id: entity.id,
+      text: entity.text,
+      count: entity.count,
+      audio: entity.audio,
+      filename: entity.filename,
     );
   }
 }

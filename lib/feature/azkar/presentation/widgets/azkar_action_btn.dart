@@ -4,7 +4,7 @@ import 'package:al_huda/core/services/azkar_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
 import 'package:al_huda/core/widgets/svg_icon.dart';
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
+import 'package:al_huda/feature/azkar/domain/entities/zikr_entity.dart';
 import 'package:al_huda/feature/favorite/presentation/manager/cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AzkarActionBtn extends StatelessWidget {
   final int count;
   final bool? isFav;
-  final Zikr? zikr;
+  final ZikrEntity? zikr;
   final int? index;
   final String? title;
   final VoidCallback? onCountComplete;

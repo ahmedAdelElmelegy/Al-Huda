@@ -20,8 +20,8 @@ description: "Executable task list for Clean Architecture Foundation"
 
 **Purpose**: Core tools dependency injection and directory structure setup
 
-- [ ] T001 Open `pubspec.yaml` and verify `mocktail` is added to dev_dependencies (run `flutter pub add --dev mocktail` if needed)
-- [ ] T002 Create empty `test/core/error/` and `test/feature/` structural directories
+- [x] T001 Open `pubspec.yaml` and verify `mocktail` is added to dev_dependencies (run `flutter pub add --dev mocktail` if needed)
+- [x] T002 Create empty `test/core/error/` and `test/feature/` structural directories
 
 ---
 
@@ -31,11 +31,11 @@ description: "Executable task list for Clean Architecture Foundation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T003 Implement `Result<T>` sealed class in `lib/core/error/result.dart`
-- [ ] T004 Enhance `Failure` class in `lib/core/error/failure.dart` to extend Equatable
-- [ ] T005 [P] Add `CacheFailure` error class to `lib/core/error/failure.dart`
-- [ ] T006 [P] Add `ParsingFailure` error class to `lib/core/error/failure.dart`
-- [ ] T007 Write unit tests for Failure and Result in `test/core/error/failure_test.dart`
+- [x] T003 Implement `Result<T>` sealed class in `lib/core/error/result.dart`
+- [x] T004 Enhance `Failure` class in `lib/core/error/failure.dart` to extend Equatable
+- [x] T005 [P] Add `CacheFailure` error class to `lib/core/error/failure.dart`
+- [x] T006 [P] Add `ParsingFailure` error class to `lib/core/error/failure.dart`
+- [x] T007 Write unit tests for Failure and Result in `test/core/error/failure_test.dart`
 
 **Checkpoint**: Core error handling foundations are ready.
 
@@ -49,20 +49,20 @@ description: "Executable task list for Clean Architecture Foundation"
 
 ### Tests for Azkar (US5) ⚠️
 
-- [ ] T008 [P] [US5] Create Mock classes in `test/feature/azkar/data/repo/azkar_repo_impl_test.dart`
-- [ ] T009 [P] [US5] Create Mock classes in `test/feature/azkar/presentation/cubit/azkar_cubit_test.dart`
+- [x] T008 [P] [US5] Create Mock classes in `test/feature/azkar/data/repo/azkar_repo_impl_test.dart`
+- [x] T009 [P] [US5] Create Mock classes in `test/feature/azkar/presentation/cubit/azkar_cubit_test.dart`
 
 ### Implementation for Azkar (US1, US2)
 
-- [ ] T010 [P] [US2] Create pure `AzkarCategoryEntity` and `ZikrEntity` in `lib/feature/azkar/domain/entities/`
-- [ ] T011 [P] [US2] Create abstract `AzkarRepository` in `lib/feature/azkar/domain/repositories/azkar_repository.dart`
-- [ ] T012 [US2] Update `AzkarCategory` and `Zikr` DTOs in `lib/feature/azkar/data/model/` with `toEntity()` mappers
-- [ ] T013 [US2] Create local data source `AzkarLocalDataSource` in `lib/feature/azkar/data/data_sources/azkar_local_data_source.dart` to load JSON assets
-- [ ] T014 [US2] Rename and implement `AzkarRepoImpl` in `lib/feature/azkar/data/repo/azkar_repo_impl.dart` to use new data source and return `Result<T>`
-- [ ] T015 [US1] Update `lib/core/di/injection.dart` to register `AzkarLocalDataSource` and `AzkarRepository` (via `AzkarRepoImpl`)
-- [ ] T016 [US1] Refactor `AzkarCubit` in `lib/feature/azkar/presentation/manager/cubit/` to depend on `AzkarRepository` and handle `Result<T>`
-- [ ] T017 [US5] Implement unit tests in `test/feature/azkar/data/repo/azkar_repo_impl_test.dart`
-- [ ] T018 [US5] Implement unit tests in `test/feature/azkar/presentation/cubit/azkar_cubit_test.dart`
+- [x] T010 [P] [US2] Create pure `AzkarCategoryEntity` and `ZikrEntity` in `lib/feature/azkar/domain/entities/`
+- [x] T011 [P] [US2] Create abstract `AzkarRepository` in `lib/feature/azkar/domain/repositories/azkar_repository.dart`
+- [x] T012 [US2] Update `AzkarCategory` and `Zikr` DTOs in `lib/feature/azkar/data/model/` with `toEntity()` mappers
+- [x] T013 [US2] Create local data source `AzkarLocalDataSource` in `lib/feature/azkar/data/data_sources/azkar_local_data_source.dart` to load JSON assets
+- [x] T014 [US2] Rename and implement `AzkarRepoImpl` in `lib/feature/azkar/data/repo/azkar_repo_impl.dart` to use new data source and return `Result<T>`
+- [x] T015 [US1] Update `lib/core/di/injection.dart` to register `AzkarLocalDataSource` and `AzkarRepository` (via `AzkarRepoImpl`)
+- [x] T016 [US1] Refactor `AzkarCubit` in `lib/feature/azkar/presentation/manager/cubit/` to depend on `AzkarRepository` and handle `Result<T>`
+- [x] T017 [US5] Implement unit tests in `test/feature/azkar/data/repo/azkar_repo_impl_test.dart`
+- [x] T018 [US5] Implement unit tests in `test/feature/azkar/presentation/cubit/azkar_cubit_test.dart`
 
 **Checkpoint**: At this point, the Azkar feature uses Clean Architecture independently.
 

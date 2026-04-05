@@ -9,4 +9,7 @@ final class AzkarLoading extends AzkarState {}
 
 final class AzkarLoaded extends AzkarState {}
 
-final class AzkarError extends AzkarState {}
+final class AzkarError extends AzkarState {
+  final String message;
+  AzkarError(this.message);
+}

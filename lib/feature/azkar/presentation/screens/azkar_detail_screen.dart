@@ -2,14 +2,14 @@ import 'package:al_huda/core/services/prayer_services.dart';
 import 'package:al_huda/core/services/time_picker_services.dart';
 import 'package:al_huda/core/theme/colors.dart';
 import 'package:al_huda/core/theme/style.dart';
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
+import 'package:al_huda/feature/azkar/domain/entities/zikr_entity.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/alarm_dialog.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_detail_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AzkarDetailScreen extends StatefulWidget {
-  final List<Zikr> zikr;
+  final List<ZikrEntity> zikr;
   final String zikrName;
   final int index;
 

@@ -1,9 +1,9 @@
-import 'package:al_huda/feature/azkar/data/model/zikr.dart';
+import 'package:al_huda/feature/azkar/domain/entities/zikr_entity.dart';
 import 'package:al_huda/feature/azkar/presentation/widgets/azkar_detail_item.dart';
 import 'package:flutter/material.dart';
 
 class AzkarListView extends StatelessWidget {
-  final List<Zikr> zikr;
+  final List<ZikrEntity> zikr;
   final int index;
   final Function(int) onCountComplete;
   final Map<int, GlobalKey> itemKeys;

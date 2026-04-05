@@ -6,7 +6,9 @@ import 'package:al_huda/core/services/qran_services.dart';
 import 'package:al_huda/core/services/tasbeh_services.dart';
 import 'package:al_huda/feature/allah_name/data/repo/allah_name_repo.dart';
 import 'package:al_huda/feature/allah_name/presentation/manager/cubit/allah_name_cubit.dart';
-import 'package:al_huda/feature/azkar/data/repo/azkar_repo.dart';
+import 'package:al_huda/feature/azkar/data/data_sources/azkar_local_data_source.dart';
+import 'package:al_huda/feature/azkar/data/repo/azkar_repo_impl.dart';
+import 'package:al_huda/feature/azkar/domain/repositories/azkar_repository.dart';
 import 'package:al_huda/feature/azkar/presentation/manager/cubit/azkar_cubit.dart';
 import 'package:al_huda/feature/doaa/data/repo/doaa_repo.dart';
 import 'package:al_huda/feature/doaa/presentation/manager/cubit/doaa_cubit.dart';
@@ -52,6 +54,10 @@ void init() async {
   // dio
   final dio = DioFactory.getDio();
   getIt.registerLazySingleton<Dio>(() => dio);
+  
+  // data sources
+  getIt.registerLazySingleton<AzkarLocalDataSource>(() => AzkarLocalDataSourceImpl());
+
   // services
   getIt.registerLazySingleton<TasbehServices>(() => TasbehServices());
 
@@ -59,7 +65,8 @@ void init() async {
   getIt.registerLazySingleton<ApiService>(() => ApiService(getIt<Dio>()));
 
   // repo
-  getIt.registerLazySingleton<AzkarRepo>(() => AzkarRepo());
+  getIt.registerLazySingleton<AzkarRepository>(() => AzkarRepoImpl(getIt<AzkarLocalDataSource>()));
+  
   getIt.registerLazySingleton<AyatRepo>(() => AyatRepo(getIt<ApiService>()));
   getIt.registerLazySingleton<QranRepo>(() => QranRepo(getIt<ApiService>()));
   getIt.registerLazySingleton<RadioRepo>(() => RadioRepo(getIt<ApiService>()));
@@ -82,6 +89,7 @@ void init() async {
   getIt.registerLazySingleton<RamadanRepo>(() => RamadanRepoImpl());
   getIt.registerLazySingleton<HifzRepo>(() => HifzRepoImpl());
   getIt.registerLazySingleton<FamilyRepo>(() => FamilyRepo());
+  
   // cubits
   getIt.registerLazySingleton<TasbehCubit>(
     () => TasbehCubit(getIt<TasbehServices>()),
@@ -92,7 +100,7 @@ void init() async {
   getIt.registerLazySingleton<QranServices>(() => QranServices());
 
   getIt.registerLazySingleton<AzkarCubit>(
-    () => AzkarCubit(getIt<AzkarRepo>(), getIt<AzkarServices>()),
+    () => AzkarCubit(getIt<AzkarRepository>(), getIt<AzkarServices>()),
   );
   getIt.registerLazySingleton<PrayerCubit>(
     () => PrayerCubit(getIt<PrayerServices>()),

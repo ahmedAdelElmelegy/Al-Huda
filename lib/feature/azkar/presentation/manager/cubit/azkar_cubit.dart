@@ -1,24 +1,26 @@
+import 'package:al_huda/core/error/result.dart';
 import 'package:al_huda/core/services/azkar_services.dart';
-import 'package:al_huda/feature/azkar/data/model/azkar_category.dart';
-import 'package:al_huda/feature/azkar/data/repo/azkar_repo.dart';
+import 'package:al_huda/feature/azkar/domain/entities/azkar_category_entity.dart';
+import 'package:al_huda/feature/azkar/domain/repositories/azkar_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 
 part 'azkar_state.dart';
 
 class AzkarCubit extends Cubit<AzkarState> {
-  AzkarCubit(this.azkarRepo, this.azkarServices) : super(AzkarInitial());
-  final AzkarRepo azkarRepo;
+  AzkarCubit(this.azkarRepository, this.azkarServices) : super(AzkarInitial());
+  final AzkarRepository azkarRepository;
   final AzkarServices azkarServices;
-  List<AzkarCategory> azkarCategories = [];
+  List<AzkarCategoryEntity> azkarCategories = [];
+
   void loadAzkar() async {
     emit(AzkarLoading());
-    try {
-      final azkar = await azkarRepo.loadAzkar();
-      azkarCategories = azkar;
+    final result = await azkarRepository.getAzkarCategories();
+    if (result is Success<List<AzkarCategoryEntity>>) {
+      azkarCategories = result.data;
       emit(AzkarLoaded());
-    } catch (e) {
-      emit(AzkarError());
+    } else if (result is Error<List<AzkarCategoryEntity>>) {
+      emit(AzkarError(result.failure.errMessage));
     }
   }
 }
