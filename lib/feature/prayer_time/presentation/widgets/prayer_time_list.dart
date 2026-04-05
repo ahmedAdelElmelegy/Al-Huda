@@ -1,11 +1,10 @@
 import 'package:al_huda/core/utils/constants.dart';
 import 'package:al_huda/feature/home/presentation/manager/cubit/prayer_cubit.dart';
-import 'package:al_huda/feature/home/presentation/screens/widget/prayer_traker_item.dart';
+import 'package:al_huda/feature/home/presentation/screens/widget/prayer_tracker_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_ce/hive.dart';
 
 class PrayerTimeList extends StatelessWidget {
   final List<bool> completedPrayers;
